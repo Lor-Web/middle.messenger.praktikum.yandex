@@ -1,16 +1,13 @@
 <div class="auth page">
-  <div class="auth-card">
-    <h1 class="auth-card__title">Вход</h1>
-
-    <form class="auth-card__form">
+  {{#> card title='Вход' }}
+    <form class="auth__form">
       {{> input placeholder="Логин" }}
       {{> input placeholder="Пароль" type='password' }}
 
-    <div class="auth-card__form-footer">
-      {{> button label="Войти" widthFull="true" }}
-      <p class="auth-card__form-description">или <a href="">Зарегистрироваться</a></p>
-    </div>
+      <div class="auth__form-footer">
+        {{> button label="Войти" widthFull="true" }}
+        <p class="auth__form-description">или <a href="">Зарегистрироваться</a></p>
+      </div>
     </form>
-
-  </div>
+  {{/card}}
 </div>

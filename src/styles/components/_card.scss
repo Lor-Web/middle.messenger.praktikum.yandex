@@ -1,0 +1,19 @@
+@use "../base/variables" as *;
+
+.card {
+  padding: 16px 36px;
+  width: 360px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: $neutral-98;
+  border-radius: 16px;
+  box-shadow: $shadow-sm;
+
+  &__title {
+    margin-bottom: 20px;
+    color: $primary-5;
+    font: $headline-large;
+  }
+}

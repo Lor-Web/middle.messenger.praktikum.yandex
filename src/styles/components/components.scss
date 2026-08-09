@@ -1,5 +1,6 @@
 @use "./button";
 @use "./input";
+@use "./card";
 
 @use "../base/variables" as *;
 
@@ -8,41 +9,5 @@ a {
 
   &:hover {
     color: $primary-4;
-  }
-}
-
-.auth-card {
-  padding: 16px 36px;
-  width: 360px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: $neutral-98;
-  border-radius: 16px;
-  box-shadow: $shadow-sm;
-
-  &__title {
-    margin-bottom: 20px;
-    color: $primary-5;
-    font: $headline-large;
-  }
-
-  &__form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    &-description {
-      font: $body-small;
-    }
-
-    &-footer {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-    }
   }
 }

@@ -1,0 +1,18 @@
+<div class="auth page">
+  {{#> card title='Регистрация' }}
+    <form class="auth__form">
+      {{> input placeholder="Почта" }}
+      {{> input placeholder="Логин" }}
+      {{> input placeholder="Имя" }}
+      {{> input placeholder="Фамилия" }}
+      {{> input placeholder="Телефон" }}
+      {{> input placeholder="Пароль" type='password' }}
+      {{> input placeholder="Пароль (еще раз)" type='password' }}
+
+      <div class="auth__form-footer">
+        {{> button label="Зарегистрироваться" widthFull="true" }}
+        <p class="auth__form-description">или <a href="">Войти</a></p>
+      </div>
+    </form>
+  {{/card}}
+</div>

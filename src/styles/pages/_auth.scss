@@ -5,4 +5,22 @@
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, $neutral-9 0%, $primary-9 100%);
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &-description {
+      font: $body-small;
+    }
+
+    &-footer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+  }
 }
