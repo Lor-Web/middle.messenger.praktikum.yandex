@@ -1,0 +1,13 @@
+@use "../base/variables" as *;
+
+.counter {
+  padding: 0 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 16px;
+  font: $body-small;
+  color: $neutral-98;
+  background-color: $primary-5;
+  border-radius: 8px;
+}

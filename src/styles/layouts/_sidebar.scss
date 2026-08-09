@@ -1,0 +1,29 @@
+@use "../base/variables" as *;
+
+.sidebar {
+  padding: 16px 8px;
+  width: 20%;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  background-color: $neutral-95;
+
+  &__header {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+
+    &-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  &__chat-list {
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+  }
+}
