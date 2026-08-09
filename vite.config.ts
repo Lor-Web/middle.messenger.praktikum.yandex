@@ -11,4 +11,16 @@ export default defineConfig({
     open: true,
     port: process.env.PORT || 8000,
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // Uses the faster, modern Sass compiler API
+        api: "modern-compiler",
+        // Automatically injects global files into all components (Vue/Svelte/etc.)
+        additionalData: `@use "./_variables.scss" as *;`,
+        // Allows you to use shorter absolute import paths inside SCSS files
+        loadPaths: ["./styles"],
+      },
+    },
+  },
 });
