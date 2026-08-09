@@ -1,3 +1,8 @@
+// BASE STYLES
+@use "./base/base.scss";
+// COMPONENTS
+@use "./components/components.scss";
+
 body {
-  background-color: $base-color;
+  font-family: "Roboto", sans-serif;
 }

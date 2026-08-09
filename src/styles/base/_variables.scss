@@ -1,0 +1,121 @@
+// THEME COLORS
+// PRIMARY
+$primary-hue: 203;
+$primary-saturation: 100%;
+
+$primary-0: hsl($primary-hue, $primary-saturation, 0%);
+$primary-1: hsl($primary-hue, $primary-saturation, 10%);
+$primary-2: hsl($primary-hue, $primary-saturation, 20%);
+$primary-3: hsl($primary-hue, $primary-saturation, 30%);
+$primary-4: hsl($primary-hue, $primary-saturation, 40%);
+$primary-5: hsl($primary-hue, $primary-saturation, 50%);
+$primary-6: hsl($primary-hue, $primary-saturation, 60%);
+$primary-7: hsl($primary-hue, $primary-saturation, 70%);
+$primary-8: hsl($primary-hue, $primary-saturation, 80%);
+$primary-9: hsl($primary-hue, $primary-saturation, 90%);
+$primary-95: hsl($primary-hue, $primary-saturation, 95%);
+$primary-98: hsl($primary-hue, $primary-saturation, 98%);
+$primary-100: hsl($primary-hue, $primary-saturation, 100%);
+
+// SECONDARY
+$secondary-hue: 155;
+$secondary-saturation: 100%;
+
+$secondary-0: hsl($secondary-hue, $secondary-saturation, 0%);
+$secondary-1: hsl($secondary-hue, $secondary-saturation, 10%);
+$secondary-2: hsl($secondary-hue, $secondary-saturation, 20%);
+$secondary-3: hsl($secondary-hue, $secondary-saturation, 30%);
+$secondary-4: hsl($secondary-hue, $secondary-saturation, 40%);
+$secondary-5: hsl($secondary-hue, $secondary-saturation, 50%);
+$secondary-6: hsl($secondary-hue, $secondary-saturation, 60%);
+$secondary-7: hsl($secondary-hue, $secondary-saturation, 70%);
+$secondary-8: hsl($secondary-hue, $secondary-saturation, 80%);
+$secondary-9: hsl($secondary-hue, $secondary-saturation, 90%);
+$secondary-95: hsl($secondary-hue, $secondary-saturation, 95%);
+$secondary-98: hsl($secondary-hue, $secondary-saturation, 98%);
+$secondary-100: hsl($secondary-hue, $secondary-saturation, 100%);
+
+// ERROR
+$error-hue: 350;
+$error-saturation: 100%;
+
+$error-0: hsl($error-hue, $error-saturation, 0%);
+$error-1: hsl($error-hue, $error-saturation, 10%);
+$error-2: hsl($error-hue, $error-saturation, 20%);
+$error-3: hsl($error-hue, $error-saturation, 30%);
+$error-4: hsl($error-hue, $error-saturation, 40%);
+$error-5: hsl($error-hue, $error-saturation, 50%);
+$error-6: hsl($error-hue, $error-saturation, 60%);
+$error-7: hsl($error-hue, $error-saturation, 70%);
+$error-8: hsl($error-hue, $error-saturation, 80%);
+$error-9: hsl($error-hue, $error-saturation, 90%);
+$error-95: hsl($error-hue, $error-saturation, 95%);
+$error-98: hsl($error-hue, $error-saturation, 98%);
+$error-100: hsl($error-hue, $error-saturation, 100%);
+
+// NEUTRAL
+$neutral-hue: 203;
+$neutral-saturation: 8%;
+
+$neutral-0: hsl($neutral-hue, $neutral-saturation, 0%);
+$neutral-1: hsl($neutral-hue, $neutral-saturation, 10%);
+$neutral-2: hsl($neutral-hue, $neutral-saturation, 20%);
+$neutral-3: hsl($neutral-hue, $neutral-saturation, 30%);
+$neutral-4: hsl($neutral-hue, $neutral-saturation, 40%);
+$neutral-5: hsl($neutral-hue, $neutral-saturation, 50%);
+$neutral-6: hsl($neutral-hue, $neutral-saturation, 60%);
+$neutral-7: hsl($neutral-hue, $neutral-saturation, 70%);
+$neutral-8: hsl($neutral-hue, $neutral-saturation, 80%);
+$neutral-9: hsl($neutral-hue, $neutral-saturation, 90%);
+$neutral-95: hsl($neutral-hue, $neutral-saturation, 95%);
+$neutral-98: hsl($neutral-hue, $neutral-saturation, 98%);
+$neutral-100: hsl($neutral-hue, $neutral-saturation, 100%);
+
+//NEUTRAL SPECIAL
+$neutral-special-hue: 220;
+$neutral-special-saturation: 36%;
+
+$neutral-special-0: hsl($neutral-special-hue, $neutral-special-saturation, 0%);
+$neutral-special-1: hsl($neutral-special-hue, $neutral-special-saturation, 10%);
+$neutral-special-2: hsl($neutral-special-hue, $neutral-special-saturation, 20%);
+$neutral-special-3: hsl($neutral-special-hue, $neutral-special-saturation, 30%);
+$neutral-special-4: hsl($neutral-special-hue, $neutral-special-saturation, 40%);
+$neutral-special-5: hsl($neutral-special-hue, $neutral-special-saturation, 50%);
+$neutral-special-6: hsl($neutral-special-hue, $neutral-special-saturation, 60%);
+$neutral-special-7: hsl($neutral-special-hue, $neutral-special-saturation, 70%);
+$neutral-special-8: hsl($neutral-special-hue, $neutral-special-saturation, 80%);
+$neutral-special-9: hsl($neutral-special-hue, $neutral-special-saturation, 90%);
+$neutral-special-95: hsl(
+  $neutral-special-hue,
+  $neutral-special-saturation,
+  95%
+);
+$neutral-special-98: hsl(
+  $neutral-special-hue,
+  $neutral-special-saturation,
+  98%
+);
+$neutral-special-100: hsl(
+  $neutral-special-hue,
+  $neutral-special-saturation,
+  100%
+);
+
+// TYPOGRAPHY
+$font-family: "Roboto", sans-serif;
+
+$headline-large: 600 20px/28px $font-family;
+$headline-medium: 600 18px/26px $font-family;
+$headline-small: 600 16px/24px $font-family;
+
+$title-large: 500 18px/26px $font-family;
+$title-medium: 500 16px/24px $font-family;
+$title-small: 500 14px/20px $font-family;
+
+$label-large: 500 16px/24px $font-family;
+$label-medium: 500 14px/20px $font-family;
+$label-small: 500 12px/16px $font-family;
+
+$body-large: 400 16px/24px $font-family;
+$body-medium: 400 14px/20px $font-family;
+$body-small: 400 12px/16px $font-family;
