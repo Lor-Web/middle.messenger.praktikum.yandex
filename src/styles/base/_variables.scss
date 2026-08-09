@@ -101,6 +101,18 @@ $neutral-special-100: hsl(
   100%
 );
 
+// SHADOWS
+$shadow-color: hsla(
+  $neutral-hue,
+  $neutral-saturation,
+  0%,
+  1
+); // чёрный с hue=203, sat=8%
+
+$shadow-sm: 0 2px 8px rgba($shadow-color, 0.08); // Легкая тень (для карточек, кнопок)
+$shadow-md: 0 4px 16px rgba($shadow-color, 0.12); // Средняя тень (для модальных окон, дропдаунов)
+$shadow-lg: 0 8px 32px rgba($shadow-color, 0.16); // Глубокая тень (для попапов, оверлеев)
+
 // TYPOGRAPHY
 $font-family: "Roboto", sans-serif;
 

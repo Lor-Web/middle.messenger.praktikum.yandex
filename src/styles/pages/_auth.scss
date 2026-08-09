@@ -1,0 +1,8 @@
+@use "../base/variables" as *;
+
+.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, $neutral-9 0%, $primary-9 100%);
+}

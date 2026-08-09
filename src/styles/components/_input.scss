@@ -1,0 +1,16 @@
+@use "../base/variables" as *;
+
+.input {
+  padding: 6px 16px;
+  font: $body-large;
+  background-color: $neutral-95;
+  border-radius: 18px;
+  border: none;
+  outline: none;
+  transition: all 0.2s ease;
+
+  &:hover,
+  &:focus-within {
+    background-color: $neutral-9;
+  }
+}

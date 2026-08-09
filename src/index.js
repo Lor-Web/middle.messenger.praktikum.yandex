@@ -1,9 +1,11 @@
 import Handlebars from "handlebars";
 
-import layoutTpl from "./layouts/layout.hbs?raw";
+import authTpl from "./pages/auth.hbs?raw";
 
 import buttonTpl from "./components/button/button.hbs?raw";
+import inputTpl from "./components/input/input.hbs?raw";
 
-Handlebars.registerPartial("new-chat-button", buttonTpl);
+Handlebars.registerPartial("button", buttonTpl);
+Handlebars.registerPartial("input", inputTpl);
 
-document.body.innerHTML = Handlebars.compile(layoutTpl)();
+document.body.innerHTML = Handlebars.compile(authTpl)();

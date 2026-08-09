@@ -3,6 +3,7 @@
 .button {
   padding: 12px 24px;
   display: flex;
+  justify-content: center;
   gap: 4px;
   color: $neutral-98;
   background-color: $primary-5;
@@ -23,5 +24,9 @@
     color: $neutral-7;
     background-color: $neutral-95;
     cursor: not-allowed;
+  }
+
+  &_width_full {
+    width: 100%;
   }
 }
