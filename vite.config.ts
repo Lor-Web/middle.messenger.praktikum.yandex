@@ -7,6 +7,7 @@ dotenv.config();
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  root: "./src",
   server: {
     open: true,
     port: process.env.PORT || 8000,
