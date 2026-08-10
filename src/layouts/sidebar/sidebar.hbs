@@ -6,7 +6,11 @@
         src="/1fb255dfa8704817151167d37cab665f.png"
       />
 
-      {{> button label="Настройки" }}
+      <h3 class="sidebar__header-title">{{user.name}}</h3>
+
+      {{#> button icon=true transparent=true}}
+        {{> icon name='gear'}}
+      {{/button}}
     </div>
 
     {{> input placeholder="Поиск" fill="true" }}

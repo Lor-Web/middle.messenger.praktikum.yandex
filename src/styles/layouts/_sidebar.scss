@@ -14,10 +14,19 @@
     gap: 8px;
     flex-direction: column;
 
+    .avatar {
+      margin-right: 12px;
+    }
+
     &-top {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+    }
+
+    &-title {
+      margin-right: auto;
+      font: $title-large;
+      color: $neutral-1;
     }
   }
 

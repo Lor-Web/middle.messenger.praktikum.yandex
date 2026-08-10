@@ -22,6 +22,7 @@ import messageTypeText from "./helpers/messageTypeText";
 
 import { chats } from "./mocks/chats.mock";
 import { messages } from "./mocks/messages.mock";
+import { user } from "./mocks/user.mock";
 
 Handlebars.registerPartial("sidebar", sidebarTpl);
 Handlebars.registerPartial("chat-window", chatWindowTpl);
@@ -39,4 +40,8 @@ Handlebars.registerHelper("icon", getIcon);
 Handlebars.registerHelper("authorMessage", authorMessage);
 Handlebars.registerHelper("messageTypeText", messageTypeText);
 
-document.body.innerHTML = Handlebars.compile(chatsTpl)({ chats, messages });
+document.body.innerHTML = Handlebars.compile(chatsTpl)({
+  chats,
+  messages,
+  user,
+});
