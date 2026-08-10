@@ -11,7 +11,7 @@ export default defineConfig({
   publicDir: "../public",
   server: {
     open: true,
-    port: process.env.PORT || 8000,
+    port: process.env.PORT || 3000,
   },
   css: {
     preprocessorOptions: {

@@ -11,9 +11,12 @@
       />
 
       <form class="profile__data-form">
-        {{> input placeholder="Имя" value=user.name }}
-        {{> input placeholder="Почта" value=user.email }}
-        {{> input placeholder="Телефон" value=user.tel }}
+        {{> input placeholder="Имя" value=user.firstName name='first_name' }}
+        {{> input placeholder="Фамилия" value=user.secondName name='second_name' }}
+        {{> input placeholder="Имя в чате" value=user.displayName name='display_name' }}
+        {{> input placeholder="Логин" value=user.login name='login' }}
+        {{> input placeholder="Почта" value=user.email name='email' }}
+        {{> input placeholder="Телефон" value=user.phone name='phone' }}
       </form>
 
       {{> button label="Сохранить" }}

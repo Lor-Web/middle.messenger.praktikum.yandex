@@ -16,6 +16,7 @@ import chatItemTpl from "./components/chat-item/chat-item.hbs?raw";
 import counterTpl from "./components/counter/counter.hbs?raw";
 import messageItemTpl from "./components/message-item/message-item.hbs?raw";
 import iconTpl from "./components/icon/icon.hbs?raw";
+import textAreaTpl from "./components/textarea/textarea.hbs?raw";
 
 import formatDate from "./helpers/formatDate";
 import getIcon from "./helpers/getIcon";
@@ -37,6 +38,7 @@ Handlebars.registerPartial("chat-item", chatItemTpl);
 Handlebars.registerPartial("counter", counterTpl);
 Handlebars.registerPartial("message-item", messageItemTpl);
 Handlebars.registerPartial("icon", iconTpl);
+Handlebars.registerPartial("textarea", textAreaTpl);
 
 Handlebars.registerHelper("formatDate", formatDate);
 Handlebars.registerHelper("icon", getIcon);
@@ -66,6 +68,9 @@ const ROTUES = {
       user,
     },
   },
+  404: {
+    template: "404", // TODO: сделать страницу 404
+  },
 };
 
 const render = () => {
@@ -75,15 +80,19 @@ const render = () => {
     window.location.pathname = "auth";
   }
 
+  if (!ROTUES[path[0]]) {
+    window.location.pathname = "404";
+  }
+
   if (path.length > 1) {
     document.body.innerHTML = Handlebars.compile(ROTUES[path[0]].template)(
       ROTUES[path[0]].data
     );
+  } else {
+    document.body.innerHTML = Handlebars.compile(ROTUES[path].template)(
+      ROTUES[path].data
+    );
   }
-
-  document.body.innerHTML = Handlebars.compile(ROTUES[path].template)(
-    ROTUES[path].data
-  );
 };
 
 window.addEventListener("DOMContentLoaded", render);
@@ -104,7 +113,7 @@ document.addEventListener("submit", (event) => {
 
 window.addEventListener("DOMContentLoaded", () => {
   const chatItem = document.querySelector(".chat-item");
-  chatItem.addEventListener("click", () => {
+  chatItem?.addEventListener("click", () => {
     window.location.pathname = "/dashboard/chats";
     render();
   });
