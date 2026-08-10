@@ -1,0 +1,22 @@
+<main class="settings">
+  <header class="settings__header">
+    <h3 class="settings__header-title">Профиль</h3>
+  </header>
+
+  <section class="settings-wrapper">
+    <div class="settings__data">
+      <img
+        class="avatar avatar_large"
+        src="/1fb255dfa8704817151167d37cab665f.png"
+      />
+
+      <form class="settings__data-form">
+        {{> input placeholder="Имя" value=user.name }}
+        {{> input placeholder="Почта" value=user.email }}
+        {{> input placeholder="Телефон" value=user.tel }}
+      </form>
+
+      {{> button label="Сохранить" }}
+    </div>
+  </section>
+</main>

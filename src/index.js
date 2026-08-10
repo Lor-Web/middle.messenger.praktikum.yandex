@@ -6,6 +6,7 @@ import chatsTpl from "./pages/chats.hbs?raw";
 
 import sidebarTpl from "./layouts/sidebar/sidebar.hbs?raw";
 import chatWindowTpl from "./layouts/chat-window/chat-window.hbs?raw";
+import settingsTpl from "./layouts/settings/settings.hbs?raw";
 
 import buttonTpl from "./components/button/button.hbs?raw";
 import inputTpl from "./components/input/input.hbs?raw";
@@ -26,6 +27,7 @@ import { user } from "./mocks/user.mock";
 
 Handlebars.registerPartial("sidebar", sidebarTpl);
 Handlebars.registerPartial("chat-window", chatWindowTpl);
+Handlebars.registerPartial("settings", settingsTpl);
 
 Handlebars.registerPartial("button", buttonTpl);
 Handlebars.registerPartial("input", inputTpl);
