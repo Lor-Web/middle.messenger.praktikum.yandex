@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "dev": "npx vite"
+    "dev": "npx vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
     "sass": "^1.102.0",
@@ -9,5 +11,8 @@
   "dependencies": {
     "dotenv": "^17.4.2",
     "handlebars": "^4.7.9"
+  },
+  "engines": {
+    "node": ">=22.0.0"
   }
 }
