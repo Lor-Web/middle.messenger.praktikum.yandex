@@ -44,4 +44,11 @@
     height: 100%;
     overflow-y: scroll;
   }
+
+  &__footer {
+    padding: 12px 20px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+  }
 }

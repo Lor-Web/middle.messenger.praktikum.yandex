@@ -24,4 +24,16 @@
       {{> message-item }}
     {{/each}}
   </section>
+
+  <footer class="chat-window__footer">
+    {{#> button icon=true transparent=true}}
+      {{> icon name='paperclip'}}
+    {{/button}}
+
+    {{> input placeholder='Сообщение...'}}
+
+    {{#> button icon=true }}
+      {{> icon name='arrow-right'}}
+    {{/button}}
+  </footer>
 </main>
