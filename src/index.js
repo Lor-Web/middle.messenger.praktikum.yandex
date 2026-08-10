@@ -101,7 +101,7 @@ document.addEventListener("submit", (event) => {
     form.dataset.form === "auth-form" ||
     form.dataset.form === "register-form"
   ) {
-    window.location.pathname = "/dashboard/chats";
+    window.location.pathname = "/dashboard";
     render();
   }
 });
@@ -109,7 +109,7 @@ document.addEventListener("submit", (event) => {
 window.addEventListener("DOMContentLoaded", () => {
   const chatItem = document.querySelector(".chat-item");
   chatItem?.addEventListener("click", () => {
-    window.location.pathname = "/dashboard/chats";
+    window.location.pathname = "/dashboard";
     render();
   });
 });
