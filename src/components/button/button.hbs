@@ -1,3 +1,15 @@
-<button class="button {{#if widthFull}}button_width_full{{/if}}" {{#if disabled}}disabled{{/if}}>
+<button 
+  class="
+    button 
+    {{#if widthFull}}button_width_full{{/if}} 
+    {{#if icon}}button_icon{{/if}}
+    {{#if transparent}}button_transparent{{/if}}
+    " 
+  {{#if disabled}}disabled{{/if}}
+>
+  {{#if icon}}
+    {{> @partial-block }}
+  {{/if}}
+  
   {{label}}
 </button>

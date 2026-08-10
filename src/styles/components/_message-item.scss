@@ -1,0 +1,73 @@
+@use "../base/variables" as *;
+
+.message-item {
+  display: flex;
+  align-items: end;
+  gap: 8px;
+
+  &_author {
+    align-self: end;
+
+    .message-item__value {
+      background-color: $primary-5;
+      border-radius: 16px;
+      border-end-end-radius: 4px;
+      order: 2;
+
+      &-text {
+        color: $neutral-98;
+      }
+    }
+
+    .message-item__date {
+      order: 1;
+    }
+
+    .message-item__read-status {
+      order: 3;
+    }
+  }
+
+  .avatar {
+    margin-right: 12px;
+  }
+
+  &__value {
+    padding: 8px 12px;
+    background-color: $primary-95;
+    border-radius: 16px;
+    border-end-start-radius: 4px;
+
+    &_image {
+      padding: 0;
+      overflow: hidden;
+
+      .message-item__value-image {
+        display: block;
+        width: 370px;
+        height: 100%;
+      }
+    }
+
+    &-text {
+      font: $body-large;
+      color: $neutral-1;
+    }
+  }
+
+  &__date {
+    font: $body-small;
+    color: $neutral-7;
+  }
+
+  &__read-status {
+    svg {
+      width: 16px;
+      height: 16px;
+
+      path {
+        fill: $neutral-7;
+      }
+    }
+  }
+}

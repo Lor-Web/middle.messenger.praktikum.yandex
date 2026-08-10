@@ -1,16 +1,9 @@
 export const chats = [
   {
-    avatar: "1fb255dfa8704817151167d37cab665f.png",
-    name: "John Doe",
-    message: "Привет, как дела?",
-    count: 2,
-    date: new Date("2026-08-09T15:02:04Z"),
-  },
-  {
-    avatar: "6f2cb369e74d22c9a5725064a2d28c7a.png",
+    avatar: "73f28b3c79c238dfe2edad5d6fd1c430.png",
     name: "Jane Smith",
-    message: "Не забыть про встречу завтра",
-    count: 5,
+    message: "Жду подтверждения от заказчика.",
+    count: 3,
     date: new Date("2026-08-09T14:30:00Z"),
   },
   {
@@ -43,7 +36,7 @@ export const chats = [
     date: new Date("2026-08-09T10:25:00Z"),
   },
   {
-    avatar: "73f28b3c79c238dfe2edad5d6fd1c430.png",
+    avatar: "6f2cb369e74d22c9a5725064a2d28c7a.png",
     name: "James Taylor",
     message: "Встреча перенесена на пятницу",
     count: 7,

@@ -1,0 +1,47 @@
+@use "../base/variables" as *;
+
+.chat-window {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__header {
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+
+    .avatar {
+      margin-right: 12px;
+    }
+  }
+
+  &__companion {
+    display: flex;
+    flex-direction: column;
+
+    &-name {
+      font: $title-large;
+      color: $neutral-1;
+    }
+
+    &-status {
+      font: $body-small;
+      color: $neutral-5;
+    }
+  }
+
+  &__settings {
+    margin-left: auto;
+  }
+
+  &__messages {
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+    overflow-y: scroll;
+  }
+}
