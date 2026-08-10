@@ -8,8 +8,12 @@
 
       <h3 class="sidebar__header-title">{{user.name}}</h3>
 
-      {{#> button icon=true transparent=true}}
+      {{#> button link=true href='/settings' icon=true transparent=true}}
         {{> icon name='gear'}}
+      {{/button}}
+
+      {{#> button link=true href='/' icon=true transparent=true}}
+        {{> icon name='logout'}}
       {{/button}}
     </div>
 

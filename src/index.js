@@ -2,10 +2,12 @@ import Handlebars from "handlebars";
 
 import authTpl from "./pages/auth.hbs?raw";
 import registerTpl from "./pages/register.hbs?raw";
+import dashboardTpl from "./pages/dashboard.hbs?raw";
+import settingsTpl from "./pages/settings.hbs?raw";
 
 import sidebarTpl from "./layouts/sidebar/sidebar.hbs?raw";
 import chatWindowTpl from "./layouts/chat-window/chat-window.hbs?raw";
-import settingsTpl from "./layouts/settings/settings.hbs?raw";
+import profileTpl from "./layouts/profile/profile.hbs?raw";
 
 import buttonTpl from "./components/button/button.hbs?raw";
 import inputTpl from "./components/input/input.hbs?raw";
@@ -26,7 +28,7 @@ import { user } from "./mocks/user.mock";
 
 Handlebars.registerPartial("sidebar", sidebarTpl);
 Handlebars.registerPartial("chat-window", chatWindowTpl);
-Handlebars.registerPartial("settings", settingsTpl);
+Handlebars.registerPartial("profile", profileTpl);
 
 Handlebars.registerPartial("button", buttonTpl);
 Handlebars.registerPartial("input", inputTpl);
@@ -42,22 +44,68 @@ Handlebars.registerHelper("authorMessage", authorMessage);
 Handlebars.registerHelper("messageTypeText", messageTypeText);
 
 const ROTUES = {
-  "/auth": {
+  auth: {
     template: authTpl,
   },
-  "/register": {
+  register: {
     template: registerTpl,
+  },
+  dashboard: {
+    template: dashboardTpl,
+    data: {
+      chats,
+      messages,
+      user,
+    },
+  },
+  settings: {
+    template: settingsTpl,
+    data: {
+      chats,
+      messages,
+      user,
+    },
   },
 };
 
-(() => {
-  const path = window.location.pathname;
+const render = () => {
+  const path = window.location.pathname.split("/").filter((v) => v !== "");
 
-  if (path === "/") {
-    window.location.pathname = "/auth";
+  if (!path.length) {
+    window.location.pathname = "auth";
+  }
+
+  if (path.length > 1) {
+    document.body.innerHTML = Handlebars.compile(ROTUES[path[0]].template)(
+      ROTUES[path[0]].data
+    );
   }
 
   document.body.innerHTML = Handlebars.compile(ROTUES[path].template)(
     ROTUES[path].data
   );
-})();
+};
+
+window.addEventListener("DOMContentLoaded", render);
+
+document.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const form = event.target;
+
+  if (
+    form.dataset.form === "auth-form" ||
+    form.dataset.form === "register-form"
+  ) {
+    window.location.pathname = "/dashboard/chats";
+    render();
+  }
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  const chatItem = document.querySelector(".chat-item");
+  chatItem.addEventListener("click", () => {
+    window.location.pathname = "/dashboard/chats";
+    render();
+  });
+});

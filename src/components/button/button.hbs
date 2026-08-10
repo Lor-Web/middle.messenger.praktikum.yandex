@@ -1,15 +1,35 @@
-<button 
-  class="
-    button 
-    {{#if widthFull}}button_width_full{{/if}} 
-    {{#if icon}}button_icon{{/if}}
-    {{#if transparent}}button_transparent{{/if}}
-    " 
-  {{#if disabled}}disabled{{/if}}
->
+{{#if link}}
+  <a 
+    class="
+      button 
+      {{#if widthFull}}button_width_full{{/if}} 
+      {{#if icon}}button_icon{{/if}}
+      {{#if transparent}}button_transparent{{/if}}
+      " 
+    href="{{href}}"
+    {{#if disabled}}disabled{{/if}}
+  >
   {{#if icon}}
     {{> @partial-block }}
   {{/if}}
   
   {{label}}
-</button>
+  </a>
+
+  {{else}}
+  <button 
+    class="
+      button 
+      {{#if widthFull}}button_width_full{{/if}} 
+      {{#if icon}}button_icon{{/if}}
+      {{#if transparent}}button_transparent{{/if}}
+      " 
+    {{#if disabled}}disabled{{/if}}
+  >
+  {{#if icon}}
+    {{> @partial-block }}
+  {{/if}}
+  
+  {{label}}
+  </button>    
+{{/if}}
