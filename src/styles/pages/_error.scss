@@ -1,0 +1,14 @@
+@use "../base/variables" as *;
+
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, $neutral-9 0%, $primary-9 100%);
+
+  &__description {
+    margin-bottom: 12px;
+    font: $headline-large;
+    color: $neutral-2;
+  }
+}

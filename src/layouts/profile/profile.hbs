@@ -1,25 +1,27 @@
-<main class="profile">
+<div class="profile">
   <header class="profile__header">
     <h3 class="profile__header-title">Профиль</h3>
   </header>
 
-  <section class="profile-wrapper">
-    <div class="profile__data">
+    <section class="profile__data">
       <img
         class="avatar avatar_large"
         src="/1fb255dfa8704817151167d37cab665f.png"
       />
 
       <form class="profile__data-form">
-        {{> input placeholder="Имя" value=user.firstName name='first_name' }}
-        {{> input placeholder="Фамилия" value=user.secondName name='second_name' }}
-        {{> input placeholder="Имя в чате" value=user.displayName name='display_name' }}
-        {{> input placeholder="Логин" value=user.login name='login' }}
-        {{> input placeholder="Почта" value=user.email name='email' }}
-        {{> input placeholder="Телефон" value=user.phone name='phone' }}
+        {{> input type='file' label="Загрузить аватар" placeholder="Загрузить аватар" name='avatar' }}
+        {{> input label="Имя" placeholder="Имя" value=user.firstName name='first_name' }}
+        {{> input label="Фамилия" placeholder="Фамилия" value=user.secondName name='second_name' }}
+        {{> input label="Имя в чате" placeholder="Имя в чате" value=user.displayName name='display_name' }}
+        {{> input label="Логин" placeholder="Логин" value=user.login name='login' }}
+        {{> input label="Почта" placeholder="Почта" value=user.email name='email' }}
+        {{> input label="Телефон" placeholder="Телефон" value=user.phone name='phone' }}
+        {{> input type='password' label="Пароль" placeholder="Пароль" name='old_password' }}
+        {{> input type='password' label="Новый пароль" placeholder="Новый пароль" name='new_password' }}
+
+        {{> button label="Сохранить" type='submit' }}
       </form>
 
-      {{> button label="Сохранить" }}
-    </div>
-  </section>
-</main>
+    </section>
+</div>

@@ -1,4 +1,4 @@
-<main class="chat-window">
+<div class="chat-window">
   <header class="chat-window__header">
     <img
       class="avatar avatar_medium"
@@ -26,14 +26,17 @@
   </section>
 
   <footer class="chat-window__footer">
-    {{#> button icon=true transparent=true}}
-      {{> icon name='paperclip'}}
-    {{/button}}
+    <form class="chat-window__form">
+      {{#> button icon=true transparent=true}}
+        {{> icon name='paperclip'}}
+      {{/button}}
 
-    {{> textarea placeholder='Сообщение...' name='message' }}
+      {{> textarea placeholder='Сообщение...' name='message' }}
 
-    {{#> button icon=true }}
-      {{> icon name='arrow-right'}}
-    {{/button}}
+      {{#> button type='submit' icon=true }}
+        {{> icon name='arrow-right'}}
+      {{/button}}
+    </form>
+  
   </footer>
-</main>
+</div>

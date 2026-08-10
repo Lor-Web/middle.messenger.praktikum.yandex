@@ -4,6 +4,7 @@ import authTpl from "./pages/auth.hbs?raw";
 import registerTpl from "./pages/register.hbs?raw";
 import dashboardTpl from "./pages/dashboard.hbs?raw";
 import settingsTpl from "./pages/settings.hbs?raw";
+import errorTpl from "./pages/error.hbs?raw";
 
 import sidebarTpl from "./layouts/sidebar/sidebar.hbs?raw";
 import chatWindowTpl from "./layouts/chat-window/chat-window.hbs?raw";
@@ -69,7 +70,18 @@ const ROUTES = {
     },
   },
   404: {
-    template: "404", // TODO: сделать страницу 404
+    template: errorTpl,
+    data: {
+      title: "404",
+      description: "Не туда попали",
+    },
+  },
+  500: {
+    template: errorTpl,
+    data: {
+      title: "500",
+      description: "Мы уже фиксим",
+    },
   },
 };
 
@@ -102,14 +114,14 @@ document.addEventListener("submit", (event) => {
     form.dataset.form === "register-form"
   ) {
     window.location.pathname = "/dashboard";
-    render();
   }
 });
 
 window.addEventListener("DOMContentLoaded", () => {
-  const chatItem = document.querySelector(".chat-item");
-  chatItem?.addEventListener("click", () => {
-    window.location.pathname = "/dashboard";
-    render();
-  });
+  const chatItem = document.querySelectorAll(".chat-item");
+  chatItem.forEach((node) =>
+    node?.addEventListener("click", () => {
+      window.location.pathname = "/dashboard";
+    })
+  );
 });

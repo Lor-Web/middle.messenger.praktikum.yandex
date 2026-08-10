@@ -17,18 +17,19 @@
   }
 
   &-wrapper {
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-y: scroll;
   }
 
   &__data {
+    padding: 18px;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 16px;
+    overflow-y: scroll;
 
     &-form {
       display: flex;
