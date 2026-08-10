@@ -45,7 +45,7 @@ Handlebars.registerHelper("icon", getIcon);
 Handlebars.registerHelper("authorMessage", authorMessage);
 Handlebars.registerHelper("messageTypeText", messageTypeText);
 
-const ROTUES = {
+const ROUTES = {
   auth: {
     template: authTpl,
   },
@@ -78,21 +78,16 @@ const render = () => {
 
   if (!path.length) {
     window.location.pathname = "auth";
+    return;
   }
 
-  if (!ROTUES[path[0]]) {
+  if (!ROUTES[path[0]]) {
     window.location.pathname = "404";
+    return;
   }
 
-  if (path.length > 1) {
-    document.body.innerHTML = Handlebars.compile(ROTUES[path[0]].template)(
-      ROTUES[path[0]].data
-    );
-  } else {
-    document.body.innerHTML = Handlebars.compile(ROTUES[path].template)(
-      ROTUES[path].data
-    );
-  }
+  const route = ROUTES[path[0]];
+  document.body.innerHTML = Handlebars.compile(route.template)(route.data);
 };
 
 window.addEventListener("DOMContentLoaded", render);

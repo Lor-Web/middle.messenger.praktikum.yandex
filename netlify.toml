@@ -1,9 +1,14 @@
 # Global settings applied to the whole site.
-#
-# “base” is the directory to change to before starting build. If you set base:
-#        that is where we will look for package.json/.nvmrc/etc, not repo root!
+# “base” is the directory to change to before starting build.
 # “command” is your build command.
 # “publish” is the directory to publish (relative to the root of your repo).
 
 [build]
+  command = "pnpm build"
   publish = "dist"
+
+# Redirect all routes to index.html so the SPA router works on refresh.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
