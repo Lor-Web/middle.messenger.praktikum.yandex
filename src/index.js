@@ -2,7 +2,6 @@ import Handlebars from "handlebars";
 
 import authTpl from "./pages/auth.hbs?raw";
 import registerTpl from "./pages/register.hbs?raw";
-import chatsTpl from "./pages/chats.hbs?raw";
 
 import sidebarTpl from "./layouts/sidebar/sidebar.hbs?raw";
 import chatWindowTpl from "./layouts/chat-window/chat-window.hbs?raw";
@@ -42,8 +41,23 @@ Handlebars.registerHelper("icon", getIcon);
 Handlebars.registerHelper("authorMessage", authorMessage);
 Handlebars.registerHelper("messageTypeText", messageTypeText);
 
-document.body.innerHTML = Handlebars.compile(chatsTpl)({
-  chats,
-  messages,
-  user,
-});
+const ROTUES = {
+  "/auth": {
+    template: authTpl,
+  },
+  "/register": {
+    template: registerTpl,
+  },
+};
+
+(() => {
+  const path = window.location.pathname;
+
+  if (path === "/") {
+    window.location.pathname = "/auth";
+  }
+
+  document.body.innerHTML = Handlebars.compile(ROTUES[path].template)(
+    ROTUES[path].data
+  );
+})();
