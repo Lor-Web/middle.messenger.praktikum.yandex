@@ -5,9 +5,10 @@
   "type": "module",
   "packageManager": "pnpm@10.15.1",
   "scripts": {
-    "start": "vite",
+    "dev": "vite",
+    "start": "pnpm run build && pnpm run preview",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --port 3000 --host"
   },
   "devDependencies": {
     "sass": "^1.102.0",
