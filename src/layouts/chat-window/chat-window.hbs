@@ -1,0 +1,42 @@
+<div class="chat-window">
+  <header class="chat-window__header">
+    <img
+      class="avatar avatar_medium"
+      src="{{messages.companion.avatar}}"
+    />
+
+    <div class="chat-window__companion">
+      <h3 class="chat-window__companion-name">{{messages.companion.name}}</h3>
+      {{#if messages.companion.online}}
+        <p class="chat-window__companion-status">Online</p>
+      {{/if}}
+    </div>
+
+    <div class="chat-window__settings">
+      {{#> button icon=true transparent=true}}
+        {{> icon name='ellipsis-vertical'}}
+      {{/button}}
+    </div>
+  </header>
+
+  <section class="chat-window__messages">
+    {{#each messages.messages}}
+      {{> message-item }}
+    {{/each}}
+  </section>
+
+  <footer class="chat-window__footer">
+    <form class="chat-window__form">
+      {{#> button icon=true transparent=true}}
+        {{> icon name='paperclip'}}
+      {{/button}}
+
+      {{> textarea placeholder='Сообщение...' name='message' }}
+
+      {{#> button type='submit' icon=true }}
+        {{> icon name='arrow-right'}}
+      {{/button}}
+    </form>
+  
+  </footer>
+</div>

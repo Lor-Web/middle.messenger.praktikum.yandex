@@ -1,0 +1,57 @@
+@use "../base/variables" as *;
+
+.button {
+  padding: 12px 24px;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  color: $neutral-98;
+  background-color: $primary-5;
+  border-radius: 24px;
+  font: $label-large;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: $primary-6;
+  }
+
+  &:active,
+  &:focus-visible {
+    background-color: $primary-4;
+  }
+
+  &[disabled] {
+    color: $neutral-7;
+    background-color: $neutral-95;
+    cursor: not-allowed;
+  }
+
+  &_width_full {
+    width: 100%;
+  }
+
+  &_icon {
+    padding: 4px;
+
+    path {
+      fill: $neutral-95;
+    }
+  }
+
+  &_transparent {
+    background-color: transparent;
+
+    &:hover {
+      background-color: $neutral-9;
+    }
+
+    &:active,
+    &:focus-visible {
+      background-color: $neutral-8;
+    }
+
+    path {
+      fill: $neutral-1;
+    }
+  }
+}

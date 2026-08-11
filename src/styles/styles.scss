@@ -1,0 +1,52 @@
+// BASE STYLES
+@use "./base/base.scss";
+// COMPONENTS
+@use "./components/components.scss";
+// LAYOUTS
+@use "./layouts/layouts.scss";
+// PAGES
+@use "./pages/pages.scss";
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.page {
+  width: 100%;
+  height: 100vh;
+}
+
+// SCROLLBAR
+/* --- Настройки для Firefox (всегда виден, но очень бледный) --- */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.05);
+}
+
+/* --- Для WebKit (Chrome, Edge, Safari) --- */
+html::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Дорожка – полностью прозрачная, невидима */
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Бегунок – прозрачный по умолчанию (скрыт) */
+html::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+/* Показываем бегунок при наведении на страницу */
+html:hover::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Делаем темнее при наведении на сам бегунок */
+html::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.6);
+}

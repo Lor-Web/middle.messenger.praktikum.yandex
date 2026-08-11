@@ -1,0 +1,20 @@
+<div class="chat-item">
+  <img class="chat-item__avatar avatar" src="{{avatar}}" alt="{{name}}" />
+
+  <div class="chat-item__user">
+    <h2 class="chat-item__user-name">{{name}}</h2>
+    <p class="chat-item__user-message">
+      {{#if myMessage}}
+        <b>Вы:</b>
+      {{/if}}
+      {{message}}
+    </p>
+  </div>
+
+  <div class="chat-item__info">
+    <p class="chat-item__info-date">{{formatDate date}}</p>
+    {{#if count}}
+      {{> counter count=count}}
+    {{/if}}
+  </div>
+</div>

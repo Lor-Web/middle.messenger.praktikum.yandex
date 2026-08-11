@@ -1,0 +1,33 @@
+@use "../base/variables" as *;
+
+.field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  &__label {
+    font: $body-small;
+    color: $neutral-5;
+  }
+
+  &__input {
+    padding: 6px 16px;
+    flex: 1;
+    font: $body-large;
+    background-color: $neutral-95;
+    border-radius: 18px;
+    border: none;
+    outline: none;
+    transition: all 0.2s ease;
+
+    &:hover,
+    &:focus-within {
+      background-color: $neutral-9;
+    }
+
+    &_fill {
+      background-color: $neutral-98;
+    }
+  }
+}

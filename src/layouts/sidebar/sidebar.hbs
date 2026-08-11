@@ -1,0 +1,28 @@
+<aside class="sidebar">
+  <header class="sidebar__header">
+    <div class="sidebar__header-top">
+      <img
+        class="avatar avatar_medium"
+        src="/1fb255dfa8704817151167d37cab665f.png"
+      />
+
+      <h3 class="sidebar__header-title">{{user.displayName}}</h3>
+
+      {{#> button link=true href='/settings' icon=true transparent=true}}
+        {{> icon name='gear'}}
+      {{/button}}
+
+      {{#> button link=true href='/' icon=true transparent=true}}
+        {{> icon name='logout'}}
+      {{/button}}
+    </div>
+
+    {{> input placeholder="Поиск" fill="true" }}
+  </header>
+
+  <nav class="sidebar__chat-list">
+    {{#each chats}}
+      {{> chat-item}}
+    {{/each}}
+  </nav>
+</aside>
