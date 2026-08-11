@@ -4,7 +4,7 @@
 # “publish” is the directory to publish (relative to the root of your repo).
 
 [build]
-  command = "pnpm build"
+  command = "npm build"
   publish = "dist"
 
 # Redirect all routes to index.html so the SPA router works on refresh.

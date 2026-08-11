@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@10.15.1",
+  "packageManager": "npm@10.15.1",
   "scripts": {
     "dev": "vite",
-    "start": "pnpm run build && pnpm run preview",
+    "start": "npm run build && npm run preview",
     "build": "vite build",
     "preview": "vite preview --port 3000 --host"
   },
