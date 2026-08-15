@@ -1,4 +1,4 @@
-export default (dateInput) => {
+export default (dateInput: string) => {
   const date = new Date(dateInput);
   if (isNaN(date.getTime())) return "";
 
@@ -16,7 +16,7 @@ export default (dateInput) => {
 
   // Разница в днях (положительная = в прошлом)
   const diffDays = Math.floor(
-    (todayStart - msgDayStart) / (1000 * 60 * 60 * 24)
+    (Number(todayStart) - Number(msgDayStart)) / (1000 * 60 * 60 * 24)
   );
 
   // 1. Сегодня

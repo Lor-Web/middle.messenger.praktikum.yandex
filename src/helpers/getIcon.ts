@@ -14,7 +14,7 @@ const ICONS = {
   logout,
 };
 
-export default (name) => {
+export default (name: keyof typeof ICONS) => {
   const svg = ICONS[name];
 
   if (!svg) {
