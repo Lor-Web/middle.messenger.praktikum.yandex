@@ -11,12 +11,12 @@ export default (dateInput: string) => {
   const msgDayStart = new Date(
     date.getFullYear(),
     date.getMonth(),
-    date.getDate()
+    date.getDate(),
   );
 
   // Разница в днях (положительная = в прошлом)
   const diffDays = Math.floor(
-    (Number(todayStart) - Number(msgDayStart)) / (1000 * 60 * 60 * 24)
+    (Number(todayStart) - Number(msgDayStart)) / (1000 * 60 * 60 * 24),
   );
 
   // 1. Сегодня

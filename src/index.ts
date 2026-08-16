@@ -122,6 +122,6 @@ window.addEventListener("DOMContentLoaded", () => {
   chatItem.forEach((node) =>
     node?.addEventListener("click", () => {
       window.location.pathname = "/dashboard";
-    })
+    }),
   );
 });

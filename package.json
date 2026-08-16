@@ -9,9 +9,12 @@
     "start": "npm run build && npm run preview",
     "prebuild": "tsc --noEmit",
     "build": "vite build",
-    "preview": "vite preview --port 3000 --host"
+    "preview": "vite preview --port 3000 --host",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write ."
   },
   "devDependencies": {
+    "prettier": "^3.9.6",
     "sass": "^1.102.0",
     "ts-node": "^10.9.2",
     "typescript": "^7.0.2",
