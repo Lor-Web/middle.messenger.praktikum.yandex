@@ -1,13 +1,22 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "target": "es2016",
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM"],
     "declaration": false,
-    "module": "commonjs",
+    "module": "ESNext",
     "strictNullChecks": true,
     "sourceMap": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "useDefineForClassFields": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "noEmit": true,
+    "noImplicitReturns": true,
+    "skipLibCheck": true
   }
 }
