@@ -1,120 +1,133 @@
-import Handlebars from 'handlebars';
+import App from './core/App/App';
+import { ERRORS_ROUTES, ROUTES } from './shared/costants/routes.constant';
 
-import buttonTpl from './components/button/button.hbs?raw';
-import cardTpl from './components/card/card.hbs?raw';
-import chatItemTpl from './components/chat-item/chat-item.hbs?raw';
-import counterTpl from './components/counter/counter.hbs?raw';
-import iconTpl from './components/icon/icon.hbs?raw';
-import inputTpl from './components/input/input.hbs?raw';
-import messageItemTpl from './components/message-item/message-item.hbs?raw';
-import textAreaTpl from './components/textarea/textarea.hbs?raw';
-import authorMessage from './helpers/authorMessage';
-import formatDate from './helpers/formatDate';
-import getIcon from './helpers/getIcon';
-import messageTypeText from './helpers/messageTypeText';
-import chatWindowTpl from './layouts/chat-window/chat-window.hbs?raw';
-import profileTpl from './layouts/profile/profile.hbs?raw';
-import sidebarTpl from './layouts/sidebar/sidebar.hbs?raw';
-import { chats } from './mocks/chats.mock';
-import { messages } from './mocks/messages.mock';
-import { user } from './mocks/user.mock';
-import authTpl from './pages/auth.hbs?raw';
-import dashboardTpl from './pages/dashboard.hbs?raw';
-import errorTpl from './pages/error.hbs?raw';
-import registerTpl from './pages/register.hbs?raw';
-import settingsTpl from './pages/settings.hbs?raw';
+const app = new App({ title: 'Практикум Чат', routes: ROUTES, errorRoutes: ERRORS_ROUTES });
+app.init();
 
-Handlebars.registerPartial('sidebar', sidebarTpl);
-Handlebars.registerPartial('chat-window', chatWindowTpl);
-Handlebars.registerPartial('profile', profileTpl);
+// registerHelpers();
+// registerComponents();
 
-Handlebars.registerPartial('button', buttonTpl);
-Handlebars.registerPartial('input', inputTpl);
-Handlebars.registerPartial('card', cardTpl);
-Handlebars.registerPartial('chat-item', chatItemTpl);
-Handlebars.registerPartial('counter', counterTpl);
-Handlebars.registerPartial('message-item', messageItemTpl);
-Handlebars.registerPartial('icon', iconTpl);
-Handlebars.registerPartial('textarea', textAreaTpl);
+// const registerPage = new ErrorPage({ title: '505', description: 'Мы уже фиксим' });
+// const registerPageElement = registerPage.element();
+// registerPageElement && document.body.appendChild(registerPageElement);
 
-Handlebars.registerHelper('formatDate', formatDate);
-Handlebars.registerHelper('icon', getIcon);
-Handlebars.registerHelper('authorMessage', authorMessage);
-Handlebars.registerHelper('messageTypeText', messageTypeText);
+// import Handlebars from 'handlebars';
 
-const ROUTES = {
-  auth: {
-    template: authTpl,
-  },
-  register: {
-    template: registerTpl,
-  },
-  dashboard: {
-    template: dashboardTpl,
-    data: {
-      chats,
-      messages,
-      user,
-    },
-  },
-  settings: {
-    template: settingsTpl,
-    data: {
-      chats,
-      messages,
-      user,
-    },
-  },
-  404: {
-    template: errorTpl,
-    data: {
-      title: '404',
-      description: 'Не туда попали',
-    },
-  },
-  500: {
-    template: errorTpl,
-    data: {
-      title: '500',
-      description: 'Мы уже фиксим',
-    },
-  },
-};
+// import buttonTpl from './components/button/button.hbs?raw';
+// import cardTpl from './components/card/card.hbs?raw';
+// import chatItemTpl from './components/chat-item/chat-item.hbs?raw';
+// import counterTpl from './components/counter/counter.hbs?raw';
+// import iconTpl from './components/icon/icon.hbs?raw';
+// import inputTpl from './components/input/input.hbs?raw';
+// import messageItemTpl from './components/message-item/message-item.hbs?raw';
+// import textAreaTpl from './components/textarea/textarea.hbs?raw';
+// import authorMessage from './helpers/authorMessage';
+// import formatDate from './helpers/formatDate';
+// import getIcon from './helpers/getIcon';
+// import messageTypeText from './helpers/messageTypeText';
+// import chatWindowTpl from './layouts/chat-window/chat-window.hbs?raw';
+// import profileTpl from './layouts/profile/profile.hbs?raw';
+// import sidebarTpl from './layouts/sidebar/sidebar.hbs?raw';
+// import { chats } from './mocks/chats.mock';
+// import { messages } from './mocks/messages.mock';
+// import { user } from './mocks/user.mock';
+// import authTpl from './pages/auth.hbs?raw';
+// import dashboardTpl from './pages/dashboard.hbs?raw';
+// import errorTpl from './pages/error.hbs?raw';
+// import registerTpl from './pages/register.hbs?raw';
+// import settingsTpl from './pages/settings.hbs?raw';
 
-const render = () => {
-  const path = window.location.pathname.split('/').filter((v) => v !== '');
+// Handlebars.registerPartial('sidebar', sidebarTpl);
+// Handlebars.registerPartial('chat-window', chatWindowTpl);
+// Handlebars.registerPartial('profile', profileTpl);
 
-  if (!path.length) {
-    window.location.pathname = 'auth';
-    return;
-  }
+// Handlebars.registerPartial('button', buttonTpl);
+// Handlebars.registerPartial('input', inputTpl);
+// Handlebars.registerPartial('card', cardTpl);
+// Handlebars.registerPartial('chat-item', chatItemTpl);
+// Handlebars.registerPartial('counter', counterTpl);
+// Handlebars.registerPartial('message-item', messageItemTpl);
+// Handlebars.registerPartial('icon', iconTpl);
+// Handlebars.registerPartial('textarea', textAreaTpl);
 
-  if (!ROUTES[path[0]]) {
-    window.location.pathname = '404';
-    return;
-  }
+// Handlebars.registerHelper('formatDate', formatDate);
+// Handlebars.registerHelper('icon', getIcon);
+// Handlebars.registerHelper('authorMessage', authorMessage);
+// Handlebars.registerHelper('messageTypeText', messageTypeText);
 
-  const route = ROUTES[path[0]];
-  document.body.innerHTML = Handlebars.compile(route.template)(route.data);
-};
+// const ROUTES = {
+//   auth: {
+//     template: authTpl,
+//   },
+//   register: {
+//     template: registerTpl,
+//   },
+//   dashboard: {
+//     template: dashboardTpl,
+//     data: {
+//       chats,
+//       messages,
+//       user,
+//     },
+//   },
+//   settings: {
+//     template: settingsTpl,
+//     data: {
+//       chats,
+//       messages,
+//       user,
+//     },
+//   },
+//   404: {
+//     template: errorTpl,
+//     data: {
+//       title: '404',
+//       description: 'Не туда попали',
+//     },
+//   },
+//   500: {
+//     template: errorTpl,
+//     data: {
+//       title: '500',
+//       description: 'Мы уже фиксим',
+//     },
+//   },
+// };
 
-window.addEventListener('DOMContentLoaded', render);
+// const render = () => {
+//   const path = window.location.pathname.split('/').filter((v) => v !== '');
 
-document.addEventListener('submit', (event) => {
-  event.preventDefault();
+//   if (!path.length) {
+//     window.location.pathname = 'auth';
+//     return;
+//   }
 
-  const form = event.target;
+//   if (!ROUTES[path[0]]) {
+//     window.location.pathname = '404';
+//     return;
+//   }
 
-  if (form.dataset.form === 'auth-form' || form.dataset.form === 'register-form') {
-    window.location.pathname = '/dashboard';
-  }
-});
+//   const route = ROUTES[path[0]];
+//   document.body.innerHTML = Handlebars.compile(route.template)(route.data);
+// };
 
-window.addEventListener('DOMContentLoaded', () => {
-  const chatItem = document.querySelectorAll('.chat-item');
-  chatItem.forEach((node) =>
-    node?.addEventListener('click', () => {
-      window.location.pathname = '/dashboard';
-    }),
-  );
-});
+// window.addEventListener('DOMContentLoaded', render);
+
+// document.addEventListener('submit', (event) => {
+//   event.preventDefault();
+
+//   const form = event.target;
+
+//   if (form.dataset.form === 'auth-form' || form.dataset.form === 'register-form') {
+//     window.location.pathname = '/dashboard';
+//   }
+// });
+
+// window.addEventListener('DOMContentLoaded', () => {
+//   const chatItem = document.querySelectorAll('.chat-item');
+//   chatItem.forEach((node) =>
+//     node?.addEventListener('click', () => {
+//       window.location.pathname = '/dashboard';
+//     }),
+//   );
+// });
