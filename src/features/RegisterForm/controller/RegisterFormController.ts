@@ -1,3 +1,4 @@
+import { DASHBOARD_PATH } from '../../../shared/costants/paths.constant';
 import { listenerForChild } from '../../../shared/lib/setListenerForChild';
 import type { RegisterFormModel } from '../models/RegisterFormModel';
 import type { RegisterFormValues } from '../types/registerForm.type';
@@ -85,6 +86,7 @@ export default class RegisterFormController {
 
     if (this.model.validate()) {
       console.log(this.model.getValues());
+      window.location.pathname = `/${DASHBOARD_PATH}`;
     }
   }
 

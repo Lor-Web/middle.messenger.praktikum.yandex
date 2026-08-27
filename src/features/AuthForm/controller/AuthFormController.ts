@@ -1,3 +1,4 @@
+import { DASHBOARD_PATH } from '../../../shared/costants/paths.constant';
 import { listenerForChild } from '../../../shared/lib/setListenerForChild';
 import type { AuthFormModel } from '../models/AuthFormModel';
 import type { AuthFormValues } from '../types/authForm.type';
@@ -85,6 +86,7 @@ export default class AuthFormController {
 
     if (this.model.validate()) {
       console.log(this.model.getValues());
+      window.location.pathname = `/${DASHBOARD_PATH}`;
     }
   }
 
