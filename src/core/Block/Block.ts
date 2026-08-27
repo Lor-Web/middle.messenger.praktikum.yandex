@@ -25,9 +25,10 @@ export default abstract class Block<Props extends BlockOwnProps = object> {
   /** В этом объекте ключ — это название метода, а значение — обработчик */
   protected events: EventListType = {};
 
+  // protected refs: Record<string, Element> = {};
   protected refs: Record<string, Element> = {};
 
-  protected children: Block<object>[] = [];
+  children: Block<object>[] = [];
 
   /** Если у компонента нет свойств, задаём пустой объект */
   constructor(props: Props = {} as Props) {
@@ -138,6 +139,10 @@ export default abstract class Block<Props extends BlockOwnProps = object> {
     }
 
     return this.domElement;
+  }
+
+  public getRef(name: string): Element | undefined {
+    return this.refs[name];
   }
 
   public setProps(props: Partial<Props>) {

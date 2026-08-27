@@ -20,7 +20,7 @@ export default class Profile extends Block {
           src="{{ user.avatar }}"
         />
 
-        {{{ ProfileForm user=user }}}
+        {{{ ProfileFormView user=user }}}
       </section>
     </div>
   `;

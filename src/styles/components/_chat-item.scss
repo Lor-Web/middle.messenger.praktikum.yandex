@@ -1,10 +1,11 @@
-@use "../base/variables" as *;
+@use '../base/variables' as *;
 
 .chat-item {
   padding: 12px;
   display: flex;
   border-radius: 8px;
   cursor: pointer;
+  text-decoration: none;
   transition: all 0.1s ease-in-out;
 
   &:hover {

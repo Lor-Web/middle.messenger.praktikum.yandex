@@ -9,7 +9,7 @@ export default class RegisterCard extends Block {
         Регистрация
       </h1>
   
-      {{{ RegisterForm }}}
+      {{{ RegisterFormView }}}
     </div>
   `;
 }

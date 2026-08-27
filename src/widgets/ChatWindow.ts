@@ -34,7 +34,7 @@ export default class ChatWindow extends Block<ChatWindowProps> {
       </section>
 
       <footer class="chat-window__footer">
-        {{{ ChatWindowForm }}}
+        {{{ ChatWindowFormView }}}
       </footer>
     </div>
   `;

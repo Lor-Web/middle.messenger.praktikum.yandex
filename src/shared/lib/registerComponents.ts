@@ -1,8 +1,8 @@
 import registerComponent from '../../core/registerComponent/registerComponent';
-import AuthForm from '../../features/AuthForm';
-import ChatWindowForm from '../../features/ChatWindowForm';
-import ProfileForm from '../../features/ProfileForm';
-import RegisterForm from '../../features/RegisterForm';
+import AuthFormView from '../../features/AuthForm/view/AuthFormView';
+import ChatWindowFormView from '../../features/ChatWindowForm/view/ChatWindowFormView';
+import ProfileFormView from '../../features/ProfileForm/view/ProfileFormView';
+import RegisterFormView from '../../features/RegisterForm/view/RegisterFormView';
 import AuthCard from '../../widgets/AuthCard';
 import ChatWindow from '../../widgets/ChatWindow';
 import Profile from '../../widgets/Profile';
@@ -18,7 +18,7 @@ import Textarea from '../ui/Texarea';
 
 const SHARED_UI = [Input, Textarea, Button, Icon, ChatItem, Counter, MessageItem];
 const WIDGETS = [AuthCard, RegisterCard, Sidebar, ChatWindow, Profile];
-const FEATURES = [AuthForm, RegisterForm, ChatWindowForm, ProfileForm];
+const FEATURES = [AuthFormView, RegisterFormView, ChatWindowFormView, ProfileFormView];
 
 export const registerComponents = () => {
   const allComponents = [...SHARED_UI, ...WIDGETS, ...FEATURES];

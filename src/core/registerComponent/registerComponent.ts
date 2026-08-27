@@ -8,13 +8,16 @@ export type ComponentClass<Props extends BlockOwnProps> = {
   componentName: string;
 };
 
+/** Уникальный инкрементальный идентификатор для заглушки */
+let uniqueId = 0;
+
 export default function registerComponent<Props extends BlockOwnProps>(
   Component: ComponentClass<Props>,
 ) {
   Handlebars.registerHelper(
     Component.componentName,
     function (this: unknown, { hash, data }: HelperOptions) {
-      const dataAttribute = `data-component-hbs-id="${new Date().getMilliseconds() + 1}"`;
+      const dataAttribute = `data-component-hbs-id="${++uniqueId}"`;
       const component = new Component(hash as Props);
 
       /** Если в свойствах компонента есть ссылка, сохраним её в свойство класса */

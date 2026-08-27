@@ -9,7 +9,7 @@ export default class ChatItem extends Block<ChatItemProps> {
   static componentName = 'ChatItem';
 
   protected template = `
-    <div class="chat-item">
+    <a class="chat-item" href="/dashboard">
       <img class="chat-item__avatar avatar" src="{{chat.avatar}}" alt="{{chat.name}}" />
 
       <div class="chat-item__user">
@@ -28,6 +28,6 @@ export default class ChatItem extends Block<ChatItemProps> {
           {{{ Counter count=chat.count }}}
         {{/if}}
       </div>
-    </div>
+    </a>
   `;
 }

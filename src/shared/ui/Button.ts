@@ -42,6 +42,7 @@ export default class Button extends Block<ButtonProps> {
         " 
         type="{{#if type}}{{type}}{{else}}button{{/if}}"
         {{#if disabled}}disabled{{/if}}
+        ref="button"
       >
         {{#if icon}}
           {{{ Icon name=icon }}}
