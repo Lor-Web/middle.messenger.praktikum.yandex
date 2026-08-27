@@ -13,6 +13,7 @@ export type ChatItem = {
   message: string;
   count: number;
   date: string;
+  myMessage?: boolean;
 };
 
 export type Chat = {

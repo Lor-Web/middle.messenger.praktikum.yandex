@@ -10,15 +10,7 @@ export default defineConfig({
   publicDir: '../public',
   server: {
     open: true,
-    port: process.env.PORT || 3000,
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        // Uses the faster, modern Sass compiler API
-        api: 'modern-compiler',
-      },
-    },
+    port: Number(process.env.PORT) || 3000,
   },
   build: {
     outDir: '../dist',

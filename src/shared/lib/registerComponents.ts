@@ -1,4 +1,7 @@
-import registerComponent from '../../core/registerComponent/registerComponent';
+import type { BlockOwnProps } from '../../core/Block/Block';
+import registerComponent, {
+  type ComponentClass,
+} from '../../core/registerComponent/registerComponent';
 import AuthFormView from '../../features/AuthForm/view/AuthFormView';
 import ChatWindowFormView from '../../features/ChatWindowForm/view/ChatWindowFormView';
 import ProfileFormView from '../../features/ProfileForm/view/ProfileFormView';
@@ -21,6 +24,7 @@ const WIDGETS = [AuthCard, RegisterCard, Sidebar, ChatWindow, Profile];
 const FEATURES = [AuthFormView, RegisterFormView, ChatWindowFormView, ProfileFormView];
 
 export const registerComponents = () => {
-  const allComponents = [...SHARED_UI, ...WIDGETS, ...FEATURES];
-  allComponents.forEach((c) => registerComponent(c));
+  const allComponents = [...SHARED_UI, ...WIDGETS, ...FEATURES] as ComponentClass<BlockOwnProps>[];
+
+  allComponents.forEach((component) => registerComponent(component));
 };
