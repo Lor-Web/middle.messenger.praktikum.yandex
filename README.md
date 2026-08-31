@@ -9,6 +9,7 @@
 ## 🛠 Technologies
 
 - JavaScript
+- TypeScript
 - Vite
 - SCSS
 - Handlebars
