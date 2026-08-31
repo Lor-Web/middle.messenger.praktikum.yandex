@@ -71,7 +71,7 @@ $neutral-95: hsl($neutral-hue, $neutral-saturation, 95%);
 $neutral-98: hsl($neutral-hue, $neutral-saturation, 98%);
 $neutral-100: hsl($neutral-hue, $neutral-saturation, 100%);
 
-//NEUTRAL SPECIAL
+// NEUTRAL SPECIAL
 $neutral-special-hue: 220;
 $neutral-special-saturation: 36%;
 
@@ -106,7 +106,7 @@ $shadow-color: hsla(
   $neutral-hue,
   $neutral-saturation,
   0%,
-  1
+  100%
 ); // чёрный с hue=203, sat=8%
 
 $shadow-sm: 0 2px 8px rgba($shadow-color, 0.08); // Легкая тень (для карточек, кнопок)

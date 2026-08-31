@@ -1,14 +1,17 @@
 // BASE STYLES
-@use "./base/base.scss";
+@use "./base/base";
+
 // COMPONENTS
-@use "./components/components.scss";
+@use "./components/components";
+
 // LAYOUTS
-@use "./layouts/layouts.scss";
+@use "./layouts/layouts";
+
 // PAGES
-@use "./pages/pages.scss";
+@use "./pages/pages";
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: Roboto, sans-serif;
 }
 
 .page {
@@ -17,10 +20,11 @@ body {
 }
 
 // SCROLLBAR
+
 /* --- Настройки для Firefox (всегда виден, но очень бледный) --- */
 html {
   scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.05);
+  scrollbar-color: rgb(0 0 0 / 20%) rgb(0 0 0 / 5%);
 }
 
 /* --- Для WebKit (Chrome, Edge, Safari) --- */
@@ -43,10 +47,10 @@ html::-webkit-scrollbar-thumb {
 
 /* Показываем бегунок при наведении на страницу */
 html:hover::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgb(0 0 0 / 30%);
 }
 
 /* Делаем темнее при наведении на сам бегунок */
 html::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgb(0 0 0 / 60%);
 }

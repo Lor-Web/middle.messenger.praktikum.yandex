@@ -1,4 +1,4 @@
-@use "../base/variables" as *;
+@use '../base/variables' as *;
 
 .field {
   flex: 1;
@@ -17,7 +17,7 @@
     font: $body-large;
     background-color: $neutral-95;
     border-radius: 18px;
-    border: none;
+    border: 1px solid transparent;
     outline: none;
     transition: all 0.2s ease;
 
@@ -29,5 +29,15 @@
     &_fill {
       background-color: $neutral-98;
     }
+
+    &_error {
+      border-color: $error-4;
+    }
+  }
+
+  &__error {
+    font: $body-small;
+    color: $error-4;
+    min-height: 16px;
   }
 }
