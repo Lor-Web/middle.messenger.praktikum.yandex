@@ -16,6 +16,7 @@ export default class Sidebar extends Block<SidebarProps> {
           <img
             class="avatar avatar_medium"
             src="{{ user.avatar }}"
+            alt="{{ user.displayName }}"
           />
 
           <h3 class="sidebar__header-title">{{user.displayName}}</h3>

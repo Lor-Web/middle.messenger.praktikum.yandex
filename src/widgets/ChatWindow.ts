@@ -1,7 +1,8 @@
 import Block, { type BlockOwnProps } from '../core/Block/Block';
+import type { Chat } from '../shared/models/base.type';
 
 export interface ChatWindowProps extends BlockOwnProps {
-  chat: ChatWindow;
+  chat: Chat;
 }
 
 export default class ChatWindow extends Block<ChatWindowProps> {
@@ -13,6 +14,7 @@ export default class ChatWindow extends Block<ChatWindowProps> {
         <img
           class="avatar avatar_medium"
           src="{{chat.companion.avatar}}"
+          alt="{{chat.companion.name}}"
         />
 
         <div class="chat-window__companion">

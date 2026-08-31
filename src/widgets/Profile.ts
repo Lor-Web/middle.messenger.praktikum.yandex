@@ -18,6 +18,7 @@ export default class Profile extends Block {
         <img
           class="avatar avatar_large"
           src="{{ user.avatar }}"
+          alt="{{ user.displayName }}"
         />
 
         {{{ ProfileFormView user=user }}}
