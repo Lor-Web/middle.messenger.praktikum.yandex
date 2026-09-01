@@ -1,6 +1,7 @@
-import type { FormErrors } from '../../../shared/models/form/form.type';
-import { FormModel } from '../../../shared/models/form/FormModel';
-import { messageValidator } from '../../../shared/models/form/validators';
+import type { FormErrors } from '@/shared/models/form/form.type';
+import { FormModel } from '@/shared/models/form/FormModel';
+import { messageValidator } from '@/shared/models/form/validators';
+
 import type { ChatWindowFormModelValues } from '../types/chatWindowFormModel.type';
 
 export class ChatWindowFormModel extends FormModel<ChatWindowFormModelValues> {

@@ -1,5 +1,6 @@
-import Block, { type BlockOwnProps } from '../../../core/Block/Block';
-import type { FormErrors } from '../../../shared/models/form/form.type';
+import Block, { type BlockOwnProps } from '@/core/Block/Block';
+import type { FormErrors } from '@/shared/models/form/form.type';
+
 import AuthFormController from '../controller/AuthFormController';
 import { AuthFormModel } from '../models/AuthFormModel';
 import type { AuthFormValues } from '../types/authForm.type';

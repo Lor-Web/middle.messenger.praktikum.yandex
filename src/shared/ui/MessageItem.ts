@@ -1,5 +1,6 @@
-import type { BlockOwnProps } from '../../core/Block/Block';
-import Block from '../../core/Block/Block';
+import type { BlockOwnProps } from '@/core/Block/Block';
+import Block from '@/core/Block/Block';
+
 import type { Message } from '../models/base.type';
 
 export interface MessageItemProps extends BlockOwnProps {

@@ -8,6 +8,9 @@ dotenv.config();
 export default defineConfig({
   root: './src',
   publicDir: '../public',
+  resolve: {
+    tsconfigPaths: true, // Включает автоматическое чтение путей из tsconfig.json
+  },
   server: {
     open: true,
     port: Number(process.env.PORT) || 3000,

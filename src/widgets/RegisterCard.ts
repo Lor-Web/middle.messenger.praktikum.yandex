@@ -1,4 +1,4 @@
-import Block from '../core/Block/Block';
+import Block from '@/core/Block/Block';
 
 export default class RegisterCard extends Block {
   static componentName = 'RegisterCard';

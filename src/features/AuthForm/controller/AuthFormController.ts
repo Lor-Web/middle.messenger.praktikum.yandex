@@ -1,5 +1,6 @@
-import { DASHBOARD_PATH } from '../../../shared/costants/paths.constant';
-import { listenerForChild } from '../../../shared/lib/setListenerForChild';
+import { DASHBOARD_PATH } from '@/shared/constants/paths.constant';
+import { listenerForChild } from '@/shared/lib/setListenerForChild';
+
 import type { AuthFormModel } from '../models/AuthFormModel';
 import type { AuthFormValues } from '../types/authForm.type';
 import type AuthFormView from '../view/AuthFormView';

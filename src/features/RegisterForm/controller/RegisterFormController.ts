@@ -1,5 +1,6 @@
-import { DASHBOARD_PATH } from '../../../shared/costants/paths.constant';
-import { listenerForChild } from '../../../shared/lib/setListenerForChild';
+import { DASHBOARD_PATH } from '@/shared/constants/paths.constant';
+import { listenerForChild } from '@/shared/lib/setListenerForChild';
+
 import type { RegisterFormModel } from '../models/RegisterFormModel';
 import type { RegisterFormValues } from '../types/registerForm.type';
 import type RegisterFormView from '../view/RegisterFormView';

@@ -1,6 +1,6 @@
-import { registerComponents } from '../../shared/lib/registerComponents';
-import { registerHelpers } from '../../shared/lib/registerHelpers';
-import type { AppProps, ErrorRoute, Route } from '../../shared/models/app.type';
+import { registerComponents } from '@/shared/lib/registerComponents';
+import { registerHelpers } from '@/shared/lib/registerHelpers';
+import type { AppProps, ErrorRoute, Route } from '@/shared/models/app.type';
 
 export default class App {
   public appElement?: HTMLElement;

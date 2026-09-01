@@ -1,4 +1,5 @@
-import { listenerForChild } from '../../../shared/lib/setListenerForChild';
+import { listenerForChild } from '@/shared/lib/setListenerForChild';
+
 import type { ProfileFormModel } from '../models/ProfileFormModel';
 import type { ProfileFormValues } from '../types/profileForm.type';
 import type ProfileFormView from '../view/ProfileFormView';

@@ -17,6 +17,20 @@
     "esModuleInterop": true,
     "noEmit": true,
     "noImplicitReturns": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@core": ["./src/core/*"],
+
+      "@pages": ["./src/pages/*"],
+      "@widgets": ["./src/widgets/*"],
+      "@features": ["./src/features/*"],
+
+      "@shared/constants": ["./src/shared/constants/*"],
+      "@shared/helpers": ["./src/shared/helpers/*"],
+      "@shared/lib": ["./src/shared/lib/*"],
+      "@shared/models": ["./src/shared/models/*"],
+      "@shared/ui": ["./src/shared/ui/*"]
+    }
   }
 }

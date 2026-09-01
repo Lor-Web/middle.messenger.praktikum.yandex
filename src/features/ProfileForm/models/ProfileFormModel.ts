@@ -1,12 +1,13 @@
-import type { FormErrors } from '../../../shared/models/form/form.type';
-import { FormModel } from '../../../shared/models/form/FormModel';
+import type { FormErrors } from '@/shared/models/form/form.type';
+import { FormModel } from '@/shared/models/form/FormModel';
 import {
   emailValidator,
   loginValidator,
   nameValidator,
   passwordValidator,
   phoneValidator,
-} from '../../../shared/models/form/validators';
+} from '@/shared/models/form/validators';
+
 import type { ProfileFormValues } from '../types/profileForm.type';
 
 export class ProfileFormModel extends FormModel<ProfileFormValues> {

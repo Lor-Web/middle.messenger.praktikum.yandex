@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type Block from '../../core/Block/Block';
-import type { BlockOwnProps } from '../../core/Block/Block';
+
+import type Block from '@/core/Block/Block';
+import type { BlockOwnProps } from '@/core/Block/Block';
 
 export type BlockClass<Props extends BlockOwnProps = BlockOwnProps> = {
   new (props?: Props): Block<Props>;

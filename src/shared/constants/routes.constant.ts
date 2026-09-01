@@ -1,8 +1,9 @@
-import AuthPage from '../../pages/AuthPage';
-import DashboardPage from '../../pages/DashboardPage';
-import ErrorPage from '../../pages/ErrorPage';
-import RegisterPage from '../../pages/RegisterPage';
-import SettingsPage from '../../pages/SettingsPage';
+import AuthPage from '@/pages/AuthPage';
+import DashboardPage from '@/pages/DashboardPage';
+import ErrorPage from '@/pages/ErrorPage';
+import RegisterPage from '@/pages/RegisterPage';
+import SettingsPage from '@/pages/SettingsPage';
+
 import { chats } from '../mocks/chats.mock';
 import { chat } from '../mocks/messages.mock';
 import { user } from '../mocks/user.mock';

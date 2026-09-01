@@ -1,5 +1,7 @@
-import Block, { type BlockOwnProps } from '../../../core/Block/Block';
-import type { FormErrors } from '../../../shared/models/form/form.type';
+import type { BlockOwnProps } from '@/core/Block/Block';
+import Block from '@/core/Block/Block';
+import type { FormErrors } from '@/shared/models/form/form.type';
+
 import ChatWindowFormController from '../controller/ChatWindowFormController';
 import { ChatWindowFormModel } from '../models/ChatWindowFormModel';
 import type { ChatWindowFormModelValues } from '../types/chatWindowFormModel.type';

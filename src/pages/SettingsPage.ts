@@ -1,5 +1,6 @@
-import Block, { type BlockOwnProps } from '../core/Block/Block';
-import type { ChatItem, User } from '../shared/models/base.type';
+import type { BlockOwnProps } from '@/core/Block/Block';
+import Block from '@/core/Block/Block';
+import type { ChatItem, User } from '@/shared/models/base.type';
 
 export interface SettingsPageProps extends BlockOwnProps {
   user: User;

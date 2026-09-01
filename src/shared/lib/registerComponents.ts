@@ -1,16 +1,16 @@
-import type { BlockOwnProps } from '../../core/Block/Block';
-import registerComponent, {
-  type ComponentClass,
-} from '../../core/registerComponent/registerComponent';
-import AuthFormView from '../../features/AuthForm/view/AuthFormView';
-import ChatWindowFormView from '../../features/ChatWindowForm/view/ChatWindowFormView';
-import ProfileFormView from '../../features/ProfileForm/view/ProfileFormView';
-import RegisterFormView from '../../features/RegisterForm/view/RegisterFormView';
-import AuthCard from '../../widgets/AuthCard';
-import ChatWindow from '../../widgets/ChatWindow';
-import Profile from '../../widgets/Profile';
-import RegisterCard from '../../widgets/RegisterCard';
-import Sidebar from '../../widgets/Sidebar';
+import type { BlockOwnProps } from '@/core/Block/Block';
+import type { ComponentClass } from '@/core/registerComponent/registerComponent';
+import registerComponent from '@/core/registerComponent/registerComponent';
+import AuthFormView from '@/features/AuthForm/view/AuthFormView';
+import ChatWindowFormView from '@/features/ChatWindowForm/view/ChatWindowFormView';
+import ProfileFormView from '@/features/ProfileForm/view/ProfileFormView';
+import RegisterFormView from '@/features/RegisterForm/view/RegisterFormView';
+import AuthCard from '@/widgets/AuthCard';
+import ChatWindow from '@/widgets/ChatWindow';
+import Profile from '@/widgets/Profile';
+import RegisterCard from '@/widgets/RegisterCard';
+import Sidebar from '@/widgets/Sidebar';
+
 import Button from '../ui/Button';
 import ChatItem from '../ui/ChatItem';
 import Counter from '../ui/Counter';

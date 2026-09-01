@@ -1,7 +1,8 @@
-import type { BlockOwnProps } from '../../../core/Block/Block';
-import Block from '../../../core/Block/Block';
-import type { User } from '../../../shared/models/base.type';
-import type { FormErrors } from '../../../shared/models/form/form.type';
+import type { BlockOwnProps } from '@/core/Block/Block';
+import Block from '@/core/Block/Block';
+import type { User } from '@/shared/models/base.type';
+import type { FormErrors } from '@/shared/models/form/form.type';
+
 import ProfileFormController from '../controller/ProfileFormController';
 import { ProfileFormModel } from '../models/ProfileFormModel';
 import type { ProfileFormValues } from '../types/profileForm.type';

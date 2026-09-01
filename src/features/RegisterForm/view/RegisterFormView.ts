@@ -1,5 +1,7 @@
-import Block, { type BlockOwnProps } from '../../../core/Block/Block';
-import type { FormErrors } from '../../../shared/models/form/form.type';
+import type { BlockOwnProps } from '@/core/Block/Block';
+import Block from '@/core/Block/Block';
+import type { FormErrors } from '@/shared/models/form/form.type';
+
 import RegisterFormController from '../controller/RegisterFormController';
 import { RegisterFormModel } from '../models/RegisterFormModel';
 import type { RegisterFormValues } from '../types/registerForm.type';

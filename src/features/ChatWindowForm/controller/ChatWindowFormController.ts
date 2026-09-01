@@ -1,4 +1,5 @@
-import { listenerForChild } from '../../../shared/lib/setListenerForChild';
+import { listenerForChild } from '@/shared/lib/setListenerForChild';
+
 import type { ChatWindowFormModel } from '../models/ChatWindowFormModel';
 import type { ChatWindowFormModelValues } from '../types/chatWindowFormModel.type';
 import type ChatWindowFormView from '../view/ChatWindowFormView';

@@ -1,12 +1,13 @@
-import type { FormErrors } from '../../../shared/models/form/form.type';
-import { FormModel } from '../../../shared/models/form/FormModel';
+import type { FormErrors } from '@/shared/models/form/form.type';
+import { FormModel } from '@/shared/models/form/FormModel';
 import {
   emailValidator,
   loginValidator,
   nameValidator,
   passwordValidator,
   phoneValidator,
-} from '../../../shared/models/form/validators';
+} from '@/shared/models/form/validators';
+
 import type { RegisterFormValues } from '../types/registerForm.type';
 
 export class RegisterFormModel extends FormModel<RegisterFormValues> {

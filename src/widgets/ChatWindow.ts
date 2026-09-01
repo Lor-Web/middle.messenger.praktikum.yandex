@@ -1,5 +1,6 @@
-import Block, { type BlockOwnProps } from '../core/Block/Block';
-import type { Chat } from '../shared/models/base.type';
+import type { BlockOwnProps } from '@/core/Block/Block';
+import Block from '@/core/Block/Block';
+import type { Chat } from '@/shared/models/base.type';
 
 export interface ChatWindowProps extends BlockOwnProps {
   chat: Chat;
