@@ -1,34 +1,49 @@
+import { ROUTES } from '@/shared/constants/routes.constant';
+
+import Route from './Route';
+
 export default class Router {
+  history = window.history;
+
+  private _routes: Route[] = [];
+  private _currentRoute: Route | null = null;
+  private static __instance: Router | null = null;
+
   constructor() {
     if (Router.__instance) {
       return Router.__instance;
     }
 
-    this.routes = [];
-    this.history = window.history;
-    this._currentRoute = null;
-
     Router.__instance = this;
-  }
 
-  use(pathname, block) {
-    const route = new Route(pathname, block, { rootQuery: this._rootQuery });
-
-    this.routes.push(route);
-
-    return this;
+    ROUTES.forEach((routeConfig) =>
+      this._routes.push(
+        new Route({ path: routeConfig.path, block: routeConfig.block, props: routeConfig.props }),
+      ),
+    );
   }
 
   start() {
-    // Реагируем на изменения в адресной строке и вызываем перерисовку
-    window.onpopstate = (event) => {
-      this._onRoute(event.currentTarget.location.pathname);
+    const path = window.location.pathname.split('/')[1];
+
+    window.onpopstate = (e: PopStateEvent) => {
+      const newPath = (e.currentTarget as Window)?.location.pathname.split('/')[1];
+      this._onRoute(newPath);
     };
 
-    this._onRoute(window.location.pathname);
+    this._onRoute(path);
   }
 
-  _onRoute(pathname) {
+  getRoute(pathname: string) {
+    return this._routes.find((route) => route.match(pathname));
+  }
+
+  go(pathname: string) {
+    this.history.pushState({}, '', pathname);
+    this._onRoute(pathname);
+  }
+
+  private _onRoute(pathname: string) {
     const route = this.getRoute(pathname);
     if (!route) {
       return;
@@ -38,15 +53,7 @@ export default class Router {
       this._currentRoute.leave();
     }
 
-    route.render(route, pathname);
-  }
-
-  go(pathname) {
-    this.history.pushState({}, '', pathname);
-    this._onRoute(pathname);
-  }
-
-  getRoute(pathname) {
-    return this.routes.find((route) => route.match(pathname));
+    this._currentRoute = route;
+    route.render();
   }
 }

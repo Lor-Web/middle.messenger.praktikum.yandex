@@ -1,4 +1,5 @@
-import { DASHBOARD_PATH } from '@/shared/constants/paths.constant';
+import Router from '@/core/Router/Router';
+import { DASHBOARD_PATH, REGISTER_PATH } from '@/shared/constants/paths.constant';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
 
 import type { AuthFormModel } from '../models/AuthFormModel';
@@ -6,10 +7,14 @@ import type { AuthFormValues } from '../types/authForm.type';
 import type AuthFormView from '../view/AuthFormView';
 
 export default class AuthFormController {
+  private _router: Router;
+
   constructor(
     private model: AuthFormModel,
     private view: AuthFormView,
-  ) {}
+  ) {
+    this._router = new Router();
+  }
 
   init(): void {
     this.removeListeners();
@@ -18,6 +23,18 @@ export default class AuthFormController {
 
   private attachListeners(): void {
     const form = this.view.getRef('authForm');
+    const linkRegister = this.view.getRef('linkRegister');
+
+    if (linkRegister instanceof HTMLAnchorElement) {
+      listenerForChild.set({
+        element: linkRegister,
+        eventName: 'click',
+        eventCallback: (e: Event) => {
+          e.preventDefault();
+          this._router.go(REGISTER_PATH);
+        },
+      });
+    }
 
     if (form instanceof HTMLFormElement) {
       listenerForChild.set({
@@ -46,6 +63,18 @@ export default class AuthFormController {
 
   private removeListeners() {
     const form = this.view.getRef('authForm');
+    const linkRegister = this.view.getRef('linkRegister');
+
+    if (linkRegister instanceof HTMLAnchorElement) {
+      listenerForChild.remove({
+        element: linkRegister,
+        eventName: 'click',
+        eventCallback: (e: Event) => {
+          e.preventDefault();
+          this._router.go(REGISTER_PATH);
+        },
+      });
+    }
 
     if (form instanceof HTMLFormElement) {
       listenerForChild.remove({
@@ -86,8 +115,8 @@ export default class AuthFormController {
     });
 
     if (this.model.validate()) {
-      console.log(this.model.getValues());
-      window.location.pathname = `/${DASHBOARD_PATH}`;
+      console.log('AUTH FORM VALUES:', this.model.getValues());
+      this._router.go(DASHBOARD_PATH);
     }
   }
 

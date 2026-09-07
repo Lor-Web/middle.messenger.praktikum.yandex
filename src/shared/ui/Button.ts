@@ -1,5 +1,6 @@
 import type { BlockOwnProps } from '@/core/Block/Block';
 import Block from '@/core/Block/Block';
+import Router from '@/core/Router/Router';
 
 export interface ButtonProps extends BlockOwnProps {
   link?: boolean;
@@ -14,6 +15,25 @@ export interface ButtonProps extends BlockOwnProps {
 export default class Button extends Block<ButtonProps> {
   static componentName = 'Button';
 
+  private _router = new Router();
+
+  protected componentDidMount(): void {
+    console.log('BUTTON', this.props?.href, this.events);
+  }
+
+  protected componentWillUnmount(): void {
+    console.log('BUTTON unmount', this.props?.href, this.events);
+  }
+
+  protected events = {
+    click: (e: Event) => {
+      if (this.props.href) {
+        e.preventDefault();
+        this._router.go(this.props.href);
+      }
+    },
+  };
+
   protected template = `
     {{#if link}}
       <a 
@@ -23,7 +43,6 @@ export default class Button extends Block<ButtonProps> {
           {{#if icon}}button_icon{{/if}}
           {{#if transparent}}button_transparent{{/if}}
         " 
-        href="{{href}}"
         {{#if disabled}}disabled{{/if}}
       >
         {{#if icon}}

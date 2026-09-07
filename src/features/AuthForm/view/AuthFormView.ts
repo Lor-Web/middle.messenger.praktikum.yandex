@@ -35,7 +35,7 @@ export default class AuthFormView extends Block<AuthFormProps> {
 
         <div class="auth__form-footer">
           {{{ Button label="Войти" widthFull="true" type='submit' }}}
-          <p class="auth__form-description">или <a href="register">Зарегистрироваться</a></p>
+          <p class="auth__form-description">или <a ref="linkRegister">Зарегистрироваться</a></p>
         </div>
     </form>
   `;

@@ -1,6 +1,9 @@
 import type { BlockOwnProps } from '@/core/Block/Block';
 import Block from '@/core/Block/Block';
+import Router from '@/core/Router/Router';
 
+import { DASHBOARD_PATH } from '../constants/paths.constant';
+import { listenerForChild } from '../lib/setListenerForChild';
 import type { ChatItem as ChatItemData } from '../models/base.type';
 
 export interface ChatItemProps extends BlockOwnProps {
@@ -10,8 +13,38 @@ export interface ChatItemProps extends BlockOwnProps {
 export default class ChatItem extends Block<ChatItemProps> {
   static componentName = 'ChatItem';
 
+  private _router = new Router();
+
+  protected componentDidMount(): void {
+    const linkDashboard = this.getRef('linkDashboard');
+    if (linkDashboard instanceof HTMLAnchorElement) {
+      listenerForChild.set({
+        element: linkDashboard,
+        eventName: 'click',
+        eventCallback: (e: Event) => {
+          e.preventDefault();
+          this._router.go(DASHBOARD_PATH);
+        },
+      });
+    }
+  }
+
+  protected componentWillUnmount(): void {
+    const linkDashboard = this.getRef('linkDashboard');
+    if (linkDashboard instanceof HTMLAnchorElement) {
+      listenerForChild.remove({
+        element: linkDashboard,
+        eventName: 'click',
+        eventCallback: (e: Event) => {
+          e.preventDefault();
+          this._router.go(DASHBOARD_PATH);
+        },
+      });
+    }
+  }
+
   protected template = `
-    <a class="chat-item" href="/dashboard">
+    <a class="chat-item" ref="linkDashboard">
       <img class="chat-item__avatar avatar" src="{{chat.avatar}}" alt="{{chat.name}}" />
 
       <div class="chat-item__user">

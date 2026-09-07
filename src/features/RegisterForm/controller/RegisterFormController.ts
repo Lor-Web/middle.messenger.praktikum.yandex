@@ -1,4 +1,5 @@
-import { DASHBOARD_PATH } from '@/shared/constants/paths.constant';
+import Router from '@/core/Router/Router';
+import { AUTH_PATH, DASHBOARD_PATH } from '@/shared/constants/paths.constant';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
 
 import type { RegisterFormModel } from '../models/RegisterFormModel';
@@ -6,10 +7,14 @@ import type { RegisterFormValues } from '../types/registerForm.type';
 import type RegisterFormView from '../view/RegisterFormView';
 
 export default class RegisterFormController {
+  private _router: Router;
+
   constructor(
     private model: RegisterFormModel,
     private view: RegisterFormView,
-  ) {}
+  ) {
+    this._router = new Router();
+  }
 
   init(): void {
     this.removeListeners();
@@ -18,6 +23,18 @@ export default class RegisterFormController {
 
   private attachListeners(): void {
     const form = this.view.getRef('registerForm');
+    const linkAuth = this.view.getRef('linkAuth');
+
+    if (linkAuth instanceof HTMLAnchorElement) {
+      listenerForChild.set({
+        element: linkAuth,
+        eventName: 'click',
+        eventCallback: (e: Event) => {
+          e.preventDefault();
+          this._router.go(AUTH_PATH);
+        },
+      });
+    }
 
     if (form instanceof HTMLFormElement) {
       listenerForChild.set({
@@ -46,6 +63,18 @@ export default class RegisterFormController {
 
   private removeListeners() {
     const form = this.view.getRef('profileForm');
+    const linkAuth = this.view.getRef('linkAuth');
+
+    if (linkAuth instanceof HTMLAnchorElement) {
+      listenerForChild.remove({
+        element: linkAuth,
+        eventName: 'click',
+        eventCallback: (e: Event) => {
+          e.preventDefault();
+          this._router.go(AUTH_PATH);
+        },
+      });
+    }
 
     if (form instanceof HTMLFormElement) {
       listenerForChild.remove({
@@ -86,8 +115,8 @@ export default class RegisterFormController {
     });
 
     if (this.model.validate()) {
-      console.log(this.model.getValues());
-      window.location.pathname = `/${DASHBOARD_PATH}`;
+      console.log('REGISTER FORM VALUES:', this.model.getValues());
+      this._router.go(DASHBOARD_PATH);
     }
   }
 
