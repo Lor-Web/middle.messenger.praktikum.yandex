@@ -2,17 +2,17 @@ import type { FormErrors } from '@/shared/models/form/form.type';
 import { FormModel } from '@/shared/models/form/FormModel';
 import { textRequiredValidator } from '@/shared/models/form/validators';
 
-import type { ChatWindowFormModelValues } from '../types/chatWindowFormModel.type';
+import type { DashboardFormValues } from '../types/dashboardForm.type';
 
-export class ChatWindowFormModel extends FormModel<ChatWindowFormModelValues> {
+export class DashboardFormModel extends FormModel<DashboardFormValues> {
   protected rules = {
-    message: {
+    chatName: {
       validator: textRequiredValidator,
       message: 'Поле не должно быть пустым',
     },
   };
 
-  constructor(values: ChatWindowFormModelValues, errors: FormErrors<ChatWindowFormModelValues>) {
+  constructor(values: DashboardFormValues, errors: FormErrors<DashboardFormValues>) {
     super(values, errors);
   }
 }

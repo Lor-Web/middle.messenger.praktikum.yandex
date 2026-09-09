@@ -41,7 +41,11 @@ export default class DashboardPage extends Block<DashboardPageProps> {
   protected template = `
     <main class="dashboard page">
       {{{ Sidebar user=user chats=chats }}}
-      {{{ ChatWindow chat=chat }}}
+      
+      <div class="dashboard-window">
+        <p>Выберите или создайте чат чтобы отправить сообщение</p>
+        {{{ DashboardFormView }}}
+      </div>
     </main>
   `;
 }

@@ -3,6 +3,7 @@ import type { ComponentClass } from '@/core/registerComponent/registerComponent'
 import registerComponent from '@/core/registerComponent/registerComponent';
 import AuthFormView from '@/features/AuthForm/view/AuthFormView';
 import ChatWindowFormView from '@/features/ChatWindowForm/view/ChatWindowFormView';
+import DashboardFormView from '@/features/DashboardForm/view/DashboardFormView';
 import ProfileFormView from '@/features/ProfileForm/view/ProfileFormView';
 import RegisterFormView from '@/features/RegisterForm/view/RegisterFormView';
 import AuthCard from '@/widgets/AuthCard';
@@ -21,7 +22,13 @@ import Textarea from '../ui/Texarea';
 
 const SHARED_UI = [Input, Textarea, Button, Icon, ChatItem, Counter, MessageItem];
 const WIDGETS = [AuthCard, RegisterCard, Sidebar, ChatWindow, Profile];
-const FEATURES = [AuthFormView, RegisterFormView, ChatWindowFormView, ProfileFormView];
+const FEATURES = [
+  AuthFormView,
+  RegisterFormView,
+  ChatWindowFormView,
+  ProfileFormView,
+  DashboardFormView,
+];
 
 export const registerComponents = () => {
   const allComponents = [...SHARED_UI, ...WIDGETS, ...FEATURES] as ComponentClass<BlockOwnProps>[];

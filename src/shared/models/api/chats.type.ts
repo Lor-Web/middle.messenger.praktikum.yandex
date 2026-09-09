@@ -24,3 +24,6 @@ export type ChatsRequest = {
   title?: string;
 };
 export type ChatsResponse = Chat[];
+
+export type CreateChatRequest = { title: string };
+export type CreateChatResponse = { id: number };

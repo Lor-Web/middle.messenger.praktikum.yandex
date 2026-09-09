@@ -23,6 +23,6 @@ export function phoneValidator(value: string): boolean {
   return /^\+?\d{10,15}$/.test(value);
 }
 
-export function messageValidator(value: string): boolean {
+export function textRequiredValidator(value: string): boolean {
   return value ? true : false;
 }
