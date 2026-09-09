@@ -1,6 +1,9 @@
 import type { BlockOwnProps } from '@/core/Block/Block';
 import Block from '@/core/Block/Block';
+import Router from '@/core/Router/Router';
+import AuthApi from '@/shared/api/AuthApi';
 import { AUTH_PATH, SETTINGS_PATH } from '@/shared/constants/paths.constant';
+import { listenerForChild } from '@/shared/lib/setListenerForChild';
 import type { ChatItem, User } from '@/shared/models/base.type';
 
 export interface SidebarProps extends BlockOwnProps {
@@ -11,8 +14,37 @@ export interface SidebarProps extends BlockOwnProps {
 export default class Sidebar extends Block<SidebarProps> {
   static componentName = 'Sidebar';
 
+  private _router = new Router();
+  private _authApi = new AuthApi();
+
   protected componentDidMount(): void {
-    console.log('MOUNT');
+    const logoutBtn = this.getRef('logoutBtn');
+
+    if (logoutBtn instanceof HTMLAnchorElement) {
+      listenerForChild.set({
+        element: logoutBtn,
+        eventName: 'click',
+        eventCallback: (e: Event) => {
+          e.preventDefault();
+          this._authApi.logout().then(() => this._router.go(AUTH_PATH));
+        },
+      });
+    }
+  }
+
+  protected componentWillUnmount(): void {
+    const logoutBtn = this.getRef('logoutBtn');
+
+    if (logoutBtn instanceof HTMLAnchorElement) {
+      listenerForChild.remove({
+        element: logoutBtn,
+        eventName: 'click',
+        eventCallback: (e: Event) => {
+          e.preventDefault();
+          this._authApi.logout().then(() => this._router.go(AUTH_PATH));
+        },
+      });
+    }
   }
 
   protected template = `
@@ -28,7 +60,7 @@ export default class Sidebar extends Block<SidebarProps> {
           <h3 class="sidebar__header-title">{{user.displayName}}</h3>
 
           {{{ Button link=true href='${SETTINGS_PATH}' icon='gear' transparent=true }}}
-          {{{ Button link=true href='${AUTH_PATH}' icon='logout' transparent=true }}}
+          {{{ Button link=true icon='logout' transparent=true ref='logoutBtn' }}}
         </div>
 
         {{{ Input placeholder="Поиск" fill="true" name='search' }}}

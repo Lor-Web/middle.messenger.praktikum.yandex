@@ -1,17 +1,23 @@
 type RequiestOptionsData = Record<string, string | number | boolean | undefined | null>;
 
-type RequestOptions = {
+type RequestOptions<T> = {
   method?: keyof typeof METHODS;
   headers?: Record<string, string>;
-  data?: RequiestOptionsData;
+  credentials?: 'include' | 'omit' | 'same-origin';
+  mode?: string;
+  data?: T;
   responseType?: XMLHttpRequestResponseType;
   timeout?: number;
 };
 
-export type Request = {
+export type Request<T> = {
   url: string;
-  options: RequestOptions;
+  options: RequestOptions<T>;
 };
+
+export type ApiError = { reason: string };
+
+export type RequestResult<TResponse = unknown> = TResponse;
 
 export const METHODS = {
   GET: 'GET',
@@ -46,23 +52,38 @@ function queryStringify(data: RequiestOptionsData) {
 }
 
 export default class HTTPTransport {
-  get = ({ url, options = {} }: Request) => {
+  get = <TRequestData = unknown, TResponseData = unknown>({
+    url,
+    options = {},
+  }: Request<TRequestData>): Promise<RequestResult<TResponseData>> => {
     return this.request({ url, options: { ...options, method: METHODS.GET } });
   };
 
-  post = ({ url, options = {} }: Request) => {
+  post = <TRequestData = unknown, TResponseData = unknown>({
+    url,
+    options = {},
+  }: Request<TRequestData>): Promise<RequestResult<TResponseData>> => {
     return this.request({ url, options: { ...options, method: METHODS.POST } });
   };
 
-  put = ({ url, options = {} }: Request) => {
+  put = <TRequestData = unknown, TResponseData = unknown>({
+    url,
+    options = {},
+  }: Request<TRequestData>): Promise<RequestResult<TResponseData>> => {
     return this.request({ url, options: { ...options, method: METHODS.PUT } });
   };
 
-  delete = ({ url, options = {} }: Request) => {
+  delete = <TRequestData = unknown, TResponseData = unknown>({
+    url,
+    options = {},
+  }: Request<TRequestData>): Promise<RequestResult<TResponseData>> => {
     return this.request({ url, options: { ...options, method: METHODS.DELETE } });
   };
 
-  request = ({ url, options = {} }: Request) => {
+  private request = <TRequestData = unknown, TResponseData = unknown>({
+    url,
+    options = {},
+  }: Request<TRequestData>): Promise<RequestResult<TResponseData>> => {
     const { headers = {}, method, data, responseType, timeout = 5000 } = options;
 
     return new Promise((resolve, reject) => {
@@ -75,6 +96,10 @@ export default class HTTPTransport {
       const isGet = method === METHODS.GET;
 
       xhr.open(method, isGet && data ? `${url}${queryStringify(data)}` : url);
+
+      if (options.credentials === 'include') {
+        xhr.withCredentials = true;
+      }
 
       if (responseType) {
         xhr.responseType = responseType;
@@ -108,7 +133,7 @@ export default class HTTPTransport {
           reject({
             status: xhr.status,
             statusText: xhr.statusText,
-            response: xhr.responseText,
+            response: JSON.parse(xhr.responseText).reason,
             request: xhr,
           });
         }
@@ -145,7 +170,7 @@ export default class HTTPTransport {
         }
         xhr.send(JSON.stringify(data));
       } else {
-        xhr.send(data);
+        xhr.send(data as XMLHttpRequestBodyInit);
       }
     });
   };

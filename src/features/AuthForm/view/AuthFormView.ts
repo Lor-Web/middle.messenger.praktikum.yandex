@@ -34,6 +34,9 @@ export default class AuthFormView extends Block<AuthFormProps> {
         }}}
 
         <div class="auth__form-footer">
+          {{#if errors.signIn}}
+            <p class="error-text">{{errors.signIn}}</p>
+          {{/if}}
           {{{ Button label="Войти" widthFull="true" type='submit' }}}
           <p class="auth__form-description">или <a ref="linkRegister">Зарегистрироваться</a></p>
         </div>

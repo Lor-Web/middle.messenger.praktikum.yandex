@@ -1,2 +1,8 @@
-@use "./normalized";
-@use "./variables";
+@use './normalized';
+@use './variables' as *;
+
+.error-text {
+  font: $body-small;
+  color: $error-4;
+  min-height: 16px;
+}

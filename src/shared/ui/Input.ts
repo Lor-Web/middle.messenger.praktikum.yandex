@@ -25,7 +25,7 @@ export default class Input extends Block<InputProps> {
         aria-label={{label}}
         ref="input"
       />
-      <p class="field__error">{{error}}</p>
+      <p class="error-text">{{error}}</p>
     </div>
   `;
 }

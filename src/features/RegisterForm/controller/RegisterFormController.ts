@@ -1,4 +1,5 @@
 import Router from '@/core/Router/Router';
+import AuthApi from '@/shared/api/AuthApi';
 import { AUTH_PATH, DASHBOARD_PATH } from '@/shared/constants/paths.constant';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
 
@@ -6,13 +7,14 @@ import type { RegisterFormModel } from '../models/RegisterFormModel';
 import type { RegisterFormValues } from '../types/registerForm.type';
 import type RegisterFormView from '../view/RegisterFormView';
 
-export default class RegisterFormController {
+export default class RegisterFormController extends AuthApi {
   private _router: Router;
 
   constructor(
     private model: RegisterFormModel,
     private view: RegisterFormView,
   ) {
+    super();
     this._router = new Router();
   }
 
@@ -116,7 +118,18 @@ export default class RegisterFormController {
 
     if (this.model.validate()) {
       console.log('REGISTER FORM VALUES:', this.model.getValues());
-      this._router.go(DASHBOARD_PATH);
+
+      this.signUp(this.model.getValues())
+        .then(() => {
+          this._router.go(DASHBOARD_PATH);
+        })
+        .catch((e) => {
+          const error = e.response;
+          this.view.setProps({
+            values: this.model.getValues(),
+            errors: { ...this.model.getErrors(), signUp: error },
+          });
+        });
     }
   }
 

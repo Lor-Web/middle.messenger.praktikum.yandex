@@ -5,4 +5,5 @@ export type RegisterFormValues = {
   second_name: string;
   phone: string;
   password: string;
+  signUp: string;
 };

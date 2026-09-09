@@ -44,6 +44,9 @@ export default class RegisterFormView extends Block<RegisterFormProps> {
         }}}
 
         <div class="auth__form-footer">
+          {{#if errors.signIn}}
+            <p class="error-text">{{errors.signIn}}</p>
+          {{/if}}
           {{{ Button label="Зарегистрироваться" widthFull="true" type='submit' }}}
           <p class="auth__form-description">или <a ref="linkAuth">Войти</a></p>
         </div>

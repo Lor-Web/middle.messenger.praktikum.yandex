@@ -17,14 +17,6 @@ export default class Button extends Block<ButtonProps> {
 
   private _router = new Router();
 
-  protected componentDidMount(): void {
-    console.log('BUTTON', this.props?.href, this.events);
-  }
-
-  protected componentWillUnmount(): void {
-    console.log('BUTTON unmount', this.props?.href, this.events);
-  }
-
   protected events = {
     click: (e: Event) => {
       if (this.props.href) {

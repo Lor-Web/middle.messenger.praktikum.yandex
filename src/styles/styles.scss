@@ -1,14 +1,14 @@
 // BASE STYLES
-@use "./base/base";
+@use './base/base' as *;
 
 // COMPONENTS
-@use "./components/components";
+@use './components/components';
 
 // LAYOUTS
-@use "./layouts/layouts";
+@use './layouts/layouts';
 
 // PAGES
-@use "./pages/pages";
+@use './pages/pages';
 
 body {
   font-family: Roboto, sans-serif;

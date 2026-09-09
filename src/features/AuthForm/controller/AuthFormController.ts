@@ -1,4 +1,5 @@
 import Router from '@/core/Router/Router';
+import AuthApi from '@/shared/api/AuthApi';
 import { DASHBOARD_PATH, REGISTER_PATH } from '@/shared/constants/paths.constant';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
 
@@ -6,13 +7,14 @@ import type { AuthFormModel } from '../models/AuthFormModel';
 import type { AuthFormValues } from '../types/authForm.type';
 import type AuthFormView from '../view/AuthFormView';
 
-export default class AuthFormController {
+export default class AuthFormController extends AuthApi {
   private _router: Router;
 
   constructor(
     private model: AuthFormModel,
     private view: AuthFormView,
   ) {
+    super();
     this._router = new Router();
   }
 
@@ -116,7 +118,16 @@ export default class AuthFormController {
 
     if (this.model.validate()) {
       console.log('AUTH FORM VALUES:', this.model.getValues());
-      this._router.go(DASHBOARD_PATH);
+
+      this.signIn(this.model.getValues())
+        .then(() => this._router.go(DASHBOARD_PATH))
+        .catch((e) => {
+          const error = e.response;
+          this.view.setProps({
+            values: this.model.getValues(),
+            errors: { ...this.model.getErrors(), signIn: error },
+          });
+        });
     }
   }
 
