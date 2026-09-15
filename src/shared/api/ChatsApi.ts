@@ -1,7 +1,12 @@
 import HTTPTransport from '@/core/Http/HttpTransport';
 
 import { host } from '../constants/api.constant';
-import type { ChatsRequest, ChatsResponse, CreateChatRequest } from '../models/api/chats.type';
+import type {
+  ChatsRequest,
+  ChatsResponse,
+  CreateChatRequest,
+  CreateChatResponse,
+} from '../models/api/chats.type';
 
 export default class ChatsApi {
   public url = `${host}chats/`;
@@ -9,7 +14,7 @@ export default class ChatsApi {
   private _http = new HTTPTransport();
 
   public createChat(request: CreateChatRequest) {
-    return this._http.post<CreateChatRequest>({
+    return this._http.post<CreateChatRequest, CreateChatResponse>({
       url: this.url,
       options: {
         credentials: 'include',

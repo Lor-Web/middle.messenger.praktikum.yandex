@@ -31,6 +31,10 @@ export default class DashboardFormView extends Block<DashboardFormProps> {
       }}}
 
       {{{ Button type='submit' icon='arrow-right' }}}
+
+      {{#if errors.createChat}}
+        <p class="error-text">{{errors.createChat}}</p>
+      {{/if}}
     </form>
   `;
 }

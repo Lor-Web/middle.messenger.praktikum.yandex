@@ -1,3 +1,4 @@
+import GlobalStore from '@/core/GlobalStore/GlobalStore';
 import ChatsApi from '@/shared/api/ChatsApi';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
 
@@ -88,8 +89,17 @@ export default class DashboardFormController extends ChatsApi {
     });
 
     if (this.model.validate()) {
-      console.log('CREATE CHAT FORM VALUES:', this.model.getValues());
-      this.createChat({ title: this.model.getValues().chatName });
+      this.createChat({ title: this.model.getValues().chatName })
+        .then(() => this.chats({}))
+        .then((chats) => {
+          GlobalStore.setState('chats', chats);
+        })
+        .catch((error: { response?: string }) => {
+          this.view.setProps({
+            values: this.model.getValues(),
+            errors: { ...this.model.getErrors(), createChat: error.response },
+          });
+        });
     }
   }
 

@@ -1,5 +1,6 @@
 import type { BlockOwnProps } from '@/core/Block/Block';
 import Block from '@/core/Block/Block';
+import connect from '@/core/GlobalStore/connect';
 import GlobalStore from '@/core/GlobalStore/GlobalStore';
 import AuthApi from '@/shared/api/AuthApi';
 import ChatsApi from '@/shared/api/ChatsApi';
@@ -13,22 +14,18 @@ export interface DashboardPageProps extends BlockOwnProps {
   params?: Record<string, string>;
 }
 
-export default class DashboardPage extends Block<DashboardPageProps> {
+class DashboardPage extends Block<DashboardPageProps> {
   private _authApi = new AuthApi();
   private _chatsApi = new ChatsApi();
-  private _globalStore = GlobalStore;
 
-  constructor(props?: DashboardPageProps) {
-    super(props);
+  protected componentDidMount(): void {
+    if (!GlobalStore.getState('user')) {
+      this._authApi.user().then((user) => GlobalStore.setState('user', user));
+    }
 
-    this._authApi.user().then((user) => {
-      this._globalStore.setState('user', user);
-      this.setProps({ ...this.props, user });
-    });
-
-    this._chatsApi.chats({}).then((chats) => {
-      this.setProps({ ...this.props, chats });
-    });
+    if (!GlobalStore.getState('chats')) {
+      this._chatsApi.chats({}).then((chats) => GlobalStore.setState('chats', chats));
+    }
   }
 
   protected template = `
@@ -42,3 +39,8 @@ export default class DashboardPage extends Block<DashboardPageProps> {
     </main>
   `;
 }
+
+export default connect<DashboardPageProps>((state) => ({
+  user: state.user as UserResponse | undefined,
+  chats: state.chats as ChatsResponse | undefined,
+}))(DashboardPage);

@@ -1,5 +1,6 @@
 import type { BlockOwnProps } from '@/core/Block/Block';
 import Block from '@/core/Block/Block';
+import GlobalStore from '@/core/GlobalStore/GlobalStore';
 import Router from '@/core/Router/Router';
 import AuthApi from '@/shared/api/AuthApi';
 import { AUTH_PATH, SETTINGS_PATH } from '@/shared/constants/paths.constant';
@@ -28,7 +29,10 @@ export default class Sidebar extends Block<SidebarProps> {
         eventName: 'click',
         eventCallback: (e: Event) => {
           e.preventDefault();
-          this._authApi.logout().then(() => this._router.go(AUTH_PATH));
+          this._authApi.logout().then(() => {
+            GlobalStore.reset();
+            this._router.go(AUTH_PATH);
+          });
         },
       });
     }
@@ -43,7 +47,10 @@ export default class Sidebar extends Block<SidebarProps> {
         eventName: 'click',
         eventCallback: (e: Event) => {
           e.preventDefault();
-          this._authApi.logout().then(() => this._router.go(AUTH_PATH));
+          this._authApi.logout().then(() => {
+            GlobalStore.reset();
+            this._router.go(AUTH_PATH);
+          });
         },
       });
     }

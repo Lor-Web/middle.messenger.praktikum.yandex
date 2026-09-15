@@ -27,6 +27,11 @@ class GlobalStore {
     };
   }
 
+  public reset() {
+    this.state = {};
+    this.emit();
+  }
+
   private emit() {
     this.listeners.forEach((listener) => listener());
   }

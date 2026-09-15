@@ -1,3 +1,4 @@
+import GlobalStore from '@/core/GlobalStore/GlobalStore';
 import UserApi from '@/shared/api/UserApi';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
 
@@ -161,6 +162,10 @@ export default class ProfileFormController extends UserApi {
     }
 
     Promise.all(requests).then(() => {
+      if (nextUser !== this.view.getUser()) {
+        GlobalStore.setState('user', nextUser);
+      }
+
       this.view.setProps({
         user: nextUser,
         values: nextValues,
@@ -178,6 +183,7 @@ export default class ProfileFormController extends UserApi {
 
     this.editAvatar(file)
       .then((user) => {
+        GlobalStore.setState('user', user);
         this.view.setProps({
           user,
           values: this.model.getValues(),
