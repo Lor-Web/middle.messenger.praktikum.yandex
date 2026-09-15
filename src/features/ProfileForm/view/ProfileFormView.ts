@@ -1,6 +1,6 @@
 import type { BlockOwnProps } from '@/core/Block/Block';
 import Block from '@/core/Block/Block';
-import type { User } from '@/shared/models/base.type';
+import type { UserResponse } from '@/shared/models/api/auth.type';
 import type { FormErrors } from '@/shared/models/form/form.type';
 
 import ProfileFormController from '../controller/ProfileFormController';
@@ -8,7 +8,7 @@ import { ProfileFormModel } from '../models/ProfileFormModel';
 import type { ProfileFormValues } from '../types/profileForm.type';
 
 export interface ProfileFormProps extends BlockOwnProps {
-  user: User;
+  user: UserResponse;
   values: ProfileFormValues;
   errors: FormErrors<ProfileFormValues>;
 }
@@ -18,9 +18,9 @@ export default class ProfileFormView extends Block<ProfileFormProps> {
 
   protected componentDidMount(): void {
     const initialValues = this.props.values ?? {
-      first_name: this.props.user?.firstName,
-      second_name: this.props.user?.secondName,
-      display_name: this.props.user?.displayName,
+      first_name: this.props.user?.first_name,
+      second_name: this.props.user?.second_name,
+      display_name: this.props.user?.display_name,
       login: this.props.user?.login,
       email: this.props.user?.email,
       phone: this.props.user?.phone,

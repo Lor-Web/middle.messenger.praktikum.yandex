@@ -4,8 +4,7 @@ import GlobalStore from '@/core/GlobalStore/GlobalStore';
 import AuthApi from '@/shared/api/AuthApi';
 import ChatsApi from '@/shared/api/ChatsApi';
 import type { UserResponse } from '@/shared/models/api/auth.type';
-import type { ChatsResponse } from '@/shared/models/api/chats.type';
-import type { Chat } from '@/shared/models/base.type';
+import type { Chat, ChatsResponse } from '@/shared/models/api/chats.type';
 
 export interface DashboardPageProps extends BlockOwnProps {
   user?: UserResponse;
@@ -22,21 +21,14 @@ export default class DashboardPage extends Block<DashboardPageProps> {
   constructor(props?: DashboardPageProps) {
     super(props);
 
-    this._authApi
-      .user()
-      .then((user) => {
-        this._globalStore.setState('user', user);
-        this.setProps({ ...this.props, user });
-      })
-      .catch((e) => console.log('ERROR', e));
+    this._authApi.user().then((user) => {
+      this._globalStore.setState('user', user);
+      this.setProps({ ...this.props, user });
+    });
 
     this._chatsApi.chats({}).then((chats) => {
       this.setProps({ ...this.props, chats });
     });
-  }
-
-  protected componentDidMount(): void {
-    console.log(this.props);
   }
 
   protected template = `

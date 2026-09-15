@@ -12,7 +12,7 @@ export default class Avatar extends Block<AvatarProps> {
 
   protected template = `
     <img 
-      class="avatar ${this.props?.size ?? ''}" 
+      class="avatar {{#if size}}avatar_{{size}}{{/if}}" 
       src="{{#if src}}{{src}}{{else}}/no-avatar.webp{{/if}}" 
       alt="{{alt}}" 
     />
