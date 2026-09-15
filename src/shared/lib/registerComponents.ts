@@ -12,6 +12,7 @@ import Profile from '@/widgets/Profile';
 import RegisterCard from '@/widgets/RegisterCard';
 import Sidebar from '@/widgets/Sidebar';
 
+import Avatar from '../ui/Avatar';
 import Button from '../ui/Button';
 import ChatItem from '../ui/ChatItem';
 import Counter from '../ui/Counter';
@@ -20,7 +21,7 @@ import Input from '../ui/Input';
 import MessageItem from '../ui/MessageItem';
 import Textarea from '../ui/Texarea';
 
-const SHARED_UI = [Input, Textarea, Button, Icon, ChatItem, Counter, MessageItem];
+const SHARED_UI = [Avatar, Input, Textarea, Button, Icon, ChatItem, Counter, MessageItem];
 const WIDGETS = [AuthCard, RegisterCard, Sidebar, ChatWindow, Profile];
 const FEATURES = [
   AuthFormView,

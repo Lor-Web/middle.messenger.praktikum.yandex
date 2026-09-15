@@ -17,6 +17,7 @@ export default class ChatItem extends Block<ChatItemProps> {
 
   protected componentDidMount(): void {
     const linkDashboard = this.getRef('linkDashboard');
+    console.log('ChatItem', this.props);
     if (linkDashboard instanceof HTMLAnchorElement) {
       listenerForChild.set({
         element: linkDashboard,
@@ -45,22 +46,26 @@ export default class ChatItem extends Block<ChatItemProps> {
 
   protected template = `
     <a class="chat-item" ref="linkDashboard">
-      <img class="chat-item__avatar avatar" src="{{chat.avatar}}" alt="{{chat.name}}" />
+      <div class="chat-item__avatar">
+        {{{ Avatar src=chat.last_message.avatar alt=chat.last_message.first_name }}}
+      </div>
 
       <div class="chat-item__user">
-        <h2 class="chat-item__user-name">{{chat.name}}</h2>
+        <h2 class="chat-item__user-name">{{chat.title}}</h2>
         <p class="chat-item__user-message">
           {{#if chat.myMessage}}
             <b>Вы:</b>
           {{/if}}
-          {{chat.message}}
+          {{chat.content}}
         </p>
       </div>
 
       <div class="chat-item__info">
-        <p class="chat-item__info-date">{{formatDate chat.date}}</p>
-        {{#if chat.count}}
-          {{{ Counter count=chat.count }}}
+        {{#if chat.time}}
+          <p class="chat-item__info-date">{{formatDate chat.time}}</p>
+        {{/if}}
+        {{#if chat.unread_count}}
+          {{{ Counter count=chat.unread_count }}}
         {{/if}}
       </div>
     </a>

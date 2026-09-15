@@ -20,6 +20,8 @@ export default class Sidebar extends Block<SidebarProps> {
   protected componentDidMount(): void {
     const logoutBtn = this.getRef('logoutBtn');
 
+    console.log('Sidebar', this.props);
+
     if (logoutBtn instanceof HTMLAnchorElement) {
       listenerForChild.set({
         element: logoutBtn,
@@ -51,13 +53,9 @@ export default class Sidebar extends Block<SidebarProps> {
     <aside class="sidebar">
       <header class="sidebar__header">
         <div class="sidebar__header-top">
-          <img
-            class="avatar avatar_medium"
-            src="{{ user.avatar }}"
-            alt="{{ user.displayName }}"
-          />
+          {{{ Avatar src=user.avatar alt=user.first_name size='medium' }}}
 
-          <h3 class="sidebar__header-title">{{user.displayName}}</h3>
+          <h3 class="sidebar__header-title">{{user.first_name}}</h3>
 
           {{{ Button link=true href='${SETTINGS_PATH}' icon='gear' transparent=true }}}
           {{{ Button link=true icon='logout' transparent=true ref='logoutBtn' }}}
