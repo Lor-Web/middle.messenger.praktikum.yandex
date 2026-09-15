@@ -14,12 +14,26 @@ export default function connect<P extends BlockOwnProps>(
   return function (Component: Constructable<P>) {
     // @ts-expect-error wrapped page already implements abstract template
     return class extends Component {
+      private unsubscribe: (() => void) | null = null;
+
       constructor(props?: P) {
         super({ ...(props as P), ...mapStateToProps(GlobalStore.getState() as Indexed) });
+        this.bindStore();
+      }
 
-        GlobalStore.subscribe(() => {
+      private bindStore() {
+        if (this.unsubscribe) {
+          return;
+        }
+
+        this.unsubscribe = GlobalStore.subscribe(() => {
           super.setProps(mapStateToProps(GlobalStore.getState() as Indexed));
         });
+      }
+
+      private unbindStore() {
+        this.unsubscribe?.();
+        this.unsubscribe = null;
       }
 
       public setProps(props: Partial<P>) {
@@ -27,6 +41,16 @@ export default function connect<P extends BlockOwnProps>(
           ...props,
           ...mapStateToProps(GlobalStore.getState() as Indexed),
         });
+      }
+
+      public hide() {
+        this.unbindStore();
+        super.hide();
+      }
+
+      public show() {
+        this.bindStore();
+        super.show();
       }
     };
   };

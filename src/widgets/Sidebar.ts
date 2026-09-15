@@ -5,11 +5,12 @@ import Router from '@/core/Router/Router';
 import AuthApi from '@/shared/api/AuthApi';
 import { AUTH_PATH, SETTINGS_PATH } from '@/shared/constants/paths.constant';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
-import type { ChatItem, User } from '@/shared/models/base.type';
+import type { UserResponse } from '@/shared/models/api/auth.type';
+import type { Chat } from '@/shared/models/api/chats.type';
 
 export interface SidebarProps extends BlockOwnProps {
-  user: User;
-  chats: ChatItem[];
+  user?: UserResponse;
+  chats?: Chat[];
 }
 
 export default class Sidebar extends Block<SidebarProps> {

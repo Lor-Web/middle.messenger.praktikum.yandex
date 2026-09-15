@@ -15,7 +15,7 @@ export type Chat = {
     };
     time: string;
     content: string;
-  };
+  } | null;
 };
 
 export type ChatsRequest = {

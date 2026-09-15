@@ -1,3 +1,4 @@
+import { loadAppData } from '@/core/GlobalStore/load';
 import Router from '@/core/Router/Router';
 import AuthApi from '@/shared/api/AuthApi';
 import { AUTH_PATH, DASHBOARD_PATH } from '@/shared/constants/paths.constant';
@@ -120,6 +121,7 @@ export default class RegisterFormController extends AuthApi {
       console.log('REGISTER FORM VALUES:', this.model.getValues());
 
       this.signUp(this.model.getValues())
+        .then(() => loadAppData())
         .then(() => {
           this._router.go(DASHBOARD_PATH);
         })

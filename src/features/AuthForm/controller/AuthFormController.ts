@@ -1,3 +1,4 @@
+import { loadAppData } from '@/core/GlobalStore/load';
 import Router from '@/core/Router/Router';
 import AuthApi from '@/shared/api/AuthApi';
 import { DASHBOARD_PATH, REGISTER_PATH } from '@/shared/constants/paths.constant';
@@ -120,6 +121,7 @@ export default class AuthFormController extends AuthApi {
       console.log('AUTH FORM VALUES:', this.model.getValues());
 
       this.signIn(this.model.getValues())
+        .then(() => loadAppData())
         .then(() => this._router.go(DASHBOARD_PATH))
         .catch((e) => {
           const error = e.response;
