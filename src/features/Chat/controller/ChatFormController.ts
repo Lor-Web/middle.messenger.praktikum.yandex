@@ -1,13 +1,13 @@
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
 
-import type { ChatWindowFormModel } from '../models/ChatWindowFormModel';
-import type { ChatWindowFormModelValues } from '../types/chatWindowFormModel.type';
-import type ChatWindowFormView from '../view/ChatWindowFormView';
+import type { ChatFormModel } from '../models/ChatFormModel';
+import type { ChatFormValues } from '../types/chatForm.type';
+import type ChatFormView from '../view/ChatFormView';
 
-export default class ChatWindowFormController {
+export default class ChatFormController {
   constructor(
-    private model: ChatWindowFormModel,
-    private view: ChatWindowFormView,
+    private model: ChatFormModel,
+    private view: ChatFormView,
   ) {}
 
   init(): void {
@@ -78,7 +78,7 @@ export default class ChatWindowFormController {
       const textarea = child.getRef('textarea');
 
       if (textarea instanceof HTMLTextAreaElement) {
-        const field = textarea.name as keyof ChatWindowFormModelValues;
+        const field = textarea.name as keyof ChatFormValues;
         this.model.validateField(field);
         this.updateView();
       }
@@ -89,7 +89,7 @@ export default class ChatWindowFormController {
   }
 
   private handleBlur(textarea: HTMLTextAreaElement): void {
-    const field = textarea.name as keyof ChatWindowFormModelValues;
+    const field = textarea.name as keyof ChatFormValues;
     this.model.setValue(field, textarea.value);
     this.model.validateField(field);
     this.updateView();

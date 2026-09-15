@@ -2,12 +2,12 @@ import type { BlockOwnProps } from '@/core/Block/Block';
 import type { ComponentClass } from '@/core/registerComponent/registerComponent';
 import registerComponent from '@/core/registerComponent/registerComponent';
 import AuthFormView from '@/features/AuthForm/view/AuthFormView';
-import ChatWindowFormView from '@/features/ChatWindowForm/view/ChatWindowFormView';
+import ChatFormView from '@/features/Chat/view/ChatFormView';
+import ChatView from '@/features/Chat/view/ChatView';
 import DashboardFormView from '@/features/DashboardForm/view/DashboardFormView';
 import ProfileFormView from '@/features/ProfileForm/view/ProfileFormView';
 import RegisterFormView from '@/features/RegisterForm/view/RegisterFormView';
 import AuthCard from '@/widgets/AuthCard';
-import ChatWindow from '@/widgets/ChatWindow';
 import Profile from '@/widgets/Profile';
 import RegisterCard from '@/widgets/RegisterCard';
 import Sidebar from '@/widgets/Sidebar';
@@ -22,11 +22,12 @@ import MessageItem from '../ui/MessageItem';
 import Textarea from '../ui/Texarea';
 
 const SHARED_UI = [Avatar, Input, Textarea, Button, Icon, ChatItem, Counter, MessageItem];
-const WIDGETS = [AuthCard, RegisterCard, Sidebar, ChatWindow, Profile];
+const WIDGETS = [AuthCard, RegisterCard, Sidebar, Profile];
 const FEATURES = [
   AuthFormView,
   RegisterFormView,
-  ChatWindowFormView,
+  ChatView,
+  ChatFormView,
   ProfileFormView,
   DashboardFormView,
 ];

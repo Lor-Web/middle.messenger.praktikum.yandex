@@ -2,9 +2,9 @@ import type { FormErrors } from '@/shared/models/form/form.type';
 import { FormModel } from '@/shared/models/form/FormModel';
 import { textRequiredValidator } from '@/shared/models/form/validators';
 
-import type { ChatWindowFormModelValues } from '../types/chatWindowFormModel.type';
+import type { ChatFormValues } from '../types/chatForm.type';
 
-export class ChatWindowFormModel extends FormModel<ChatWindowFormModelValues> {
+export class ChatFormModel extends FormModel<ChatFormValues> {
   protected rules = {
     message: {
       validator: textRequiredValidator,
@@ -12,7 +12,7 @@ export class ChatWindowFormModel extends FormModel<ChatWindowFormModelValues> {
     },
   };
 
-  constructor(values: ChatWindowFormModelValues, errors: FormErrors<ChatWindowFormModelValues>) {
+  constructor(values: ChatFormValues, errors: FormErrors<ChatFormValues>) {
     super(values, errors);
   }
 }

@@ -42,7 +42,7 @@ class ChatPage extends Block<ChatPageProps> {
   protected template = `
     <main class="dashboard page">
       {{{ Sidebar user=user chats=chats }}}
-      {{{ ChatWindow chats=chats chatId=params.id }}}
+      {{{ ChatView chats=chats chatId=params.id }}}
     </main>
   `;
 }
