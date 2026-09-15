@@ -10,13 +10,15 @@ export default class Route {
   private _blockClass: RouteType['block'] | null;
   private _block: Block<BlockOwnProps> | null;
   private _access: RouteAccess;
+  private _title?: string;
   private _props;
 
-  constructor({ path, block, props, access = 'protected' }: RouteType & { path: string }) {
+  constructor({ path, block, props, access = 'protected', title }: RouteType & { path: string }) {
     this._pathname = path;
     this._blockClass = block ?? null;
     this._block = null;
     this._access = access;
+    this._title = title;
     this._props = props;
   }
 
@@ -43,6 +45,10 @@ export default class Route {
   }
 
   render(params: PathParams = {}) {
+    if (this._title) {
+      document.title = this._title;
+    }
+
     const props = { ...this._props, params };
 
     if (!this._block && this._blockClass) {
