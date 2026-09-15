@@ -1,7 +1,7 @@
 import type Block from '@/core/Block/Block';
 import type { BlockOwnProps } from '@/core/Block/Block';
 import { render } from '@/shared/lib/utility';
-import type { Route as RouteType } from '@/shared/models/app.type';
+import type { Route as RouteType, RouteAccess } from '@/shared/models/app.type';
 
 import { matchPath, type PathMatch, type PathParams, rankPath } from './path';
 
@@ -9,17 +9,23 @@ export default class Route {
   private _pathname: string;
   private _blockClass: RouteType['block'] | null;
   private _block: Block<BlockOwnProps> | null;
+  private _access: RouteAccess;
   private _props;
 
-  constructor({ path, block, props }: RouteType & { path: string }) {
+  constructor({ path, block, props, access = 'protected' }: RouteType & { path: string }) {
     this._pathname = path;
     this._blockClass = block ?? null;
     this._block = null;
+    this._access = access;
     this._props = props;
   }
 
   get pathname() {
     return this._pathname;
+  }
+
+  get access() {
+    return this._access;
   }
 
   get rank() {

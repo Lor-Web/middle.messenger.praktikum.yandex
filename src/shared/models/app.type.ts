@@ -8,6 +8,8 @@ export type BlockClass<Props extends BlockOwnProps = BlockOwnProps> = {
   componentName?: string;
 };
 
+export type RouteAccess = 'guest' | 'public' | 'protected';
+
 export type Route = {
   title?: string;
   path?: string;
@@ -18,4 +20,5 @@ export type Route = {
   block: BlockClass<any>;
   props?: Record<string, unknown>;
   children?: Route[];
+  access?: RouteAccess;
 };

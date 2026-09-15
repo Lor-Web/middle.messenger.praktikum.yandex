@@ -21,16 +21,19 @@ export const ROUTES: Route[] = [
     title: 'Вход',
     path: AUTH_PATH,
     block: AuthPage,
+    access: 'guest',
   },
   {
     title: 'Регистрация',
     path: REGISTER_PATH,
     block: RegisterPage,
+    access: 'guest',
   },
   {
     title: 'Чаты',
     path: MESSENGER_PATH,
     block: DashboardPage,
+    access: 'protected',
     children: [
       {
         title: 'Чат',
@@ -43,11 +46,13 @@ export const ROUTES: Route[] = [
     title: 'Настройки',
     path: SETTINGS_PATH,
     block: SettingsPage,
+    access: 'protected',
   },
   {
     title: 'Страница не найдена',
     path: NOT_FOUND_PATH,
     block: ErrorPage,
+    access: 'public',
     props: {
       title: '404',
       description: 'Не туда попали',
@@ -57,6 +62,7 @@ export const ROUTES: Route[] = [
     title: 'Ошибка сервера',
     path: SERVER_ERROR_PATH,
     block: ErrorPage,
+    access: 'public',
     props: {
       title: '500',
       description: 'Мы уже фиксим',
