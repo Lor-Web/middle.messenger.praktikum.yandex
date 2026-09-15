@@ -16,14 +16,26 @@ export interface SettingsPageProps extends BlockOwnProps {
 class SettingsPage extends Block<SettingsPageProps> {
   private _authApi = new AuthApi();
   private _chatsApi = new ChatsApi();
+  private _userRequest: Promise<unknown> | null = null;
+  private _chatsRequest: Promise<unknown> | null = null;
 
   protected componentDidMount(): void {
-    if (!GlobalStore.getState('user')) {
-      this._authApi.user().then((user) => GlobalStore.setState('user', user));
+    if (!GlobalStore.getState('user') && !this._userRequest) {
+      this._userRequest = this._authApi
+        .user()
+        .then((user) => GlobalStore.setState('user', user))
+        .finally(() => {
+          this._userRequest = null;
+        });
     }
 
-    if (!GlobalStore.getState('chats')) {
-      this._chatsApi.chats({}).then((chats) => GlobalStore.setState('chats', chats));
+    if (!GlobalStore.getState('chats') && !this._chatsRequest) {
+      this._chatsRequest = this._chatsApi
+        .chats({})
+        .then((chats) => GlobalStore.setState('chats', chats))
+        .finally(() => {
+          this._chatsRequest = null;
+        });
     }
   }
 
