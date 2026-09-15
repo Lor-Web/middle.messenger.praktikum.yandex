@@ -1,5 +1,6 @@
 import type { BlockOwnProps } from '@/core/Block/Block';
 import Block from '@/core/Block/Block';
+import getResourceUrl from '@/shared/helpers/getResourceUrl';
 
 export interface AvatarProps extends BlockOwnProps {
   alt?: string;
@@ -9,6 +10,13 @@ export interface AvatarProps extends BlockOwnProps {
 
 export default class Avatar extends Block<AvatarProps> {
   static componentName = 'Avatar';
+
+  constructor(props: AvatarProps = {} as AvatarProps) {
+    super({
+      ...props,
+      src: getResourceUrl(props.src),
+    });
+  }
 
   protected template = `
     <img 

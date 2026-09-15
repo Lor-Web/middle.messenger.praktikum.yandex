@@ -31,6 +31,7 @@ export default class ProfileFormView extends Block<ProfileFormProps> {
       this.setProps({
         values: initialValues,
       });
+      return;
     }
 
     const model = new ProfileFormModel(initialValues, this.props.errors ?? {}, originalProfile);
@@ -55,8 +56,10 @@ export default class ProfileFormView extends Block<ProfileFormProps> {
   }
 
   protected template = `
-    <form class="profile__data-form" ref="profileForm">
-      {{{ Input type='file' label="Загрузить аватар" placeholder="Загрузить аватар" name='avatar' }}}
+    <div class="profile__data-content">
+      {{{ Avatar src=user.avatar alt=user.first_name size='large' }}}
+      <form class="profile__data-form" ref="profileForm">
+        {{{ Input type='file' label="Загрузить аватар" placeholder="Загрузить аватар" name='avatar' error=errors.editAvatar }}}
       {{{ Input 
         label="Имя" 
         placeholder="Имя" 
@@ -124,6 +127,7 @@ export default class ProfileFormView extends Block<ProfileFormProps> {
       {{/if}}
       
       {{{ Button label="Сохранить" type='submit' }}}
-    </form>
+      </form>
+    </div>
   `;
 }

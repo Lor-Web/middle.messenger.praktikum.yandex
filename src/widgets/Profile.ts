@@ -16,7 +16,6 @@ export default class Profile extends Block {
       </header>
 
       <section class="profile__data">
-        {{{ Avatar src=user.avatar alt=user.first_name size='large' }}}
         {{{ ProfileFormView user=user }}}
       </section>
     </div>

@@ -28,6 +28,7 @@ export type ProfileFormValues = {
 export type ProfileFormErrors = FormErrors<ProfileFormValues> & {
   editProfile?: string;
   editPassword?: string;
+  editAvatar?: string;
 };
 
 export type ProfileSnapshot = Pick<ProfileFormValues, ProfileField>;

@@ -1,4 +1,4 @@
-@use "../base/variables" as *;
+@use '../base/variables' as *;
 
 .profile {
   width: 100%;
@@ -30,6 +30,14 @@
     flex-direction: column;
     gap: 16px;
     overflow-y: scroll;
+
+    &-content {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
 
     &-form {
       display: flex;

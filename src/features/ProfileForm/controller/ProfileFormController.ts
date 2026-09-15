@@ -35,13 +35,23 @@ export default class ProfileFormController extends UserApi {
       const input = child.getRef('input');
 
       if (input instanceof HTMLInputElement) {
-        listenerForChild.set({
-          element: input,
-          eventName: 'blur',
-          eventCallback: () => {
-            this.handleBlur(input);
-          },
-        });
+        if (input.type === 'file') {
+          listenerForChild.set({
+            element: input,
+            eventName: 'change',
+            eventCallback: () => {
+              this.handleAvatarChange(input);
+            },
+          });
+        } else {
+          listenerForChild.set({
+            element: input,
+            eventName: 'blur',
+            eventCallback: () => {
+              this.handleBlur(input);
+            },
+          });
+        }
       }
     });
   }
@@ -63,13 +73,23 @@ export default class ProfileFormController extends UserApi {
       const input = child.getRef('input');
 
       if (input instanceof HTMLInputElement) {
-        listenerForChild.remove({
-          element: input,
-          eventName: 'blur',
-          eventCallback: () => {
-            this.handleBlur(input);
-          },
-        });
+        if (input.type === 'file') {
+          listenerForChild.remove({
+            element: input,
+            eventName: 'change',
+            eventCallback: () => {
+              this.handleAvatarChange(input);
+            },
+          });
+        } else {
+          listenerForChild.remove({
+            element: input,
+            eventName: 'blur',
+            eventCallback: () => {
+              this.handleBlur(input);
+            },
+          });
+        }
       }
     });
   }
@@ -147,6 +167,29 @@ export default class ProfileFormController extends UserApi {
         errors: nextErrors,
       });
     });
+  }
+
+  private handleAvatarChange(input: HTMLInputElement): void {
+    const file = input.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    this.editAvatar(file)
+      .then((user) => {
+        this.view.setProps({
+          user,
+          values: this.model.getValues(),
+          errors: { ...this.model.getErrors(), editAvatar: undefined },
+        });
+      })
+      .catch((error: { response?: string }) => {
+        this.view.setProps({
+          values: this.model.getValues(),
+          errors: { ...this.model.getErrors(), editAvatar: error.response },
+        });
+      });
   }
 
   private handleBlur(input: HTMLInputElement): void {

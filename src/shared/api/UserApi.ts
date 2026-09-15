@@ -33,4 +33,19 @@ export default class UserApi {
       },
     });
   }
+
+  public editAvatar(avatar: File) {
+    const data = new FormData();
+    data.append('avatar', avatar);
+
+    return this._http.put<FormData, EditProfileResponse>({
+      url: this.url + 'profile/avatar',
+      options: {
+        credentials: 'include',
+        mode: 'cors',
+        data,
+        timeout: 15000,
+      },
+    });
+  }
 }
