@@ -4,9 +4,6 @@ import ErrorPage from '@/pages/ErrorPage';
 import RegisterPage from '@/pages/RegisterPage';
 import SettingsPage from '@/pages/SettingsPage';
 
-import { chats } from '../mocks/chats.mock';
-import { chat } from '../mocks/messages.mock';
-import { user } from '../mocks/user.mock';
 import type { ErrorRoute, Route } from '../models/app.type';
 import { AUTH_PATH, DASHBOARD_PATH, ID_PATH, REGISTER_PATH, SETTINGS_PATH } from './paths.constant';
 
@@ -25,9 +22,6 @@ export const ROUTES: Route[] = [
     title: 'Чаты',
     path: DASHBOARD_PATH,
     block: DashboardPage,
-    props: {
-      chat,
-    },
     children: [
       {
         title: 'Чат',
@@ -40,10 +34,6 @@ export const ROUTES: Route[] = [
     title: 'Настройки',
     path: SETTINGS_PATH,
     block: SettingsPage,
-    props: {
-      user,
-      chats,
-    },
   },
 ];
 

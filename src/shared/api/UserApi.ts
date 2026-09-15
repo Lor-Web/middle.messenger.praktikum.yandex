@@ -13,7 +13,7 @@ export default class UserApi {
   private _http = new HTTPTransport();
 
   public editProfile(request: EditProfileRequest) {
-    this._http.put<EditProfileRequest, EditProfileResponse>({
+    return this._http.put<EditProfileRequest, EditProfileResponse>({
       url: this.url + 'profile',
       options: {
         credentials: 'include',
@@ -24,7 +24,7 @@ export default class UserApi {
   }
 
   public editPassword(request: EditPasswordRequest) {
-    this._http.put<EditPasswordRequest>({
+    return this._http.put<EditPasswordRequest>({
       url: this.url + 'password',
       options: {
         credentials: 'include',

@@ -1,29 +1,30 @@
 import type { BlockOwnProps } from '@/core/Block/Block';
 import Block from '@/core/Block/Block';
 import type { UserResponse } from '@/shared/models/api/auth.type';
-import type { FormErrors } from '@/shared/models/form/form.type';
 
 import ProfileFormController from '../controller/ProfileFormController';
 import { ProfileFormModel } from '../models/ProfileFormModel';
-import type { ProfileFormValues } from '../types/profileForm.type';
+import type {
+  ProfileFormErrors,
+  ProfileFormValues,
+  ProfileSnapshot,
+} from '../types/profileForm.type';
 
 export interface ProfileFormProps extends BlockOwnProps {
   user: UserResponse;
   values: ProfileFormValues;
-  errors: FormErrors<ProfileFormValues>;
+  errors: ProfileFormErrors;
 }
 
 export default class ProfileFormView extends Block<ProfileFormProps> {
   static componentName = 'ProfileFormView';
 
   protected componentDidMount(): void {
+    const originalProfile = this.getOriginalProfile();
     const initialValues = this.props.values ?? {
-      first_name: this.props.user?.first_name,
-      second_name: this.props.user?.second_name,
-      display_name: this.props.user?.display_name,
-      login: this.props.user?.login,
-      email: this.props.user?.email,
-      phone: this.props.user?.phone,
+      ...originalProfile,
+      old_password: '',
+      new_password: '',
     };
 
     if (!this.props.values) {
@@ -32,10 +33,25 @@ export default class ProfileFormView extends Block<ProfileFormProps> {
       });
     }
 
-    const model = new ProfileFormModel(initialValues, this.props.errors);
+    const model = new ProfileFormModel(initialValues, this.props.errors ?? {}, originalProfile);
     const controller = new ProfileFormController(model, this);
 
     controller.init();
+  }
+
+  public getUser(): UserResponse {
+    return this.props.user;
+  }
+
+  private getOriginalProfile(): ProfileSnapshot {
+    return {
+      first_name: this.props.user?.first_name ?? '',
+      second_name: this.props.user?.second_name ?? '',
+      display_name: this.props.user?.display_name ?? '',
+      login: this.props.user?.login ?? '',
+      email: this.props.user?.email ?? '',
+      phone: this.props.user?.phone ?? '',
+    };
   }
 
   protected template = `
@@ -99,6 +115,13 @@ export default class ProfileFormView extends Block<ProfileFormProps> {
         value=values.new_password 
         error=errors.new_password  
       }}}
+
+      {{#if errors.editProfile}}
+        <p class="error-text">{{errors.editProfile}}</p>
+      {{/if}}
+      {{#if errors.editPassword}}
+        <p class="error-text">{{errors.editPassword}}</p>
+      {{/if}}
       
       {{{ Button label="Сохранить" type='submit' }}}
     </form>
