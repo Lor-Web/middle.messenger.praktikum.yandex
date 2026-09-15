@@ -5,8 +5,16 @@ import ErrorPage from '@/pages/ErrorPage';
 import RegisterPage from '@/pages/RegisterPage';
 import SettingsPage from '@/pages/SettingsPage';
 
-import type { ErrorRoute, Route } from '../models/app.type';
-import { AUTH_PATH, DASHBOARD_PATH, ID_PATH, REGISTER_PATH, SETTINGS_PATH } from './paths.constant';
+import type { Route } from '../models/app.type';
+import {
+  AUTH_PATH,
+  ID_PATH,
+  MESSENGER_PATH,
+  NOT_FOUND_PATH,
+  REGISTER_PATH,
+  SERVER_ERROR_PATH,
+  SETTINGS_PATH,
+} from './paths.constant';
 
 export const ROUTES: Route[] = [
   {
@@ -21,7 +29,7 @@ export const ROUTES: Route[] = [
   },
   {
     title: 'Чаты',
-    path: DASHBOARD_PATH,
+    path: MESSENGER_PATH,
     block: DashboardPage,
     children: [
       {
@@ -36,15 +44,21 @@ export const ROUTES: Route[] = [
     path: SETTINGS_PATH,
     block: SettingsPage,
   },
-];
-
-export const ERRORS_ROUTES: ErrorRoute[] = [
   {
     title: 'Страница не найдена',
-    code: 404,
+    path: NOT_FOUND_PATH,
     block: ErrorPage,
     props: {
       title: '404',
+      description: 'Не туда попали',
+    },
+  },
+  {
+    title: 'Ошибка сервера',
+    path: SERVER_ERROR_PATH,
+    block: ErrorPage,
+    props: {
+      title: '500',
       description: 'Мы уже фиксим',
     },
   },

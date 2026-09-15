@@ -1,10 +1,13 @@
-export const AUTH_PATH = 'auth';
-export const REGISTER_PATH = 'register';
+export const AUTH_PATH = '/';
+export const REGISTER_PATH = '/sign-up';
 
-export const DASHBOARD_PATH = 'dashboard';
+export const MESSENGER_PATH = '/messenger';
 
 export const ID_PATH = ':id';
 
-export const SETTINGS_PATH = 'settings';
+export const SETTINGS_PATH = '/settings';
 
-export const chatPath = (id: string | number) => `${DASHBOARD_PATH}/${id}`;
+export const NOT_FOUND_PATH = '/404';
+export const SERVER_ERROR_PATH = '/500';
+
+export const chatPath = (id: string | number) => `${MESSENGER_PATH}/${id}`;

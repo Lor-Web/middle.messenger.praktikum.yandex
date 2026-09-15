@@ -1,7 +1,7 @@
 import { loadAppData } from '@/core/GlobalStore/load';
 import Router from '@/core/Router/Router';
 import AuthApi from '@/shared/api/AuthApi';
-import { AUTH_PATH, DASHBOARD_PATH } from '@/shared/constants/paths.constant';
+import { AUTH_PATH, MESSENGER_PATH } from '@/shared/constants/paths.constant';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
 
 import type { RegisterFormModel } from '../models/RegisterFormModel';
@@ -123,7 +123,7 @@ export default class RegisterFormController extends AuthApi {
       this.signUp(this.model.getValues())
         .then(() => loadAppData())
         .then(() => {
-          this._router.go(DASHBOARD_PATH);
+          this._router.go(MESSENGER_PATH);
         })
         .catch((e) => {
           const error = e.response;

@@ -1,5 +1,6 @@
 import type { BlockOwnProps } from '@/core/Block/Block';
 import Block from '@/core/Block/Block';
+import { MESSENGER_PATH } from '@/shared/constants/paths.constant';
 
 export interface ErrorPageProps extends BlockOwnProps {
   title: string;
@@ -18,7 +19,7 @@ export default class ErrorPage extends Block<ErrorPageProps> {
           {{description}}
         </p>
 
-        <a class="" href="/dashboard">Назад к чатам</a>
+        {{{ Button link=true href='${MESSENGER_PATH}' label='Назад к чатам' }}}
       </div>
     </main>
   `;

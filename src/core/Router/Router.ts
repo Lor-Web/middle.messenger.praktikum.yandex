@@ -1,3 +1,4 @@
+import { NOT_FOUND_PATH } from '@/shared/constants/paths.constant';
 import { ROUTES } from '@/shared/constants/routes.constant';
 import type { Route as RouteType } from '@/shared/models/app.type';
 
@@ -51,7 +52,7 @@ export default class Router {
   }
 
   private _onRoute(pathname: string) {
-    const matched = this.getRoute(pathname);
+    const matched = this.getRoute(pathname) ?? this.getRoute(NOT_FOUND_PATH);
 
     if (!matched) {
       return;

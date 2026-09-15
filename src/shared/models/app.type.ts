@@ -19,13 +19,3 @@ export type Route = {
   props?: Record<string, unknown>;
   children?: Route[];
 };
-
-export interface ErrorRoute extends Route {
-  code?: number;
-}
-
-export interface AppProps {
-  title?: string;
-  routes?: Route[];
-  errorRoutes?: ErrorRoute[];
-}
