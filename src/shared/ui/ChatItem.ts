@@ -2,12 +2,12 @@ import type { BlockOwnProps } from '@/core/Block/Block';
 import Block from '@/core/Block/Block';
 import Router from '@/core/Router/Router';
 
-import { DASHBOARD_PATH } from '../constants/paths.constant';
+import { chatPath } from '../constants/paths.constant';
 import { listenerForChild } from '../lib/setListenerForChild';
-import type { ChatItem as ChatItemData } from '../models/base.type';
+import type { Chat } from '../models/api/chats.type';
 
 export interface ChatItemProps extends BlockOwnProps {
-  chat: ChatItemData;
+  chat: Chat;
 }
 
 export default class ChatItem extends Block<ChatItemProps> {
@@ -24,7 +24,7 @@ export default class ChatItem extends Block<ChatItemProps> {
         eventName: 'click',
         eventCallback: (e: Event) => {
           e.preventDefault();
-          this._router.go(DASHBOARD_PATH);
+          this._router.go(chatPath(this.props.chat.id));
         },
       });
     }
@@ -38,7 +38,7 @@ export default class ChatItem extends Block<ChatItemProps> {
         eventName: 'click',
         eventCallback: (e: Event) => {
           e.preventDefault();
-          this._router.go(DASHBOARD_PATH);
+          this._router.go(chatPath(this.props.chat.id));
         },
       });
     }

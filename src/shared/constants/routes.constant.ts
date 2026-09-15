@@ -1,4 +1,5 @@
 import AuthPage from '@/pages/AuthPage';
+import ChatPage from '@/pages/ChatPage';
 import DashboardPage from '@/pages/DashboardPage';
 import ErrorPage from '@/pages/ErrorPage';
 import RegisterPage from '@/pages/RegisterPage';
@@ -26,7 +27,7 @@ export const ROUTES: Route[] = [
       {
         title: 'Чат',
         path: ID_PATH,
-        block: DashboardPage,
+        block: ChatPage,
       },
     ],
   },

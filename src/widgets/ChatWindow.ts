@@ -1,44 +1,48 @@
 import type { BlockOwnProps } from '@/core/Block/Block';
 import Block from '@/core/Block/Block';
-import type { Chat } from '@/shared/models/base.type';
+import type { Chat } from '@/shared/models/api/chats.type';
 
 export interface ChatWindowProps extends BlockOwnProps {
-  chat: Chat;
+  chat?: Chat;
+  chats?: Chat[];
+  chatId?: string;
 }
 
 export default class ChatWindow extends Block<ChatWindowProps> {
   static componentName = 'ChatWindow';
 
+  constructor(props: ChatWindowProps = {} as ChatWindowProps) {
+    super({
+      ...props,
+      chat: props.chat ?? props.chats?.find((chat) => String(chat.id) === String(props.chatId)),
+    });
+  }
+
   protected template = `
-    <div class="chat-window">
-      <header class="chat-window__header">
-        <img
-          class="avatar avatar_medium"
-          src="{{chat.companion.avatar}}"
-          alt="{{chat.companion.name}}"
-        />
+    {{#if chat}}
+      <div class="chat-window">
+        <header class="chat-window__header">
+          {{{ Avatar src=chat.avatar alt=chat.title size='medium' }}}
 
-        <div class="chat-window__companion">
-          <h3 class="chat-window__companion-name">{{chat.companion.name}}</h3>
-          {{#if chat.companion.online}}
-            <p class="chat-window__companion-status">Online</p>
-          {{/if}}
-        </div>
+          <div class="chat-window__companion">
+            <h3 class="chat-window__companion-name">{{chat.title}}</h3>
+          </div>
 
-        <div class="chat-window__settings">
-          {{{ Button icon='ellipsis-vertical' transparent=true }}}
-        </div>
-      </header>
+          <div class="chat-window__settings">
+            {{{ Button icon='ellipsis-vertical' transparent=true }}}
+          </div>
+        </header>
 
-      <section class="chat-window__messages">
-        {{#each chat.messages}}
-          {{{ MessageItem message=this}}}
-        {{/each}}
-      </section>
+        <section class="chat-window__messages"></section>
 
-      <footer class="chat-window__footer">
-        {{{ ChatWindowFormView }}}
-      </footer>
-    </div>
+        <footer class="chat-window__footer">
+          {{{ ChatWindowFormView }}}
+        </footer>
+      </div>
+    {{else}}
+      <div class="dashboard-window">
+        <p>Чат не найден</p>
+      </div>
+    {{/if}}
   `;
 }
