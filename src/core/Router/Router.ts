@@ -1,5 +1,7 @@
 import { ROUTES } from '@/shared/constants/routes.constant';
+import type { Route as RouteType } from '@/shared/models/app.type';
 
+import { joinPaths, normalizePath } from './path';
 import Route from './Route';
 
 export default class Router {
@@ -16,44 +18,69 @@ export default class Router {
 
     Router.__instance = this;
 
-    ROUTES.forEach((routeConfig) =>
-      this._routes.push(
-        new Route({ path: routeConfig.path, block: routeConfig.block, props: routeConfig.props }),
-      ),
-    );
+    this.initRoutes(ROUTES);
+    this._routes.sort((a, b) => b.rank - a.rank);
   }
 
   start() {
-    const path = window.location.pathname.split('/')[1];
-
-    window.onpopstate = (e: PopStateEvent) => {
-      const newPath = (e.currentTarget as Window)?.location.pathname.split('/')[1];
-      this._onRoute(newPath);
+    window.onpopstate = () => {
+      this._onRoute(window.location.pathname);
     };
 
-    this._onRoute(path);
+    this._onRoute(window.location.pathname);
   }
 
   getRoute(pathname: string) {
-    return this._routes.find((route) => route.match(pathname));
+    const path = normalizePath(pathname);
+
+    for (const route of this._routes) {
+      const matched = route.match(path);
+
+      if (matched) {
+        return { route, params: matched.params };
+      }
+    }
+
+    return null;
   }
 
   go(pathname: string) {
-    this.history.pushState({}, '', pathname);
-    this._onRoute(pathname);
+    const path = normalizePath(pathname);
+    this.history.pushState({}, '', path);
+    this._onRoute(path);
   }
 
   private _onRoute(pathname: string) {
-    const route = this.getRoute(pathname);
-    if (!route) {
+    const matched = this.getRoute(pathname);
+
+    if (!matched) {
       return;
     }
 
-    if (this._currentRoute) {
+    const { route, params } = matched;
+
+    if (this._currentRoute && this._currentRoute !== route) {
       this._currentRoute.leave();
     }
 
     this._currentRoute = route;
-    route.render();
+    route.render(params);
+  }
+
+  private initRoutes(routes: RouteType[], parentPath = '') {
+    routes.forEach((routeConfig) => {
+      const path = joinPaths(parentPath, routeConfig.path ?? '');
+
+      this._routes.push(
+        new Route({
+          ...routeConfig,
+          path,
+        }),
+      );
+
+      if (routeConfig.children?.length) {
+        this.initRoutes(routeConfig.children, path);
+      }
+    });
   }
 }

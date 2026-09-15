@@ -8,9 +8,10 @@ import type { ChatsResponse } from '@/shared/models/api/chats.type';
 import type { Chat } from '@/shared/models/base.type';
 
 export interface DashboardPageProps extends BlockOwnProps {
-  user: UserResponse;
-  chats: ChatsResponse;
-  chat: Chat;
+  user?: UserResponse;
+  chats?: ChatsResponse;
+  chat?: Chat;
+  params?: Record<string, string>;
 }
 
 export default class DashboardPage extends Block<DashboardPageProps> {
@@ -18,8 +19,8 @@ export default class DashboardPage extends Block<DashboardPageProps> {
   private _chatsApi = new ChatsApi();
   private _globalStore = GlobalStore;
 
-  constructor() {
-    super();
+  constructor(props?: DashboardPageProps) {
+    super(props);
 
     this._authApi
       .user()

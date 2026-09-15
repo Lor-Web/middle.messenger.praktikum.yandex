@@ -8,7 +8,7 @@ import { chats } from '../mocks/chats.mock';
 import { chat } from '../mocks/messages.mock';
 import { user } from '../mocks/user.mock';
 import type { ErrorRoute, Route } from '../models/app.type';
-import { AUTH_PATH, DASHBOARD_PATH, REGISTER_PATH, SETTINGS_PATH } from './paths.constant';
+import { AUTH_PATH, DASHBOARD_PATH, ID_PATH, REGISTER_PATH, SETTINGS_PATH } from './paths.constant';
 
 export const ROUTES: Route[] = [
   {
@@ -26,10 +26,15 @@ export const ROUTES: Route[] = [
     path: DASHBOARD_PATH,
     block: DashboardPage,
     props: {
-      user,
-      chats,
       chat,
     },
+    children: [
+      {
+        title: 'Чат',
+        path: ID_PATH,
+        block: DashboardPage,
+      },
+    ],
   },
   {
     title: 'Настройки',

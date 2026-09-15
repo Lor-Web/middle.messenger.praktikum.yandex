@@ -17,6 +17,7 @@ export type Route = {
    */
   block: BlockClass<any>;
   props?: Record<string, unknown>;
+  children?: Route[];
 };
 
 export interface ErrorRoute extends Route {
