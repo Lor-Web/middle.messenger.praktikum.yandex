@@ -22,8 +22,6 @@ export default class Sidebar extends Block<SidebarProps> {
   protected componentDidMount(): void {
     const logoutBtn = this.getRef('logoutBtn');
 
-    console.log('Sidebar', this.props);
-
     if (logoutBtn instanceof HTMLAnchorElement) {
       listenerForChild.set({
         element: logoutBtn,

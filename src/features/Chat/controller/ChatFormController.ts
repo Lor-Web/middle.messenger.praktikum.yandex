@@ -78,7 +78,7 @@ export default class ChatFormController {
     this.syncValuesFromView();
     this.updateView();
     if (this.model.validate()) {
-      console.log(this.model.getValues());
+      console.log('CHAT FORM VALUES:', this.model.getValues());
     }
   }
 

@@ -153,7 +153,6 @@ export default abstract class Block<Props extends BlockOwnProps = object> {
   }
 
   public hide() {
-    console.log('HIDE', this.domElement);
     if (this.domElement) {
       this.unmountComponent();
       this.domElement.remove();

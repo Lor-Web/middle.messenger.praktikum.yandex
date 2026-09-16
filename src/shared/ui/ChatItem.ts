@@ -30,7 +30,6 @@ export default class ChatItem extends Block<ChatItemProps> {
 
   protected componentDidMount(): void {
     const linkDashboard = this.getRef('linkDashboard');
-    console.log('ChatItem', this.props);
     if (linkDashboard instanceof HTMLAnchorElement) {
       listenerForChild.set({
         element: linkDashboard,
