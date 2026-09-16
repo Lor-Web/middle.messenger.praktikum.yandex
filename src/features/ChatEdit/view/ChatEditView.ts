@@ -1,10 +1,13 @@
 import Block from '@/core/Block/Block';
 import { chatPath } from '@/shared/constants/paths.constant';
 
+import ChatEditController from '../controller/ChatEditController';
 import type { ChatEditViewProps } from '../types/chatEdit.type';
 
 export default class ChatEditView extends Block<ChatEditViewProps> {
   static componentName = 'ChatEditView';
+
+  private controller: ChatEditController | null = null;
 
   constructor(props: ChatEditViewProps = {} as ChatEditViewProps) {
     const chat =
@@ -17,11 +20,23 @@ export default class ChatEditView extends Block<ChatEditViewProps> {
     });
   }
 
+  protected componentDidMount(): void {
+    if (!this.controller) {
+      this.controller = new ChatEditController(this);
+    }
+
+    this.controller.init();
+  }
+
+  public getChatId(): string | undefined {
+    return this.props.chatId ?? (this.props.chat ? String(this.props.chat.id) : undefined);
+  }
+
   protected template = `
     {{#if chat}}
       <div class="chat-edit">
         <header class="chat-edit__header">
-          {{{ Button link=true href=backHref label="Назад" transparent=true size="small" }}}
+          {{{ Button link=true href=backHref label="Назад" variant="transparent" size="small" }}}
           <h1 class="chat-edit__title">{{chat.title}}</h1>
         </header>
 
@@ -33,9 +48,23 @@ export default class ChatEditView extends Block<ChatEditViewProps> {
 
           <section class="chat-edit__section">
             <h2 class="chat-edit__section-title">Пользователи чата</h2>
-            {{{ ChatMembersView chatId=chatId }}}
+            {{{ ChatMembersView chatId=chatId currentUserId=user.id }}}
           </section>
         </div>
+
+        <div class="chat-edit__actions">
+          {{{ Button
+            label="Удалить чат"
+            type="button"
+            variant="delete"
+            ref="deleteChatBtn"
+            disabled=deleteChatDisabled
+          }}}
+        </div>
+
+        {{#if error}}
+          <p class="error-text">{{error}}</p>
+        {{/if}}
       </div>
     {{else}}
       <div class="dashboard-window">

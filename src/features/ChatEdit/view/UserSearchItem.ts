@@ -9,17 +9,24 @@ export default class UserSearchItem extends Block<UserSearchItemProps> {
     const user = props.user;
     const fullName = [user?.first_name, user?.second_name].filter(Boolean).join(' ');
     const selected = Boolean(props.selected ?? user?.selected);
+    const isCurrent = Boolean(props.isCurrent ?? user?.isCurrent);
 
     super({
       ...props,
       selected,
+      isCurrent,
       name: user?.display_name || fullName || user?.login,
-      actionLabel: selected ? 'Отменить выбор' : 'Выбрать пользователя',
+      actionLabel: isCurrent ? 'Это вы' : selected ? 'Отменить выбор' : 'Выбрать пользователя',
+      selectVariant: selected ? 'transparent' : 'primary',
     });
   }
 
   public getUserId(): number | undefined {
     return this.props.user?.id;
+  }
+
+  public isCurrentUser(): boolean {
+    return Boolean(this.props.isCurrent);
   }
 
   protected template = `
@@ -28,7 +35,14 @@ export default class UserSearchItem extends Block<UserSearchItemProps> {
 
       <p class="user-search__name">{{name}}</p>
 
-      {{{ Button label=actionLabel type="button" ref="selectBtn" size="small" transparent=selected }}}
+      {{{ Button
+        label=actionLabel
+        type="button"
+        ref="selectBtn"
+        size="small"
+        variant=selectVariant
+        disabled=isCurrent
+      }}}
     </li>
   `;
 }

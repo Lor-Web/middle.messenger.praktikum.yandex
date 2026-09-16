@@ -47,3 +47,14 @@ export type ChatUserResponse = {
 };
 
 export type DeleteUsersRequest = { users: number[]; chatId: number };
+
+export type DeleteChatRequest = { chatId: number };
+export type DeleteChatResponse = {
+  userId: number;
+  result: {
+    id: number;
+    title: string;
+    avatar: string;
+    created_by: number;
+  };
+};

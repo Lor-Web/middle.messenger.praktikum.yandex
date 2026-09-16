@@ -9,6 +9,7 @@ export interface UserSearchListItem {
   login: string;
   avatar: string;
   selected?: boolean;
+  isCurrent?: boolean;
 }
 
 export interface UserSearchState {
@@ -33,5 +34,7 @@ export interface UserSearchItemProps extends BlockOwnProps {
   user: UserSearchListItem;
   name?: string;
   selected?: boolean;
+  isCurrent?: boolean;
   actionLabel?: string;
+  selectVariant?: 'primary' | 'transparent';
 }

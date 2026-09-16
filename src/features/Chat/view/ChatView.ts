@@ -60,7 +60,7 @@ export default class ChatView extends Block<ChatViewProps> {
           </div>
 
           <div class="chat-window__settings">
-            {{{ Button icon='ellipsis-vertical' transparent=true ref='editBtn' }}}
+            {{{ Button icon='ellipsis-vertical' variant="transparent" ref='editBtn' }}}
           </div>
         </header>
 

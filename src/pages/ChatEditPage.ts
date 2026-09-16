@@ -14,7 +14,7 @@ class ChatEditPage extends Block<ChatEditPageProps> {
   protected template = `
     <main class="dashboard page">
       {{{ Sidebar user=user chats=chats }}}
-      {{{ ChatEditView chats=chats chatId=params.id }}}
+      {{{ ChatEditView user=user chats=chats chatId=params.id }}}
     </main>
   `;
 }

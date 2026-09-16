@@ -121,7 +121,7 @@ export default class ChatMembersController extends ChatsApi {
       UserSearchItem | undefined;
     const userId = item?.getUserId();
 
-    if (userId === undefined) {
+    if (userId === undefined || item?.isCurrentUser()) {
       return;
     }
 
@@ -209,11 +209,14 @@ export default class ChatMembersController extends ChatsApi {
     const users = this.model.getUsers();
     const deleteDisabled = this.model.getSelectedIds().length === 0 || this.isDeleting;
 
+    const currentUserId = this.view.getCurrentUserId();
+
     this.view.setProps({
       query: this.model.getQuery(),
       users: users.map((user) => ({
         ...user,
         selected: this.model.isSelected(user.id),
+        isCurrent: user.id === currentUserId,
       })),
       error: this.model.getError(),
       didSearch: this.model.getDidSearch(),

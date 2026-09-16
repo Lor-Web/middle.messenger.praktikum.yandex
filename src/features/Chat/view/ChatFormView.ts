@@ -23,7 +23,7 @@ export default class ChatFormView extends Block<ChatFormProps> {
 
   protected template = `
     <form class="chat-window__form" ref="chatForm">
-      {{{ Button icon='paperclip' transparent=true }}}
+      {{{ Button icon='paperclip' variant="transparent" }}}
 
       {{{ Textarea placeholder='Сообщение...' name='message' value=values.message error=errors.message  }}}
 

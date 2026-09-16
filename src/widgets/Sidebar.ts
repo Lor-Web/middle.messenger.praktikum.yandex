@@ -63,8 +63,8 @@ export default class Sidebar extends Block<SidebarProps> {
 
           <h3 class="sidebar__header-title">{{user.first_name}}</h3>
 
-          {{{ Button link=true href='${SETTINGS_PATH}' icon='gear' transparent=true }}}
-          {{{ Button link=true icon='logout' transparent=true ref='logoutBtn' }}}
+          {{{ Button link=true href='${SETTINGS_PATH}' icon='gear' variant="transparent" }}}
+          {{{ Button link=true icon='logout' variant="transparent" ref='logoutBtn' }}}
         </div>
 
         {{{ Button link=true href='${MESSENGER_PATH}' label='Создать новый чат' size='small'}}}

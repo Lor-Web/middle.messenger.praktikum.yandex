@@ -41,6 +41,15 @@
     font: $title-medium;
     color: $neutral-1;
   }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 8px;
+  }
 }
 
 .user-search {

@@ -8,16 +8,23 @@ export interface ButtonProps extends BlockOwnProps {
   type?: HTMLButtonElement['type'];
   widthFull?: boolean;
   icon?: string;
-  transparent?: boolean;
   disabled?: boolean;
   label?: string;
   size?: 'small';
+  variant?: 'primary' | 'delete' | 'transparent';
 }
 
 export default class Button extends Block<ButtonProps> {
   static componentName = 'Button';
 
   private _router = new Router();
+
+  constructor(props: ButtonProps = {} as ButtonProps) {
+    super({
+      variant: 'primary',
+      ...props,
+    });
+  }
 
   protected events = {
     click: (e: Event) => {
@@ -36,7 +43,7 @@ export default class Button extends Block<ButtonProps> {
           {{#if widthFull}}button_width_full{{/if}} 
           {{#if icon}}button_icon{{/if}}
           {{#if size}}button_size_{{size}}{{/if}}
-          {{#if transparent}}button_transparent{{/if}}
+          {{#if variant}}button_variant_{{variant}}{{/if}}
         " 
         {{#if disabled}}disabled{{/if}}
       >
@@ -54,7 +61,7 @@ export default class Button extends Block<ButtonProps> {
           {{#if widthFull}}button_width_full{{/if}} 
           {{#if icon}}button_icon{{/if}}
           {{#if size}}button_size_{{size}}{{/if}}
-          {{#if transparent}}button_transparent{{/if}}
+          {{#if variant}}button_variant_{{variant}}{{/if}}
         " 
         type="{{#if type}}{{type}}{{else}}button{{/if}}"
         {{#if disabled}}disabled{{/if}}

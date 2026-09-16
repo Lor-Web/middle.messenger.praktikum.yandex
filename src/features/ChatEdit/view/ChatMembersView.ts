@@ -33,6 +33,12 @@ export default class ChatMembersView extends Block<ChatMembersViewProps> {
     return this.props.chatId;
   }
 
+  public getCurrentUserId(): number | undefined {
+    const currentUserId = Number(this.props.currentUserId);
+
+    return Number.isFinite(currentUserId) ? currentUserId : undefined;
+  }
+
   protected template = `
     <div class="user-search">
       {{{ Input
@@ -45,6 +51,7 @@ export default class ChatMembersView extends Block<ChatMembersViewProps> {
       {{{ Button
         label="Удалить пользователей"
         type="button"
+        variant="delete"
         ref="deleteUsersBtn"
         disabled=deleteDisabled
       }}}

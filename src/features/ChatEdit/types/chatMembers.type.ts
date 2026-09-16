@@ -19,4 +19,5 @@ export interface ChatMembersViewProps extends BlockOwnProps {
   didSearch?: boolean;
   hasUsers?: boolean;
   deleteDisabled?: boolean;
+  currentUserId?: number | string;
 }

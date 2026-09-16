@@ -24,12 +24,6 @@
     background-color: $primary-4;
   }
 
-  &[disabled] {
-    color: $neutral-7;
-    background-color: $neutral-95;
-    cursor: not-allowed;
-  }
-
   &_width_full {
     width: 100%;
   }
@@ -42,7 +36,39 @@
     }
   }
 
-  &_transparent {
+  &_size_small {
+    padding: 8px 16px;
+    font: $label-small;
+    min-height: 32px;
+  }
+
+  &_variant_primary {
+    background-color: $primary-5;
+
+    &:hover {
+      background-color: $primary-6;
+    }
+
+    &:active,
+    &:focus-visible {
+      background-color: $primary-4;
+    }
+  }
+
+  &_variant_delete {
+    background-color: $error-5;
+
+    &:hover {
+      background-color: $error-6;
+    }
+
+    &:active,
+    &:focus-visible {
+      background-color: $error-4;
+    }
+  }
+
+  &_variant_transparent {
     background-color: transparent;
     color: $primary-5;
 
@@ -61,9 +87,9 @@
     }
   }
 
-  &_size_small {
-    padding: 8px 16px;
-    font: $label-small;
-    min-height: 32px;
+  &[disabled] {
+    color: $neutral-7;
+    background-color: $neutral-95;
+    cursor: not-allowed;
   }
 }
