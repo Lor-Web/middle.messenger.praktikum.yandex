@@ -1,5 +1,6 @@
 import GlobalStore from '@/core/GlobalStore/GlobalStore';
 import UserApi from '@/shared/api/UserApi';
+import { blurActiveElement } from '@/shared/lib/blurActiveElement';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
 
 import type { ProfileFormModel } from '../models/ProfileFormModel';
@@ -97,6 +98,7 @@ export default class ProfileFormController extends UserApi {
 
   private handleSubmitForm(e: Event) {
     e.preventDefault();
+    blurActiveElement();
     this.syncValuesFromView();
 
     const shouldEditProfile = this.model.hasProfileChanged();

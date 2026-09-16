@@ -2,6 +2,7 @@ import { loadAppData } from '@/core/GlobalStore/load';
 import Router from '@/core/Router/Router';
 import AuthApi from '@/shared/api/AuthApi';
 import { AUTH_PATH, MESSENGER_PATH } from '@/shared/constants/paths.constant';
+import { blurActiveElement } from '@/shared/lib/blurActiveElement';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
 
 import type { RegisterFormModel } from '../models/RegisterFormModel';
@@ -106,16 +107,9 @@ export default class RegisterFormController extends AuthApi {
 
   private handleSubmitForm(e: Event) {
     e.preventDefault();
-
-    this.view.children.forEach((child) => {
-      const input = child.getRef('input');
-
-      if (input instanceof HTMLInputElement) {
-        const field = input.name as keyof RegisterFormValues;
-        this.model.validateField(field);
-        this.updateView();
-      }
-    });
+    blurActiveElement();
+    this.syncValuesFromView();
+    this.updateView();
 
     if (this.model.validate()) {
       console.log('REGISTER FORM VALUES:', this.model.getValues());
@@ -140,6 +134,18 @@ export default class RegisterFormController extends AuthApi {
     this.model.setValue(field, input.value);
     this.model.validateField(field);
     this.updateView();
+  }
+
+  private syncValuesFromView(): void {
+    this.view.children.forEach((child) => {
+      const input = child.getRef('input');
+
+      if (input instanceof HTMLInputElement) {
+        const field = input.name as keyof RegisterFormValues;
+        this.model.setValue(field, input.value);
+        this.model.validateField(field);
+      }
+    });
   }
 
   private updateView(): void {

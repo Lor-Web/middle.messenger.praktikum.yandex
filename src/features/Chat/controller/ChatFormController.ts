@@ -1,3 +1,4 @@
+import { blurActiveElement } from '@/shared/lib/blurActiveElement';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
 
 import type { ChatFormModel } from '../models/ChatFormModel';
@@ -73,16 +74,9 @@ export default class ChatFormController {
 
   private handleSubmitForm(e: Event) {
     e.preventDefault();
-
-    this.view.children.forEach((child) => {
-      const textarea = child.getRef('textarea');
-
-      if (textarea instanceof HTMLTextAreaElement) {
-        const field = textarea.name as keyof ChatFormValues;
-        this.model.validateField(field);
-        this.updateView();
-      }
-    });
+    blurActiveElement();
+    this.syncValuesFromView();
+    this.updateView();
     if (this.model.validate()) {
       console.log(this.model.getValues());
     }
@@ -93,6 +87,18 @@ export default class ChatFormController {
     this.model.setValue(field, textarea.value);
     this.model.validateField(field);
     this.updateView();
+  }
+
+  private syncValuesFromView(): void {
+    this.view.children.forEach((child) => {
+      const textarea = child.getRef('textarea');
+
+      if (textarea instanceof HTMLTextAreaElement) {
+        const field = textarea.name as keyof ChatFormValues;
+        this.model.setValue(field, textarea.value);
+        this.model.validateField(field);
+      }
+    });
   }
 
   private updateView(): void {

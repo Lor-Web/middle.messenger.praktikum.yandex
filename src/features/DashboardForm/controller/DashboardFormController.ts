@@ -1,5 +1,6 @@
 import GlobalStore from '@/core/GlobalStore/GlobalStore';
 import ChatsApi from '@/shared/api/ChatsApi';
+import { blurActiveElement } from '@/shared/lib/blurActiveElement';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
 
 import type { DashboardFormModel } from '../models/DashboardFormModel';
@@ -77,16 +78,9 @@ export default class DashboardFormController extends ChatsApi {
 
   private handleSubmitForm(e: Event) {
     e.preventDefault();
-
-    this.view.children.forEach((child) => {
-      const input = child.getRef('input');
-
-      if (input instanceof HTMLInputElement) {
-        const field = input.name as keyof DashboardFormValues;
-        this.model.validateField(field);
-        this.updateView();
-      }
-    });
+    blurActiveElement();
+    this.syncValuesFromView();
+    this.updateView();
 
     if (this.model.validate()) {
       this.createChat({ title: this.model.getValues().chatName })
@@ -109,6 +103,18 @@ export default class DashboardFormController extends ChatsApi {
     this.model.setValue(field, input.value);
     this.model.validateField(field);
     this.updateView();
+  }
+
+  private syncValuesFromView(): void {
+    this.view.children.forEach((child) => {
+      const input = child.getRef('input');
+
+      if (input instanceof HTMLInputElement) {
+        const field = input.name as keyof DashboardFormValues;
+        this.model.setValue(field, input.value);
+        this.model.validateField(field);
+      }
+    });
   }
 
   private updateView(): void {
