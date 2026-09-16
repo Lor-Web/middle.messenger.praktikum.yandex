@@ -27,3 +27,21 @@ export type ChatsResponse = Chat[];
 
 export type CreateChatRequest = { title: string };
 export type CreateChatResponse = { id: number };
+
+export type AddUserToChatRequest = { users: number[]; chatId: number };
+
+export type GetChatUsersRequest = {
+  offset?: number;
+  limit?: number;
+  name?: string;
+  email?: string;
+};
+export type ChatUserResponse = {
+  id: number;
+  first_name: string;
+  second_name: string;
+  display_name: string;
+  login: string;
+  avatar: string;
+  role: string;
+};

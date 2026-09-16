@@ -12,18 +12,18 @@ export default class ChatView extends Block<ChatViewProps> {
   private controller: ChatController | null = null;
   private _router = new Router();
 
-
   constructor(props: ChatViewProps = {} as ChatViewProps) {
     super({
       ...props,
-      chat:
-        props.chat ?? props.chats?.find((chat) => String(chat.id) === String(props.chatId)),
+      chat: props.chat ?? props.chats?.find((chat) => String(chat.id) === String(props.chatId)),
     });
   }
 
   protected componentDidMount(): void {
     this.controller = new ChatController(this);
     this.controller.init();
+
+    console.log(this.props);
 
     const editBtn = this.getRef('editBtn');
     if (editBtn instanceof HTMLButtonElement) {
@@ -37,7 +37,7 @@ export default class ChatView extends Block<ChatViewProps> {
           }
         },
       });
-  }
+    }
   }
 
   protected componentWillUnmount(): void {

@@ -2,10 +2,13 @@ import HTTPTransport from '@/core/Http/HttpTransport';
 
 import { host } from '../constants/api.constant';
 import type {
+  AddUserToChatRequest,
   ChatsRequest,
   ChatsResponse,
+  ChatUserResponse,
   CreateChatRequest,
   CreateChatResponse,
+  GetChatUsersRequest,
 } from '../models/api/chats.type';
 
 export default class ChatsApi {
@@ -27,6 +30,28 @@ export default class ChatsApi {
   public chats(request: ChatsRequest) {
     return this._http.get<ChatsRequest, ChatsResponse>({
       url: this.url,
+      options: {
+        credentials: 'include',
+        mode: 'cors',
+        data: request,
+      },
+    });
+  }
+
+  public addUser(request: AddUserToChatRequest) {
+    return this._http.put<AddUserToChatRequest>({
+      url: this.url + 'users',
+      options: {
+        credentials: 'include',
+        mode: 'cors',
+        data: request,
+      },
+    });
+  }
+
+  public chatUsers(chatId: number, request: GetChatUsersRequest) {
+    return this._http.get<GetChatUsersRequest, ChatUserResponse[]>({
+      url: this.url + chatId + '/users',
       options: {
         credentials: 'include',
         mode: 'cors',

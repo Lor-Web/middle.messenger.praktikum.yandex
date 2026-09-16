@@ -6,6 +6,7 @@ export class UserSearchModel {
   private state: UserSearchState = {
     query: '',
     users: [],
+    selectedIds: [],
     didSearch: false,
   };
 
@@ -39,5 +40,26 @@ export class UserSearchModel {
 
   public setDidSearch(didSearch: boolean): void {
     this.state.didSearch = didSearch;
+  }
+
+  public getSelectedIds(): number[] {
+    return this.state.selectedIds;
+  }
+
+  public isSelected(userId: number): boolean {
+    return this.state.selectedIds.includes(userId);
+  }
+
+  public toggleSelected(userId: number): void {
+    if (this.isSelected(userId)) {
+      this.state.selectedIds = this.state.selectedIds.filter((id) => id !== userId);
+      return;
+    }
+
+    this.state.selectedIds = [...this.state.selectedIds, userId];
+  }
+
+  public clearSelected(): void {
+    this.state.selectedIds = [];
   }
 }

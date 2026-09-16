@@ -10,6 +10,13 @@ export default class UserSearchView extends Block<UserSearchViewProps> {
   private model: UserSearchModel | null = null;
   private controller: UserSearchController | null = null;
 
+  constructor(props: UserSearchViewProps = {} as UserSearchViewProps) {
+    super({
+      addDisabled: true,
+      ...props,
+    });
+  }
+
   protected componentDidMount(): void {
     if (!this.model) {
       this.model = new UserSearchModel();
@@ -33,6 +40,13 @@ export default class UserSearchView extends Block<UserSearchViewProps> {
         label="Логин"
         placeholder="Логин пользователя"
         value=query
+      }}}
+
+      {{{ Button
+        label="Добавить пользователей"
+        type="button"
+        ref="addUsersBtn"
+        disabled=addDisabled
       }}}
 
       {{#if error}}
