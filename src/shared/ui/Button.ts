@@ -10,6 +10,8 @@ export interface ButtonProps extends BlockOwnProps {
   icon?: string;
   transparent?: boolean;
   disabled?: boolean;
+  label?: string;
+  size?: 'small';
 }
 
 export default class Button extends Block<ButtonProps> {
@@ -33,6 +35,7 @@ export default class Button extends Block<ButtonProps> {
           button 
           {{#if widthFull}}button_width_full{{/if}} 
           {{#if icon}}button_icon{{/if}}
+          {{#if size}}button_size_{{size}}{{/if}}
           {{#if transparent}}button_transparent{{/if}}
         " 
         {{#if disabled}}disabled{{/if}}
@@ -50,6 +53,7 @@ export default class Button extends Block<ButtonProps> {
           button 
           {{#if widthFull}}button_width_full{{/if}} 
           {{#if icon}}button_icon{{/if}}
+          {{#if size}}button_size_{{size}}{{/if}}
           {{#if transparent}}button_transparent{{/if}}
         " 
         type="{{#if type}}{{type}}{{else}}button{{/if}}"

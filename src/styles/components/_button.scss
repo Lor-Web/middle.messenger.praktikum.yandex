@@ -15,6 +15,7 @@
   transition: all 0.2s ease;
 
   &:hover {
+    color: $neutral-98;
     background-color: $primary-6;
   }
 
@@ -43,9 +44,11 @@
 
   &_transparent {
     background-color: transparent;
+    color: $primary-5;
 
     &:hover {
       background-color: $neutral-9;
+      color: $primary-2;
     }
 
     &:active,
@@ -56,5 +59,11 @@
     path {
       fill: $neutral-1;
     }
+  }
+
+  &_size_small {
+    padding: 8px 16px;
+    font: $label-small;
+    min-height: 32px;
   }
 }

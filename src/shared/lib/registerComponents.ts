@@ -4,6 +4,9 @@ import registerComponent from '@/core/registerComponent/registerComponent';
 import AuthFormView from '@/features/AuthForm/view/AuthFormView';
 import ChatFormView from '@/features/Chat/view/ChatFormView';
 import ChatView from '@/features/Chat/view/ChatView';
+import ChatEditView from '@/features/ChatEdit/view/ChatEditView';
+import UserSearchItem from '@/features/ChatEdit/view/UserSearchItem';
+import UserSearchView from '@/features/ChatEdit/view/UserSearchView';
 import DashboardFormView from '@/features/DashboardForm/view/DashboardFormView';
 import ProfileFormView from '@/features/ProfileForm/view/ProfileFormView';
 import RegisterFormView from '@/features/RegisterForm/view/RegisterFormView';
@@ -28,6 +31,9 @@ const FEATURES = [
   RegisterFormView,
   ChatView,
   ChatFormView,
+  ChatEditView,
+  UserSearchView,
+  UserSearchItem,
   ProfileFormView,
   DashboardFormView,
 ];

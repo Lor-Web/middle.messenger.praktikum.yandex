@@ -4,7 +4,8 @@ import { host } from '../constants/api.constant';
 import type {
   EditPasswordRequest,
   EditProfileRequest,
-  EditProfileResponse,
+  SearchUsersRequest,
+  UserResponse,
 } from '../models/api/user.type';
 
 export default class UserApi {
@@ -12,8 +13,19 @@ export default class UserApi {
 
   private _http = new HTTPTransport();
 
+  public searchUsers(request: SearchUsersRequest) {
+    return this._http.post<SearchUsersRequest, UserResponse[]>({
+      url: this.url + 'search',
+      options: {
+        credentials: 'include',
+        mode: 'cors',
+        data: request,
+      },
+    });
+  }
+
   public editProfile(request: EditProfileRequest) {
-    return this._http.put<EditProfileRequest, EditProfileResponse>({
+    return this._http.put<EditProfileRequest, UserResponse>({
       url: this.url + 'profile',
       options: {
         credentials: 'include',
@@ -38,7 +50,7 @@ export default class UserApi {
     const data = new FormData();
     data.append('avatar', avatar);
 
-    return this._http.put<FormData, EditProfileResponse>({
+    return this._http.put<FormData, UserResponse>({
       url: this.url + 'profile/avatar',
       options: {
         credentials: 'include',

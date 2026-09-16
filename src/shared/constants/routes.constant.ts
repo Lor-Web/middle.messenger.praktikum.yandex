@@ -1,4 +1,5 @@
 import AuthPage from '@/pages/AuthPage';
+import ChatEditPage from '@/pages/ChatEditPage';
 import ChatPage from '@/pages/ChatPage';
 import DashboardPage from '@/pages/DashboardPage';
 import ErrorPage from '@/pages/ErrorPage';
@@ -44,9 +45,9 @@ export const ROUTES: Route[] = [
           {
             title: 'Редактирование чата',
             path: EDIT_PATH,
-            block: ChatPage,
-          }
-        ]
+            block: ChatEditPage,
+          },
+        ],
       },
     ],
   },

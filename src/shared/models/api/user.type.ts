@@ -7,7 +7,7 @@ export type EditProfileRequest = {
   phone: string;
 };
 
-export type EditProfileResponse = {
+export type UserResponse = {
   id: number;
   first_name: string;
   second_name: string;
@@ -21,4 +21,8 @@ export type EditProfileResponse = {
 export type EditPasswordRequest = {
   oldPassword: string;
   newPassword: string;
+};
+
+export type SearchUsersRequest = {
+  login: string;
 };
