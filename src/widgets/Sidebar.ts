@@ -3,7 +3,7 @@ import Block from '@/core/Block/Block';
 import GlobalStore from '@/core/GlobalStore/GlobalStore';
 import Router from '@/core/Router/Router';
 import AuthApi from '@/shared/api/AuthApi';
-import { AUTH_PATH, SETTINGS_PATH } from '@/shared/constants/paths.constant';
+import { AUTH_PATH, MESSENGER_PATH, SETTINGS_PATH } from '@/shared/constants/paths.constant';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
 import type { UserResponse } from '@/shared/models/api/auth.type';
 import type { Chat } from '@/shared/models/api/chats.type';
@@ -67,8 +67,10 @@ export default class Sidebar extends Block<SidebarProps> {
           {{{ Button link=true icon='logout' transparent=true ref='logoutBtn' }}}
         </div>
 
+        {{{ Button link=true href='${MESSENGER_PATH}' label='Создать новыт чат' }}}
         {{{ Input placeholder="Поиск" fill="true" name='search' }}}
       </header>
+
 
       <nav class="sidebar__chat-list">
         {{#each chats}}
