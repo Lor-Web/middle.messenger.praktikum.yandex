@@ -8,6 +8,7 @@ import SettingsPage from '@/pages/SettingsPage';
 import type { Route } from '../models/app.type';
 import {
   AUTH_PATH,
+  EDIT_PATH,
   ID_PATH,
   MESSENGER_PATH,
   NOT_FOUND_PATH,
@@ -39,6 +40,13 @@ export const ROUTES: Route[] = [
         title: 'Чат',
         path: ID_PATH,
         block: ChatPage,
+        children: [
+          {
+            title: 'Редактирование чата',
+            path: EDIT_PATH,
+            block: ChatPage,
+          }
+        ]
       },
     ],
   },
