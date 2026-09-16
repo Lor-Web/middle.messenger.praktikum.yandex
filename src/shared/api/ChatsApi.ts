@@ -8,6 +8,7 @@ import type {
   ChatUserResponse,
   CreateChatRequest,
   CreateChatResponse,
+  DeleteUsersRequest,
   GetChatUsersRequest,
 } from '../models/api/chats.type';
 
@@ -52,6 +53,17 @@ export default class ChatsApi {
   public chatUsers(chatId: number, request: GetChatUsersRequest) {
     return this._http.get<GetChatUsersRequest, ChatUserResponse[]>({
       url: this.url + chatId + '/users',
+      options: {
+        credentials: 'include',
+        mode: 'cors',
+        data: request,
+      },
+    });
+  }
+
+  public deleteUsers(request: DeleteUsersRequest) {
+    return this._http.delete<DeleteUsersRequest>({
+      url: this.url + 'users',
       options: {
         credentials: 'include',
         mode: 'cors',

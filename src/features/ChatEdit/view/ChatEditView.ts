@@ -25,10 +25,17 @@ export default class ChatEditView extends Block<ChatEditViewProps> {
           <h1 class="chat-edit__title">{{chat.title}}</h1>
         </header>
 
-        <section class="chat-edit__section">
-          <h2 class="chat-edit__section-title">Добавить пользователя</h2>
-          {{{ UserSearchView chatId=chatId }}}
-        </section>
+        <div class="chat-edit__sections">
+          <section class="chat-edit__section">
+            <h2 class="chat-edit__section-title">Добавить пользователя</h2>
+            {{{ UserSearchView chatId=chatId }}}
+          </section>
+
+          <section class="chat-edit__section">
+            <h2 class="chat-edit__section-title">Пользователи чата</h2>
+            {{{ ChatMembersView chatId=chatId }}}
+          </section>
+        </div>
       </div>
     {{else}}
       <div class="dashboard-window">

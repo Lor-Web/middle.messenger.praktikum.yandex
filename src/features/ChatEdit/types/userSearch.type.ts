@@ -1,7 +1,13 @@
 import type { BlockOwnProps } from '@/core/Block/Block';
 import type { UserResponse } from '@/shared/models/api/user.type';
 
-export interface UserSearchListItem extends UserResponse {
+export interface UserSearchListItem {
+  id: number;
+  first_name: string;
+  second_name: string;
+  display_name: string;
+  login: string;
+  avatar: string;
   selected?: boolean;
 }
 

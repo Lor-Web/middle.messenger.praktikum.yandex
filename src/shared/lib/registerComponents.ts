@@ -5,6 +5,7 @@ import AuthFormView from '@/features/AuthForm/view/AuthFormView';
 import ChatFormView from '@/features/Chat/view/ChatFormView';
 import ChatView from '@/features/Chat/view/ChatView';
 import ChatEditView from '@/features/ChatEdit/view/ChatEditView';
+import ChatMembersView from '@/features/ChatEdit/view/ChatMembersView';
 import UserSearchItem from '@/features/ChatEdit/view/UserSearchItem';
 import UserSearchView from '@/features/ChatEdit/view/UserSearchView';
 import DashboardFormView from '@/features/DashboardForm/view/DashboardFormView';
@@ -32,6 +33,7 @@ const FEATURES = [
   ChatView,
   ChatFormView,
   ChatEditView,
+  ChatMembersView,
   UserSearchView,
   UserSearchItem,
   ProfileFormView,

@@ -45,3 +45,5 @@ export type ChatUserResponse = {
   avatar: string;
   role: string;
 };
+
+export type DeleteUsersRequest = { users: number[]; chatId: number };
