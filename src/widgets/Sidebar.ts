@@ -67,7 +67,7 @@ export default class Sidebar extends Block<SidebarProps> {
           {{{ Button link=true icon='logout' transparent=true ref='logoutBtn' }}}
         </div>
 
-        {{{ Button link=true href='${MESSENGER_PATH}' label='Создать новыт чат' }}}
+        {{{ Button link=true href='${MESSENGER_PATH}' label='Создать новый чат' }}}
         {{{ Input placeholder="Поиск" fill="true" name='search' }}}
       </header>
 
