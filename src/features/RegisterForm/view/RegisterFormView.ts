@@ -1,5 +1,7 @@
-import Block, { type BlockOwnProps } from '../../../core/Block/Block';
-import type { FormErrors } from '../../../shared/models/form/form.type';
+import type { BlockOwnProps } from '@/core/Block/Block';
+import Block from '@/core/Block/Block';
+import type { FormErrors } from '@/shared/models/form/form.type';
+
 import RegisterFormController from '../controller/RegisterFormController';
 import { RegisterFormModel } from '../models/RegisterFormModel';
 import type { RegisterFormValues } from '../types/registerForm.type';
@@ -42,8 +44,11 @@ export default class RegisterFormView extends Block<RegisterFormProps> {
         }}}
 
         <div class="auth__form-footer">
+          {{#if errors.signIn}}
+            <p class="error-text">{{errors.signIn}}</p>
+          {{/if}}
           {{{ Button label="Зарегистрироваться" widthFull="true" type='submit' }}}
-          <p class="auth__form-description">или <a href="auth">Войти</a></p>
+          <p class="auth__form-description">или <a ref="linkAuth">Войти</a></p>
         </div>
     </form>
   `;

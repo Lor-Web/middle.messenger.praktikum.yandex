@@ -1,5 +1,5 @@
-import type { BlockOwnProps } from '../../core/Block/Block';
-import Block from '../../core/Block/Block';
+import type { BlockOwnProps } from '@/core/Block/Block';
+import Block from '@/core/Block/Block';
 
 export interface CounterProps extends BlockOwnProps {
   count: number;

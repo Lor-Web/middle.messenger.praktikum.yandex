@@ -1,5 +1,6 @@
-import Block, { type BlockOwnProps } from '../../../core/Block/Block';
-import type { FormErrors } from '../../../shared/models/form/form.type';
+import Block, { type BlockOwnProps } from '@/core/Block/Block';
+import type { FormErrors } from '@/shared/models/form/form.type';
+
 import AuthFormController from '../controller/AuthFormController';
 import { AuthFormModel } from '../models/AuthFormModel';
 import type { AuthFormValues } from '../types/authForm.type';
@@ -33,8 +34,11 @@ export default class AuthFormView extends Block<AuthFormProps> {
         }}}
 
         <div class="auth__form-footer">
+          {{#if errors.signIn}}
+            <p class="error-text">{{errors.signIn}}</p>
+          {{/if}}
           {{{ Button label="Войти" widthFull="true" type='submit' }}}
-          <p class="auth__form-description">или <a href="register">Зарегистрироваться</a></p>
+          <p class="auth__form-description">или <a ref="linkRegister">Зарегистрироваться</a></p>
         </div>
     </form>
   `;

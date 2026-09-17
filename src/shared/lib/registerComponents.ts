@@ -1,16 +1,22 @@
-import type { BlockOwnProps } from '../../core/Block/Block';
-import registerComponent, {
-  type ComponentClass,
-} from '../../core/registerComponent/registerComponent';
-import AuthFormView from '../../features/AuthForm/view/AuthFormView';
-import ChatWindowFormView from '../../features/ChatWindowForm/view/ChatWindowFormView';
-import ProfileFormView from '../../features/ProfileForm/view/ProfileFormView';
-import RegisterFormView from '../../features/RegisterForm/view/RegisterFormView';
-import AuthCard from '../../widgets/AuthCard';
-import ChatWindow from '../../widgets/ChatWindow';
-import Profile from '../../widgets/Profile';
-import RegisterCard from '../../widgets/RegisterCard';
-import Sidebar from '../../widgets/Sidebar';
+import type { BlockOwnProps } from '@/core/Block/Block';
+import type { ComponentClass } from '@/core/registerComponent/registerComponent';
+import registerComponent from '@/core/registerComponent/registerComponent';
+import AuthFormView from '@/features/AuthForm/view/AuthFormView';
+import ChatFormView from '@/features/Chat/view/ChatFormView';
+import ChatView from '@/features/Chat/view/ChatView';
+import ChatEditView from '@/features/ChatEdit/view/ChatEditView';
+import ChatMembersView from '@/features/ChatEdit/view/ChatMembersView';
+import UserSearchItem from '@/features/ChatEdit/view/UserSearchItem';
+import UserSearchView from '@/features/ChatEdit/view/UserSearchView';
+import DashboardFormView from '@/features/DashboardForm/view/DashboardFormView';
+import ProfileFormView from '@/features/ProfileForm/view/ProfileFormView';
+import RegisterFormView from '@/features/RegisterForm/view/RegisterFormView';
+import AuthCard from '@/widgets/AuthCard';
+import Profile from '@/widgets/Profile';
+import RegisterCard from '@/widgets/RegisterCard';
+import Sidebar from '@/widgets/Sidebar';
+
+import Avatar from '../ui/Avatar';
 import Button from '../ui/Button';
 import ChatItem from '../ui/ChatItem';
 import Counter from '../ui/Counter';
@@ -19,9 +25,20 @@ import Input from '../ui/Input';
 import MessageItem from '../ui/MessageItem';
 import Textarea from '../ui/Texarea';
 
-const SHARED_UI = [Input, Textarea, Button, Icon, ChatItem, Counter, MessageItem];
-const WIDGETS = [AuthCard, RegisterCard, Sidebar, ChatWindow, Profile];
-const FEATURES = [AuthFormView, RegisterFormView, ChatWindowFormView, ProfileFormView];
+const SHARED_UI = [Avatar, Input, Textarea, Button, Icon, ChatItem, Counter, MessageItem];
+const WIDGETS = [AuthCard, RegisterCard, Sidebar, Profile];
+const FEATURES = [
+  AuthFormView,
+  RegisterFormView,
+  ChatView,
+  ChatFormView,
+  ChatEditView,
+  ChatMembersView,
+  UserSearchView,
+  UserSearchItem,
+  ProfileFormView,
+  DashboardFormView,
+];
 
 export const registerComponents = () => {
   const allComponents = [...SHARED_UI, ...WIDGETS, ...FEATURES] as ComponentClass<BlockOwnProps>[];

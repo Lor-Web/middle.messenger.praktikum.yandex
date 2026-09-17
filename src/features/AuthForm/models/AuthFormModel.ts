@@ -1,6 +1,7 @@
-import type { FormErrors } from '../../../shared/models/form/form.type';
-import { FormModel } from '../../../shared/models/form/FormModel';
-import { loginValidator, passwordValidator } from '../../../shared/models/form/validators';
+import type { FormErrors } from '@/shared/models/form/form.type';
+import { FormModel } from '@/shared/models/form/FormModel';
+import { loginValidator, passwordValidator } from '@/shared/models/form/validators';
+
 import type { AuthFormValues } from '../types/authForm.type';
 
 export class AuthFormModel extends FormModel<AuthFormValues> {

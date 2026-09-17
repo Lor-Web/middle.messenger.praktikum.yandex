@@ -151,4 +151,21 @@ export default abstract class Block<Props extends BlockOwnProps = object> {
     /** Вызываем метод render, обновляя представление в DOM-дереве */
     this.render();
   }
+
+  public hide() {
+    if (this.domElement) {
+      this.unmountComponent();
+      this.domElement.remove();
+    }
+  }
+
+  public show() {
+    if (this.domElement) {
+      if (!this.domElement.parentElement) {
+        document.body.appendChild(this.domElement);
+      }
+
+      this.mountComponent();
+    }
+  }
 }

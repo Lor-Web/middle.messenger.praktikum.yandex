@@ -1,0 +1,87 @@
+import HTTPTransport from '@/core/Http/HttpTransport';
+
+import { host } from '../constants/api.constant';
+import type {
+  AddUserToChatRequest,
+  ChatsRequest,
+  ChatsResponse,
+  ChatUserResponse,
+  CreateChatRequest,
+  CreateChatResponse,
+  DeleteChatRequest,
+  DeleteChatResponse,
+  DeleteUsersRequest,
+  GetChatUsersRequest,
+} from '../models/api/chats.type';
+
+export default class ChatsApi {
+  public url = `${host}chats/`;
+
+  private _http = new HTTPTransport();
+
+  public createChat(request: CreateChatRequest) {
+    return this._http.post<CreateChatRequest, CreateChatResponse>({
+      url: this.url,
+      options: {
+        credentials: 'include',
+        mode: 'cors',
+        data: request,
+      },
+    });
+  }
+
+  public chats(request: ChatsRequest) {
+    return this._http.get<ChatsRequest, ChatsResponse>({
+      url: this.url,
+      options: {
+        credentials: 'include',
+        mode: 'cors',
+        data: request,
+      },
+    });
+  }
+
+  public addUser(request: AddUserToChatRequest) {
+    return this._http.put<AddUserToChatRequest>({
+      url: this.url + 'users',
+      options: {
+        credentials: 'include',
+        mode: 'cors',
+        data: request,
+      },
+    });
+  }
+
+  public chatUsers(chatId: number, request: GetChatUsersRequest) {
+    return this._http.get<GetChatUsersRequest, ChatUserResponse[]>({
+      url: this.url + chatId + '/users',
+      options: {
+        credentials: 'include',
+        mode: 'cors',
+        data: request,
+      },
+    });
+  }
+
+  public deleteUsers(request: DeleteUsersRequest) {
+    return this._http.delete<DeleteUsersRequest>({
+      url: this.url + 'users',
+      options: {
+        credentials: 'include',
+        mode: 'cors',
+        data: request,
+      },
+    });
+  }
+
+  public deleteChat(request: DeleteChatRequest) {
+    return this._http.delete<DeleteChatRequest, DeleteChatResponse>({
+      url: this.url,
+      options: {
+        credentials: 'include',
+        mode: 'cors',
+        data: request,
+      },
+    });
+  }
+}

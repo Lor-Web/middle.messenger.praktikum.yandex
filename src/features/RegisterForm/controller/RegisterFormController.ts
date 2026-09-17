@@ -1,14 +1,24 @@
-import { DASHBOARD_PATH } from '../../../shared/costants/paths.constant';
-import { listenerForChild } from '../../../shared/lib/setListenerForChild';
+import { loadAppData } from '@/core/GlobalStore/load';
+import Router from '@/core/Router/Router';
+import AuthApi from '@/shared/api/AuthApi';
+import { AUTH_PATH, MESSENGER_PATH } from '@/shared/constants/paths.constant';
+import { blurActiveElement } from '@/shared/lib/blurActiveElement';
+import { listenerForChild } from '@/shared/lib/setListenerForChild';
+
 import type { RegisterFormModel } from '../models/RegisterFormModel';
 import type { RegisterFormValues } from '../types/registerForm.type';
 import type RegisterFormView from '../view/RegisterFormView';
 
-export default class RegisterFormController {
+export default class RegisterFormController extends AuthApi {
+  private _router: Router;
+
   constructor(
     private model: RegisterFormModel,
     private view: RegisterFormView,
-  ) {}
+  ) {
+    super();
+    this._router = new Router();
+  }
 
   init(): void {
     this.removeListeners();
@@ -17,6 +27,18 @@ export default class RegisterFormController {
 
   private attachListeners(): void {
     const form = this.view.getRef('registerForm');
+    const linkAuth = this.view.getRef('linkAuth');
+
+    if (linkAuth instanceof HTMLAnchorElement) {
+      listenerForChild.set({
+        element: linkAuth,
+        eventName: 'click',
+        eventCallback: (e: Event) => {
+          e.preventDefault();
+          this._router.go(AUTH_PATH);
+        },
+      });
+    }
 
     if (form instanceof HTMLFormElement) {
       listenerForChild.set({
@@ -45,6 +67,18 @@ export default class RegisterFormController {
 
   private removeListeners() {
     const form = this.view.getRef('profileForm');
+    const linkAuth = this.view.getRef('linkAuth');
+
+    if (linkAuth instanceof HTMLAnchorElement) {
+      listenerForChild.remove({
+        element: linkAuth,
+        eventName: 'click',
+        eventCallback: (e: Event) => {
+          e.preventDefault();
+          this._router.go(AUTH_PATH);
+        },
+      });
+    }
 
     if (form instanceof HTMLFormElement) {
       listenerForChild.remove({
@@ -73,20 +107,25 @@ export default class RegisterFormController {
 
   private handleSubmitForm(e: Event) {
     e.preventDefault();
-
-    this.view.children.forEach((child) => {
-      const input = child.getRef('input');
-
-      if (input instanceof HTMLInputElement) {
-        const field = input.name as keyof RegisterFormValues;
-        this.model.validateField(field);
-        this.updateView();
-      }
-    });
+    blurActiveElement();
+    this.syncValuesFromView();
+    this.updateView();
 
     if (this.model.validate()) {
-      console.log(this.model.getValues());
-      window.location.pathname = `/${DASHBOARD_PATH}`;
+      console.log('REGISTER FORM VALUES:', this.model.getValues());
+
+      this.signUp(this.model.getValues())
+        .then(() => loadAppData())
+        .then(() => {
+          this._router.go(MESSENGER_PATH);
+        })
+        .catch((e) => {
+          const error = e.response;
+          this.view.setProps({
+            values: this.model.getValues(),
+            errors: { ...this.model.getErrors(), signUp: error },
+          });
+        });
     }
   }
 
@@ -95,6 +134,18 @@ export default class RegisterFormController {
     this.model.setValue(field, input.value);
     this.model.validateField(field);
     this.updateView();
+  }
+
+  private syncValuesFromView(): void {
+    this.view.children.forEach((child) => {
+      const input = child.getRef('input');
+
+      if (input instanceof HTMLInputElement) {
+        const field = input.name as keyof RegisterFormValues;
+        this.model.setValue(field, input.value);
+        this.model.validateField(field);
+      }
+    });
   }
 
   private updateView(): void {

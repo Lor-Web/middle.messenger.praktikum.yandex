@@ -1,13 +1,19 @@
-import { listenerForChild } from '../../../shared/lib/setListenerForChild';
+import GlobalStore from '@/core/GlobalStore/GlobalStore';
+import UserApi from '@/shared/api/UserApi';
+import { blurActiveElement } from '@/shared/lib/blurActiveElement';
+import { listenerForChild } from '@/shared/lib/setListenerForChild';
+
 import type { ProfileFormModel } from '../models/ProfileFormModel';
-import type { ProfileFormValues } from '../types/profileForm.type';
+import type { ProfileFormErrors, ProfileFormValues } from '../types/profileForm.type';
 import type ProfileFormView from '../view/ProfileFormView';
 
-export default class ProfileFormController {
+export default class ProfileFormController extends UserApi {
   constructor(
     private model: ProfileFormModel,
     private view: ProfileFormView,
-  ) {}
+  ) {
+    super();
+  }
 
   init(): void {
     this.removeListeners();
@@ -31,13 +37,23 @@ export default class ProfileFormController {
       const input = child.getRef('input');
 
       if (input instanceof HTMLInputElement) {
-        listenerForChild.set({
-          element: input,
-          eventName: 'blur',
-          eventCallback: () => {
-            this.handleBlur(input);
-          },
-        });
+        if (input.type === 'file') {
+          listenerForChild.set({
+            element: input,
+            eventName: 'change',
+            eventCallback: () => {
+              this.handleAvatarChange(input);
+            },
+          });
+        } else {
+          listenerForChild.set({
+            element: input,
+            eventName: 'blur',
+            eventCallback: () => {
+              this.handleBlur(input);
+            },
+          });
+        }
       }
     });
   }
@@ -59,40 +75,160 @@ export default class ProfileFormController {
       const input = child.getRef('input');
 
       if (input instanceof HTMLInputElement) {
-        listenerForChild.remove({
-          element: input,
-          eventName: 'blur',
-          eventCallback: () => {
-            this.handleBlur(input);
-          },
-        });
+        if (input.type === 'file') {
+          listenerForChild.remove({
+            element: input,
+            eventName: 'change',
+            eventCallback: () => {
+              this.handleAvatarChange(input);
+            },
+          });
+        } else {
+          listenerForChild.remove({
+            element: input,
+            eventName: 'blur',
+            eventCallback: () => {
+              this.handleBlur(input);
+            },
+          });
+        }
       }
     });
   }
 
   private handleSubmitForm(e: Event) {
     e.preventDefault();
+    blurActiveElement();
+    this.syncValuesFromView();
 
-    this.view.children.forEach((child) => {
-      const input = child.getRef('input');
+    const shouldEditProfile = this.model.hasProfileChanged();
+    const shouldEditPassword = this.model.hasPasswordsFilled();
 
-      if (input instanceof HTMLInputElement) {
-        const field = input.name as keyof ProfileFormValues;
-        this.model.validateField(field);
-        this.updateView();
-      }
-    });
+    let isProfileValid = true;
+    let isPasswordValid = true;
 
-    if (this.model.validate()) {
-      console.log(this.model.getValues());
+    if (shouldEditProfile) {
+      isProfileValid = this.model.validateProfile();
+    } else {
+      this.model.clearProfileErrors();
     }
+
+    if (shouldEditPassword) {
+      isPasswordValid = this.model.validatePassword();
+    } else {
+      this.model.clearPasswordErrors();
+    }
+
+    if (!isProfileValid || !isPasswordValid) {
+      this.updateView();
+      return;
+    }
+
+    const requests: Promise<void>[] = [];
+    const nextValues: ProfileFormValues = { ...this.model.getValues() };
+    const nextErrors: ProfileFormErrors = { ...this.model.getErrors() };
+    let nextUser = this.view.getUser();
+
+    if (shouldEditProfile) {
+      requests.push(
+        this.editProfile(this.model.getProfileRequest())
+          .then((user) => {
+            nextUser = user;
+            nextErrors.editProfile = undefined;
+          })
+          .catch((error: { response?: string }) => {
+            nextErrors.editProfile = error.response;
+          }),
+      );
+    }
+
+    if (shouldEditPassword) {
+      requests.push(
+        this.editPassword(this.model.getPasswordRequest())
+          .then(() => {
+            nextValues.old_password = '';
+            nextValues.new_password = '';
+            nextErrors.old_password = undefined;
+            nextErrors.new_password = undefined;
+            nextErrors.editPassword = undefined;
+          })
+          .catch((error: { response?: string }) => {
+            nextErrors.editPassword = error.response;
+          }),
+      );
+    }
+
+    if (requests.length === 0) {
+      this.updateView();
+      return;
+    }
+
+    Promise.all(requests).then(() => {
+      if (nextUser !== this.view.getUser()) {
+        GlobalStore.setState('user', nextUser);
+      }
+
+      this.view.setProps({
+        user: nextUser,
+        values: nextValues,
+        errors: nextErrors,
+      });
+    });
+  }
+
+  private handleAvatarChange(input: HTMLInputElement): void {
+    const file = input.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    this.editAvatar(file)
+      .then((user) => {
+        GlobalStore.setState('user', user);
+        this.view.setProps({
+          user,
+          values: this.model.getValues(),
+          errors: { ...this.model.getErrors(), editAvatar: undefined },
+        });
+      })
+      .catch((error: { response?: string }) => {
+        this.view.setProps({
+          values: this.model.getValues(),
+          errors: { ...this.model.getErrors(), editAvatar: error.response },
+        });
+      });
   }
 
   private handleBlur(input: HTMLInputElement): void {
-    const field = input.name as keyof ProfileFormValues;
+    if (input.type === 'file' || !this.model.isEditableField(input.name)) {
+      return;
+    }
+
+    const field = input.name;
     this.model.setValue(field, input.value);
-    this.model.validateField(field);
+
+    if (this.model.shouldValidateField(field)) {
+      this.model.validateField(field);
+    } else {
+      this.model.clearFieldError(field);
+    }
+
     this.updateView();
+  }
+
+  private syncValuesFromView(): void {
+    this.view.children.forEach((child) => {
+      const input = child.getRef('input');
+
+      if (!(input instanceof HTMLInputElement) || input.type === 'file') {
+        return;
+      }
+
+      if (this.model.isEditableField(input.name)) {
+        this.model.setValue(input.name, input.value);
+      }
+    });
   }
 
   private updateView(): void {

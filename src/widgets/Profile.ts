@@ -1,8 +1,9 @@
-import Block, { type BlockOwnProps } from '../core/Block/Block';
-import type { User } from '../shared/models/base.type';
+import type { BlockOwnProps } from '@/core/Block/Block';
+import Block from '@/core/Block/Block';
+import type { UserResponse } from '@/shared/models/api/auth.type';
 
 export interface ProfileProps extends BlockOwnProps {
-  user: User;
+  user: UserResponse;
 }
 
 export default class Profile extends Block {
@@ -15,11 +16,6 @@ export default class Profile extends Block {
       </header>
 
       <section class="profile__data">
-        <img
-          class="avatar avatar_large"
-          src="{{ user.avatar }}"
-        />
-
         {{{ ProfileFormView user=user }}}
       </section>
     </div>

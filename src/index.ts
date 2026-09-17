@@ -1,5 +1,9 @@
-import App from './core/App/App';
-import { ERRORS_ROUTES, ROUTES } from './shared/costants/routes.constant';
+import Router from './core/Router/Router';
+import { registerComponents } from './shared/lib/registerComponents';
+import { registerHelpers } from './shared/lib/registerHelpers';
 
-const app = new App({ title: 'Практикум Чат', routes: ROUTES, errorRoutes: ERRORS_ROUTES });
-app.init();
+registerHelpers();
+registerComponents();
+
+const router = new Router();
+router.start();

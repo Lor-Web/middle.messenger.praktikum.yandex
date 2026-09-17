@@ -1,0 +1,28 @@
+import type { BlockOwnProps } from '@/core/Block/Block';
+import Block from '@/core/Block/Block';
+import getResourceUrl from '@/shared/helpers/getResourceUrl';
+
+export interface AvatarProps extends BlockOwnProps {
+  alt?: string;
+  size?: 'large' | 'small' | 'medium';
+  src?: string;
+}
+
+export default class Avatar extends Block<AvatarProps> {
+  static componentName = 'Avatar';
+
+  constructor(props: AvatarProps = {} as AvatarProps) {
+    super({
+      ...props,
+      src: getResourceUrl(props.src),
+    });
+  }
+
+  protected template = `
+    <img 
+      class="avatar {{#if size}}avatar_{{size}}{{/if}}" 
+      src="{{#if src}}{{src}}{{else}}/no-avatar.webp{{/if}}" 
+      alt="{{alt}}" 
+    />
+  `;
+}

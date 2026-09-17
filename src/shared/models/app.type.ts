@@ -1,11 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type Block from '../../core/Block/Block';
-import type { BlockOwnProps } from '../../core/Block/Block';
+
+import type Block from '@/core/Block/Block';
+import type { BlockOwnProps } from '@/core/Block/Block';
 
 export type BlockClass<Props extends BlockOwnProps = BlockOwnProps> = {
   new (props?: Props): Block<Props>;
   componentName?: string;
 };
+
+export type RouteAccess = 'guest' | 'public' | 'protected';
 
 export type Route = {
   title?: string;
@@ -16,14 +19,6 @@ export type Route = {
    */
   block: BlockClass<any>;
   props?: Record<string, unknown>;
+  children?: Route[];
+  access?: RouteAccess;
 };
-
-export interface ErrorRoute extends Route {
-  code?: number;
-}
-
-export interface AppProps {
-  title?: string;
-  routes?: Route[];
-  errorRoutes?: ErrorRoute[];
-}

@@ -1,4 +1,4 @@
-@use "../base/variables" as *;
+@use '../base/variables' as *;
 
 .button {
   padding: 12px 24px;
@@ -6,24 +6,22 @@
   justify-content: center;
   gap: 4px;
   color: $neutral-98;
+  min-height: 38px;
+  height: fit-content;
+  align-items: center;
   background-color: $primary-5;
   border-radius: 24px;
   font: $label-large;
   transition: all 0.2s ease;
 
   &:hover {
+    color: $neutral-98;
     background-color: $primary-6;
   }
 
   &:active,
   &:focus-visible {
     background-color: $primary-4;
-  }
-
-  &[disabled] {
-    color: $neutral-7;
-    background-color: $neutral-95;
-    cursor: not-allowed;
   }
 
   &_width_full {
@@ -38,11 +36,45 @@
     }
   }
 
-  &_transparent {
+  &_size_small {
+    padding: 8px 16px;
+    font: $label-small;
+    min-height: 32px;
+  }
+
+  &_variant_primary {
+    background-color: $primary-5;
+
+    &:hover {
+      background-color: $primary-6;
+    }
+
+    &:active,
+    &:focus-visible {
+      background-color: $primary-4;
+    }
+  }
+
+  &_variant_delete {
+    background-color: $error-5;
+
+    &:hover {
+      background-color: $error-6;
+    }
+
+    &:active,
+    &:focus-visible {
+      background-color: $error-4;
+    }
+  }
+
+  &_variant_transparent {
     background-color: transparent;
+    color: $primary-5;
 
     &:hover {
       background-color: $neutral-9;
+      color: $primary-2;
     }
 
     &:active,
@@ -53,5 +85,11 @@
     path {
       fill: $neutral-1;
     }
+  }
+
+  &[disabled] {
+    color: $neutral-7;
+    background-color: $neutral-95;
+    cursor: not-allowed;
   }
 }
