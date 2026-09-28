@@ -6,6 +6,8 @@ import type { ChatFormValues } from '../types/chatForm.type';
 import type ChatFormView from '../view/ChatFormView';
 
 export default class ChatFormController {
+  private ignoreBlur = false;
+
   constructor(
     private model: ChatFormModel,
     private view: ChatFormView,
@@ -103,10 +105,23 @@ export default class ChatFormController {
       return;
     }
 
+    this.ignoreBlur = true;
     messagesSocket.sendMessage(message);
     this.model.setValue('message', '');
+    this.clearMessageField();
     this.updateView();
     this.focusMessageField();
+    this.ignoreBlur = false;
+  }
+
+  private clearMessageField(): void {
+    this.view.children.forEach((child) => {
+      const textarea = child.getRef('textarea');
+
+      if (textarea instanceof HTMLTextAreaElement) {
+        textarea.value = '';
+      }
+    });
   }
 
   private focusMessageField(): void {
@@ -135,6 +150,10 @@ export default class ChatFormController {
   }
 
   private handleBlur(textarea: HTMLTextAreaElement): void {
+    if (this.ignoreBlur) {
+      return;
+    }
+
     const field = textarea.name as keyof ChatFormValues;
     this.model.setValue(field, textarea.value);
     this.model.validateField(field);

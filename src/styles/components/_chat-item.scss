@@ -3,6 +3,10 @@
 .chat-item {
   padding: 12px;
   display: flex;
+  align-items: flex-start;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   border-radius: 8px;
   cursor: pointer;
   text-decoration: none;
@@ -14,15 +18,19 @@
 
   &__avatar {
     margin-right: 12px;
+    flex-shrink: 0;
   }
 
   &__user {
     display: flex;
+    flex: 1;
     flex-direction: column;
+    min-width: 0;
 
     &-name {
       font: $title-medium;
       color: $neutral-1;
+      overflow-wrap: anywhere;
     }
 
     &-message {
@@ -32,13 +40,14 @@
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      width: 160px;
+      overflow-wrap: anywhere;
     }
   }
 
   &__info {
-    margin-left: auto;
+    margin-left: 8px;
     display: flex;
+    flex-shrink: 0;
     gap: 8px;
     flex-direction: column;
     align-items: end;

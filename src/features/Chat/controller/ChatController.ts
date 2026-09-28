@@ -1,12 +1,25 @@
 import GlobalStore from '@/core/GlobalStore/GlobalStore';
 import ChatsApi from '@/shared/api/ChatsApi';
 import type { UserResponse } from '@/shared/models/api/auth.type';
+import type { Message } from '@/shared/models/base.type';
 
 import messagesSocket from '../api/MessagesSocket';
+import {
+  enrichMessages,
+  forgetChatUsersLoad,
+  getChatUsers,
+  onChatUsers,
+  rememberChatUsers,
+  rememberCurrentUser,
+  shouldLoadChatUsers,
+  syncChatPreview,
+} from '../lib/syncChatPreview';
 import type ChatView from '../view/ChatView';
 
 export default class ChatController extends ChatsApi {
   private chatId: number | null = null;
+  private messages: Message[] = [];
+  private unsubscribeUsers: (() => void) | null = null;
 
   constructor(private view: ChatView) {
     super();
@@ -21,13 +34,25 @@ export default class ChatController extends ChatsApi {
     }
 
     this.chatId = chatId;
+    rememberCurrentUser(user);
+    this.unsubscribeUsers = onChatUsers((id, users) => {
+      if (this.chatId !== chatId || id !== chatId) {
+        return;
+      }
+
+      this.view.renderParticipants(users);
+      this.view.renderMessages(enrichMessages(this.messages));
+    });
     messagesSocket.attach(chatId, (messages) => {
       if (this.chatId !== chatId) {
         return;
       }
 
-      this.view.renderMessages(messages);
+      this.messages = messages;
+      this.view.renderMessages(enrichMessages(messages));
+      syncChatPreview(chatId, messages);
     });
+    this.loadAuthors(chatId);
 
     if (messagesSocket.isActive(chatId)) {
       return;
@@ -38,7 +63,34 @@ export default class ChatController extends ChatsApi {
 
   destroy(): void {
     this.chatId = null;
+    this.messages = [];
+    this.unsubscribeUsers?.();
+    this.unsubscribeUsers = null;
     messagesSocket.detach();
+  }
+
+  private loadAuthors(chatId: number): void {
+    const cached = getChatUsers(chatId);
+
+    if (cached) {
+      this.view.renderParticipants(cached);
+    }
+
+    if (!shouldLoadChatUsers(chatId)) {
+      return;
+    }
+
+    this.chatUsers(chatId, {})
+      .then((users) => {
+        rememberChatUsers(chatId, users);
+
+        if (this.chatId === chatId) {
+          syncChatPreview(chatId, this.messages);
+        }
+      })
+      .catch(() => {
+        forgetChatUsersLoad(chatId);
+      });
   }
 
   private openConnection(chatId: number, userId: number): void {

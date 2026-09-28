@@ -34,6 +34,8 @@ export type Message = {
   id: number;
   reading?: boolean;
   senderId: number;
+  senderName?: string;
+  senderAvatar?: string;
   message: { type: 'text' | 'image'; value: string };
   timestamp: string;
 };

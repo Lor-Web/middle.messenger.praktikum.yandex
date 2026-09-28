@@ -201,7 +201,9 @@ class MessagesSocket {
       byId.set(message.id, message);
     });
 
-    this.messages = [...byId.values()].sort((left, right) => left.id - right.id);
+    this.messages = [...byId.values()].sort(
+      (left, right) => Date.parse(left.timestamp) - Date.parse(right.timestamp),
+    );
     return added;
   }
 

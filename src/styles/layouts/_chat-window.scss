@@ -22,16 +22,24 @@
 
   &__companion {
     display: flex;
+    flex: 1;
     flex-direction: column;
+    min-width: 0;
 
     &-name {
       font: $title-large;
       color: $neutral-1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     &-status {
       font: $body-small;
       color: $neutral-5;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 

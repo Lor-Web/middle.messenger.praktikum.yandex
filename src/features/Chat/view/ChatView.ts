@@ -2,6 +2,7 @@ import Block from '@/core/Block/Block';
 import Router from '@/core/Router/Router';
 import { chatEditPath } from '@/shared/constants/paths.constant';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
+import type { ChatUserResponse } from '@/shared/models/api/chats.type';
 import type { Message } from '@/shared/models/base.type';
 import MessageItem from '@/shared/ui/MessageItem';
 
@@ -56,9 +57,6 @@ export default class ChatView extends Block<ChatViewProps> {
       return;
     }
 
-    const distanceToBottom = container.scrollHeight - container.scrollTop - container.clientHeight;
-    const stickToBottom = container.childElementCount === 0 || distanceToBottom < 80;
-
     container.replaceChildren(
       ...messages.flatMap((message) => {
         const element = new MessageItem({ message }).element();
@@ -66,9 +64,23 @@ export default class ChatView extends Block<ChatViewProps> {
       }),
     );
 
-    if (stickToBottom) {
+    requestAnimationFrame(() => {
       container.scrollTop = container.scrollHeight;
+    });
+  }
+
+  public renderParticipants(users: ChatUserResponse[]): void {
+    const element = this.getRef('participants');
+
+    if (!(element instanceof HTMLElement)) {
+      return;
     }
+
+    const names = users.map((user) => user.first_name).filter(Boolean);
+    const visibleNames = names.slice(0, 3);
+
+    element.textContent =
+      names.length > 3 ? `${visibleNames.join(', ')}...` : visibleNames.join(', ');
   }
 
   protected template = `
@@ -79,6 +91,7 @@ export default class ChatView extends Block<ChatViewProps> {
 
           <div class="chat-window__companion">
             <h3 class="chat-window__companion-name">{{chat.title}}</h3>
+            <p class="chat-window__companion-status" ref="participants"></p>
           </div>
 
           <div class="chat-window__settings">
