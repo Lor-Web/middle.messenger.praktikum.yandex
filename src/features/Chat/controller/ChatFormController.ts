@@ -1,6 +1,6 @@
-import { blurActiveElement } from '@/shared/lib/blurActiveElement';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
 
+import messagesSocket from '../api/MessagesSocket';
 import type { ChatFormModel } from '../models/ChatFormModel';
 import type { ChatFormValues } from '../types/chatForm.type';
 import type ChatFormView from '../view/ChatFormView';
@@ -29,6 +29,18 @@ export default class ChatFormController {
       });
     }
 
+    const submitBtn = this.view.getRef('submitBtn');
+
+    if (submitBtn instanceof HTMLButtonElement) {
+      listenerForChild.set({
+        element: submitBtn,
+        eventName: 'mousedown',
+        eventCallback: (event: Event) => {
+          event.preventDefault();
+        },
+      });
+    }
+
     this.view.children.forEach((child) => {
       const textarea = child.getRef('textarea');
 
@@ -38,6 +50,13 @@ export default class ChatFormController {
           eventName: 'blur',
           eventCallback: () => {
             this.handleBlur(textarea);
+          },
+        });
+        listenerForChild.set({
+          element: textarea,
+          eventName: 'keydown',
+          eventCallback: (event: Event) => {
+            this.handleMessageKeyDown(event);
           },
         });
       }
@@ -72,14 +91,47 @@ export default class ChatFormController {
     });
   }
 
-  private handleSubmitForm(e: Event) {
-    e.preventDefault();
-    blurActiveElement();
+  private handleSubmitForm(event: Event) {
+    event.preventDefault();
     this.syncValuesFromView();
-    this.updateView();
-    if (this.model.validate()) {
-      console.log('CHAT FORM VALUES:', this.model.getValues());
+
+    const message = (this.model.getValues().message ?? '').trim();
+    this.model.setValue('message', message);
+
+    if (!this.model.validate()) {
+      this.updateView();
+      return;
     }
+
+    messagesSocket.sendMessage(message);
+    this.model.setValue('message', '');
+    this.updateView();
+    this.focusMessageField();
+  }
+
+  private focusMessageField(): void {
+    this.view.children.forEach((child) => {
+      const textarea = child.getRef('textarea');
+
+      if (textarea instanceof HTMLTextAreaElement) {
+        textarea.focus();
+      }
+    });
+  }
+
+  private handleMessageKeyDown(event: Event): void {
+    if (
+      !(event instanceof KeyboardEvent) ||
+      event.key !== 'Enter' ||
+      event.shiftKey ||
+      event.repeat ||
+      event.isComposing
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    this.handleSubmitForm(event);
   }
 
   private handleBlur(textarea: HTMLTextAreaElement): void {

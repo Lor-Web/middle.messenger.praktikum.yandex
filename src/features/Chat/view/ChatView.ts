@@ -2,6 +2,8 @@ import Block from '@/core/Block/Block';
 import Router from '@/core/Router/Router';
 import { chatEditPath } from '@/shared/constants/paths.constant';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
+import type { Message } from '@/shared/models/base.type';
+import MessageItem from '@/shared/ui/MessageItem';
 
 import ChatController from '../controller/ChatController';
 import type { ChatViewProps } from '../types/chat.type';
@@ -22,8 +24,6 @@ export default class ChatView extends Block<ChatViewProps> {
   protected componentDidMount(): void {
     this.controller = new ChatController(this);
     this.controller.init();
-
-    console.log(this.props);
 
     const editBtn = this.getRef('editBtn');
     if (editBtn instanceof HTMLButtonElement) {
@@ -49,6 +49,28 @@ export default class ChatView extends Block<ChatViewProps> {
     return this.props.chatId ?? (this.props.chat ? String(this.props.chat.id) : undefined);
   }
 
+  public renderMessages(messages: Message[]): void {
+    const container = this.getRef('messages');
+
+    if (!(container instanceof HTMLElement)) {
+      return;
+    }
+
+    const distanceToBottom = container.scrollHeight - container.scrollTop - container.clientHeight;
+    const stickToBottom = container.childElementCount === 0 || distanceToBottom < 80;
+
+    container.replaceChildren(
+      ...messages.flatMap((message) => {
+        const element = new MessageItem({ message }).element();
+        return element ? [element] : [];
+      }),
+    );
+
+    if (stickToBottom) {
+      container.scrollTop = container.scrollHeight;
+    }
+  }
+
   protected template = `
     {{#if chat}}
       <div class="chat-window">
@@ -64,7 +86,7 @@ export default class ChatView extends Block<ChatViewProps> {
           </div>
         </header>
 
-        <section class="chat-window__messages"></section>
+        <section class="chat-window__messages" ref="messages"></section>
 
         <footer class="chat-window__footer">
           {{{ ChatFormView }}}

@@ -48,6 +48,10 @@ export type ChatUserResponse = {
 
 export type DeleteUsersRequest = { users: number[]; chatId: number };
 
+export type ChatTokenResponse = {
+  token: string;
+};
+
 export type DeleteChatRequest = { chatId: number };
 export type DeleteChatResponse = {
   userId: number;

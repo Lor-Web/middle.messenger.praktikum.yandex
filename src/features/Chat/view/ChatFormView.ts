@@ -14,6 +14,14 @@ export interface ChatFormProps extends BlockOwnProps {
 export default class ChatFormView extends Block<ChatFormProps> {
   static componentName = 'ChatFormView';
 
+  constructor(props: ChatFormProps = {} as ChatFormProps) {
+    super({
+      ...props,
+      values: props.values ?? { message: '' },
+      errors: props.errors ?? {},
+    });
+  }
+
   protected componentDidMount(): void {
     const model = new ChatFormModel(this.props.values, this.props.errors);
     const controller = new ChatFormController(model, this);
@@ -27,7 +35,7 @@ export default class ChatFormView extends Block<ChatFormProps> {
 
       {{{ Textarea placeholder='Сообщение...' name='message' value=values.message error=errors.message  }}}
 
-      {{{ Button type='submit' icon='arrow-right' }}}
+      {{{ Button type='submit' icon='arrow-right' ref='submitBtn' }}}
     </form>
   `;
 }
