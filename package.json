@@ -19,7 +19,7 @@
     "lint:fix": "eslint --fix .",
     "prepare": "husky",
     "lint-staged": "lint-staged",
-    "test": "vitest",
+    "test": "vitest run",
     "test:ui": "vitest --ui",
     "test:run": "vitest run"
   },
@@ -31,6 +31,7 @@
     "globals": "^17.11.0",
     "happy-dom": "^20.14.5",
     "husky": "^9.1.7",
+    "jest": "^30.5.2",
     "jiti": "^2.7.0",
     "lint-staged": "^16.4.0",
     "postcss-scss": "^4.0.9",
