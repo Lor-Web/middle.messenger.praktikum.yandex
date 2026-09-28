@@ -16,14 +16,13 @@ import {
 } from '../lib/syncChatPreview';
 import type ChatView from '../view/ChatView';
 
-export default class ChatController extends ChatsApi {
+export default class ChatController {
+  private chatsApi = new ChatsApi();
   private chatId: number | null = null;
   private messages: Message[] = [];
   private unsubscribeUsers: (() => void) | null = null;
 
-  constructor(private view: ChatView) {
-    super();
-  }
+  constructor(private view: ChatView) {}
 
   init(): void {
     const chatId = Number(this.view.getChatId());
@@ -80,7 +79,8 @@ export default class ChatController extends ChatsApi {
       return;
     }
 
-    this.chatUsers(chatId, {})
+    this.chatsApi
+      .chatUsers(chatId, {})
       .then((users) => {
         rememberChatUsers(chatId, users);
 
@@ -94,7 +94,7 @@ export default class ChatController extends ChatsApi {
   }
 
   private openConnection(chatId: number, userId: number): void {
-    const requestToken = (id: number) => this.token(id).then((response) => response.token);
+    const requestToken = (id: number) => this.chatsApi.token(id).then((response) => response.token);
 
     requestToken(chatId)
       .then((token) => {

@@ -5,6 +5,7 @@ const PING_INTERVAL = 10000;
 type WSTransportHandlers = {
   onOpen?: () => void;
   onClose?: () => void;
+  onError?: (event: Event) => void;
   onMessage?: (data: unknown) => void;
 };
 
@@ -37,6 +38,11 @@ export default class WSTransport {
     socket.addEventListener('close', () => {
       this.stopPing();
       this.handlers.onClose?.();
+    });
+
+    socket.addEventListener('error', (event) => {
+      this.stopPing();
+      this.handlers.onError?.(event);
     });
 
     socket.addEventListener('message', (event) => {

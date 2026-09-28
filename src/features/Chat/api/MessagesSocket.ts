@@ -122,6 +122,14 @@ class MessagesSocket {
         this.transport = null;
         this.scheduleReconnect();
       },
+      onError: () => {
+        if (generation !== this.generation) {
+          return;
+        }
+
+        this.transport = null;
+        this.scheduleReconnect();
+      },
     });
 
     this.transport = transport;
@@ -220,6 +228,10 @@ class MessagesSocket {
   }
 
   private scheduleReconnect(): void {
+    if (this.reconnectTimer) {
+      return;
+    }
+
     if (!this.retained || this.activeChatId == null || this.userId == null || !this.requestToken) {
       return;
     }
