@@ -4,8 +4,13 @@
 # “publish” is the directory to publish (relative to the root of your repo).
 
 [build]
-  command = "npm run build"
+  command = "npm run test:run && npm run build"
   publish = "dist"
+
+# Netlify installs with NODE_ENV=production and skips devDependencies.
+# Vitest and happy-dom live there, so include them before the test run.
+[build.environment]
+  NPM_FLAGS = "--include=dev"
 
 # Redirect all routes to index.html so the SPA router works on refresh.
 [[redirects]]

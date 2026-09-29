@@ -68,6 +68,10 @@ export default class ChatItem extends Block<ChatItemProps> {
           <p class="chat-item__user-message">
             {{#if myMessage}}
               <b>Вы:</b>
+            {{else}}
+              {{#if chat.last_message.user.first_name}}
+                <b>{{chat.last_message.user.first_name}}:</b>
+              {{/if}}
             {{/if}}
             {{chat.last_message.content}}
           </p>

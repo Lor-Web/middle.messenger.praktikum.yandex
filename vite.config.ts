@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 
 // используйте его. До этой строчки process.env не будет содержать указанных в .env переменных. После — будет
 dotenv.config();
@@ -18,5 +18,9 @@ export default defineConfig({
   build: {
     outDir: '../dist',
     emptyOutDir: true,
+  },
+  test: {
+    environment: 'happy-dom',
+    include: ['**/*.test.ts'],
   },
 });

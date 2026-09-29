@@ -5,6 +5,7 @@ import type {
   AddUserToChatRequest,
   ChatsRequest,
   ChatsResponse,
+  ChatTokenResponse,
   ChatUserResponse,
   CreateChatRequest,
   CreateChatResponse,
@@ -81,6 +82,16 @@ export default class ChatsApi {
         credentials: 'include',
         mode: 'cors',
         data: request,
+      },
+    });
+  }
+
+  public token(id: number) {
+    return this._http.post<never, ChatTokenResponse>({
+      url: `${this.url}token/${id}`,
+      options: {
+        credentials: 'include',
+        mode: 'cors',
       },
     });
   }

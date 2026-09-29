@@ -2,6 +2,7 @@ import type { BlockOwnProps } from '@/core/Block/Block';
 import Block from '@/core/Block/Block';
 import GlobalStore from '@/core/GlobalStore/GlobalStore';
 import Router from '@/core/Router/Router';
+import { resetChatPreviewCache } from '@/features/Chat/lib/syncChatPreview';
 import AuthApi from '@/shared/api/AuthApi';
 import { AUTH_PATH, MESSENGER_PATH, SETTINGS_PATH } from '@/shared/constants/paths.constant';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
@@ -29,6 +30,7 @@ export default class Sidebar extends Block<SidebarProps> {
         eventCallback: (e: Event) => {
           e.preventDefault();
           this._authApi.logout().then(() => {
+            resetChatPreviewCache();
             GlobalStore.reset();
             this._router.go(AUTH_PATH);
           });
@@ -47,6 +49,7 @@ export default class Sidebar extends Block<SidebarProps> {
         eventCallback: (e: Event) => {
           e.preventDefault();
           this._authApi.logout().then(() => {
+            resetChatPreviewCache();
             GlobalStore.reset();
             this._router.go(AUTH_PATH);
           });

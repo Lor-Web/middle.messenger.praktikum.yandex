@@ -2,6 +2,9 @@ import Block from '@/core/Block/Block';
 import Router from '@/core/Router/Router';
 import { chatEditPath } from '@/shared/constants/paths.constant';
 import { listenerForChild } from '@/shared/lib/setListenerForChild';
+import type { ChatUserResponse } from '@/shared/models/api/chats.type';
+import type { Message } from '@/shared/models/base.type';
+import MessageItem from '@/shared/ui/MessageItem';
 
 import ChatController from '../controller/ChatController';
 import type { ChatViewProps } from '../types/chat.type';
@@ -22,8 +25,6 @@ export default class ChatView extends Block<ChatViewProps> {
   protected componentDidMount(): void {
     this.controller = new ChatController(this);
     this.controller.init();
-
-    console.log(this.props);
 
     const editBtn = this.getRef('editBtn');
     if (editBtn instanceof HTMLButtonElement) {
@@ -49,6 +50,39 @@ export default class ChatView extends Block<ChatViewProps> {
     return this.props.chatId ?? (this.props.chat ? String(this.props.chat.id) : undefined);
   }
 
+  public renderMessages(messages: Message[]): void {
+    const container = this.getRef('messages');
+
+    if (!(container instanceof HTMLElement)) {
+      return;
+    }
+
+    container.replaceChildren(
+      ...messages.flatMap((message) => {
+        const element = new MessageItem({ message }).element();
+        return element ? [element] : [];
+      }),
+    );
+
+    requestAnimationFrame(() => {
+      container.scrollTop = container.scrollHeight;
+    });
+  }
+
+  public renderParticipants(users: ChatUserResponse[]): void {
+    const element = this.getRef('participants');
+
+    if (!(element instanceof HTMLElement)) {
+      return;
+    }
+
+    const names = users.map((user) => user.first_name).filter(Boolean);
+    const visibleNames = names.slice(0, 3);
+
+    element.textContent =
+      names.length > 3 ? `${visibleNames.join(', ')}...` : visibleNames.join(', ');
+  }
+
   protected template = `
     {{#if chat}}
       <div class="chat-window">
@@ -57,6 +91,7 @@ export default class ChatView extends Block<ChatViewProps> {
 
           <div class="chat-window__companion">
             <h3 class="chat-window__companion-name">{{chat.title}}</h3>
+            <p class="chat-window__companion-status" ref="participants"></p>
           </div>
 
           <div class="chat-window__settings">
@@ -64,7 +99,7 @@ export default class ChatView extends Block<ChatViewProps> {
           </div>
         </header>
 
-        <section class="chat-window__messages"></section>
+        <section class="chat-window__messages" ref="messages"></section>
 
         <footer class="chat-window__footer">
           {{{ ChatFormView }}}

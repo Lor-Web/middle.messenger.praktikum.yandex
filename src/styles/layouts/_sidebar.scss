@@ -34,7 +34,10 @@
   &__chat-list {
     padding-right: 10px;
     display: flex;
+    flex: 1;
     flex-direction: column;
-    overflow-y: scroll;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden auto;
   }
 }
